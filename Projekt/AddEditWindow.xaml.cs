@@ -17,9 +17,9 @@ namespace Projekt
     /// <summary>
     /// Interaction logic for KierowcaMain.xaml
     /// </summary>
-    public partial class KierowcaMain : Window
+    public partial class AddEdit : Window
     {
-        public KierowcaMain()
+        public AddEdit()
         {
             InitializeComponent();
         }
