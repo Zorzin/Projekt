@@ -35,6 +35,6 @@
         <ComboBox Grid.Column="1" Grid.Row="5" />
         <Label Grid.Row="6" Content="Aktualny autobus:"/>
         <ComboBox Grid.Column="1" Grid.Row="6"/>
-        <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Dodaj"/>
+        <Button Click="AddButton" Grid.Row="7" Grid.ColumnSpan="2" Content="Dodaj"/>
     </Grid>
 </Window>

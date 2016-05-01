@@ -6,10 +6,14 @@
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
         Title="Dodaj/Edytuj" Height="300" Width="300">
+    <Window.CommandBindings>
+        <CommandBinding Command="local:Commands.ButtonCommand" Executed="ButtonCommandExecuted" CanExecute="ButtonCommandCanExecute" />
+    </Window.CommandBindings>
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Name="EditButton" Content="Edytuj/Usuń" Margin="30" Padding="10"/>
-            <Button Name="AddButton" Content="Dodaj" Margin="30" Padding="10"/>
+            <Button Command="local:Commands.ButtonCommand" Name="EditButton" Content="Edytuj/Usuń" Margin="15" Padding="10"/>
+            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" Margin="15" Padding="10"/>
+            <Button Click="BackButton" Content="Cofnij" Margin="15" Padding="10"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -23,18 +23,23 @@ namespace Projekt
         public MainWindow()
         {
             InitializeComponent();
-             
+            
         }
 
         private void MainWindowButton_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(e.Source.ToString());
             AddEdit addEdit = new AddEdit();
+            addEdit.List = new Dictionary<object, Func<int>>();
+            addEdit.List [DriversButton] = addEdit.DriverFunction;
+            addEdit.List [BusStopsButton] = addEdit.BusStopFunction;
+            addEdit.List [BussesButton] = addEdit.BusFunction;
+            addEdit.List [LinesButton] = addEdit.LineFunction;
             Commands commands = new Commands();
             addEdit.EventArgs = e;
             MainWindow mainWindow = (MainWindow) Application.Current.MainWindow;
             mainWindow.Close();
-            addEdit.ShowDialog();
+            addEdit.Show();
             
         }
     }

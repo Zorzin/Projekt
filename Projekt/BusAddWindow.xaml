@@ -38,6 +38,6 @@
         <ComboBox Grid.Row="6" Grid.Column="1"/>
         <Label Grid.Row="7" Content="Stan techniczny:"/>
         <ComboBox Grid.Row="7" Grid.Column="1"/>
-        <Button Grid.Row="8" Grid.ColumnSpan="2" Content="Dodaj"/>
+        <Button Click="AddButton" Grid.Row="8" Grid.ColumnSpan="2" Content="Dodaj"/>
     </Grid>
 </Window>

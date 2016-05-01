@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,67 +20,91 @@ namespace Projekt
     /// </summary>
     public partial class AddEdit : Window
     {
+        public Dictionary<Object, Func<int>> List; 
         public RoutedEventArgs EventArgs;
+        private bool edit;
         public AddEdit()
         {
             InitializeComponent();
+            
+        }
+
+        public int DriverFunction()
+        {
+            if (edit)
+            {
+                DriverListWindow driverListWindow = new DriverListWindow();
+                driverListWindow.Show();
+            }
+            else
+            {
+                DriverAddWindow driverAddWindow = new DriverAddWindow();
+                driverAddWindow.Show();
+            }
+            return 1;
+        }
+
+        public int BusStopFunction()
+        {
+            if (edit)
+            {
+                BusStopListWindow busStopListWindow = new BusStopListWindow();
+                busStopListWindow.Show();
+            }
+            else
+            {
+                //add or delete
+            }
+            return 1;
+        }
+
+        public int BusFunction()
+        {
+            if (edit)
+            {
+                BusListWindow busListWindow = new BusListWindow();
+                busListWindow.Show();
+            }
+            else
+            {
+                BusAddWindow busAddWindow= new BusAddWindow();
+                busAddWindow.Show();
+            }
+            return 1;
+        }
+
+        public int LineFunction()
+        {
+            if (edit)
+            {
+                LineListWindow lineListWindow = new LineListWindow();
+                lineListWindow.Show();
+            }
+            else
+            {
+                LineAddWindow lineAddWindow = new LineAddWindow();
+                lineAddWindow.Show();
+            }
+            return 1;
         }
         private void ButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            edit = ReferenceEquals(e.Source, EditButton);
+            List[EventArgs.Source].Invoke();
             this.Close();
-            bool edit = ReferenceEquals(e.Source, EditButton);
-            MainWindow mainWindow = (MainWindow) Application.Current.MainWindow;
-            if (Object.ReferenceEquals(EventArgs.Source, mainWindow.DriversButton))
-            {
-                if (edit)
-                {
-                    DriverListWindow driverListWindow = new DriverListWindow();
-                    driverListWindow.ShowDialog();
-                }
-                else
-                {
-                    DriverAddWindow driverAddWindow = new DriverAddWindow();
-                    driverAddWindow.ShowDialog();
-                }
-            }
-            else if (Object.ReferenceEquals(EventArgs.Source, mainWindow.BusStopsButton))
-            {
-                if (edit)
-                {
-                    BusStopListWindow busStopListWindow = new BusStopListWindow();
-                    busStopListWindow.ShowDialog();
-                }
-                else
-                {
-                    //add or delete
-                }
-            }
-            else if (Object.ReferenceEquals(EventArgs.Source, mainWindow.BussesButton))
-            {
-                if (edit)
-                {
-                    BusListWindow busListWindow = new BusListWindow();
-                    busListWindow.ShowDialog();
-                }
-                else
-                {
-                    BusAddWindow busAddWindow= new BusAddWindow();
-                    busAddWindow.ShowDialog();
-                }
-            }
-            else if (Object.ReferenceEquals(EventArgs.Source, mainWindow.LinesButton))
-            {
-                if (edit)
-                {
-                    LineListWindow lineListWindow = new LineListWindow();
-                    lineListWindow.ShowDialog();
-                }
-                else
-                {
-                    LineAddWindow lineAddWindow = new LineAddWindow();
-                    lineAddWindow.ShowDialog();
-                }
-            }
+        }
+
+        private void ButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+            
         }
     }
 }
