@@ -22,6 +22,7 @@ namespace Projekt
         public DriverAddWindow()
         {
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
         }
         private void AddButton(object sender, RoutedEventArgs e)
         {

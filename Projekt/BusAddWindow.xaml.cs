@@ -22,13 +22,13 @@ namespace Projekt
         public BusAddWindow()
         {
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
         }
 
         private void AddButton(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             this.Close();
-
         }
     }
 }

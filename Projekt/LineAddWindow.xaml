@@ -16,6 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -36,5 +37,6 @@
         <Label Grid.Row="6" Content="Aktualny autobus:"/>
         <ComboBox Grid.Column="1" Grid.Row="6"/>
         <Button Click="AddButton" Grid.Row="7" Grid.ColumnSpan="2" Content="Dodaj"/>
+        <Button Command="local:Commands.BackButtonCommand" Grid.Row="8" Grid.ColumnSpan="2" Content="Powrót"/>
     </Grid>
 </Window>

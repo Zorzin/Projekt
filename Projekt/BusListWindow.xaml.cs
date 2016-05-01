@@ -22,6 +22,7 @@ namespace Projekt
         public BusListWindow()
         {
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
         }
     }
 }

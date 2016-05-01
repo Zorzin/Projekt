@@ -22,6 +22,8 @@ namespace Projekt
         public DriverListWindow()
         {
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
         }
+
     }
 }

@@ -22,6 +22,7 @@ namespace Projekt
         public LineListWindow()
         {
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
         }
     }
 }

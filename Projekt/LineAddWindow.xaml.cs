@@ -22,6 +22,7 @@ namespace Projekt
         public LineAddWindow()
         {
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
         }
         private void AddButton(object sender, RoutedEventArgs e)
         {

@@ -16,6 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
+            <Button Command="local:Commands.BackButtonCommand" Content="Powrót"/>
             <Button Content="Dodaj"/>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
