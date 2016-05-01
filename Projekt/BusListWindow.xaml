@@ -45,6 +45,7 @@
             <Label Grid.Row="3" Content="Aktualna linia:"/>
             <ComboBox Grid.Row="3" Grid.Column="1"/>
             <Label Grid.Row="4" Content="Przebieg:"/>
+            <TextBox Grid.Row="4" Grid.Column="1"/>
             <Label Grid.Row="5" Content="Marka:"/>
             <ComboBox Grid.Row="5" Grid.Column="1"/>
             <Label Grid.Row="6" Content="Model:"/>

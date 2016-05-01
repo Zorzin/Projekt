@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Projekt
 {
     /// <summary>
-    /// Interaction logic for ListWindow.xaml
+    /// Interaction logic for LineAddWindow.xaml
     /// </summary>
-    public partial class DriverListWindow : Window
+    public partial class LineAddWindow : Window
     {
-        public DriverListWindow()
+        public LineAddWindow()
         {
             InitializeComponent();
         }

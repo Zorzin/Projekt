@@ -8,8 +8,8 @@
         Title="Dodaj/Edytuj" Height="300" Width="300">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="Edytuj/Usuń" Margin="30" Padding="10"/>
-            <Button Content="Dodaj" Margin="30" Padding="10"/>
+            <Button Name="EditButton" Content="Edytuj/Usuń" Margin="30" Padding="10"/>
+            <Button Name="AddButton" Content="Dodaj" Margin="30" Padding="10"/>
         </StackPanel>
     </Grid>
 </Window>

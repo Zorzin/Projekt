@@ -26,10 +26,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
-            <Button Grid.Row="1" Content="Kierowcy"/>
-            <Button Grid.Row="2" Content="Autobusy"/>
-            <Button Grid.Row="3" Content="Przystanki"/>
-            <Button Grid.Row="4"  Content="Linie"/>
+            <Button Name="DriversButton" Grid.Row="1" Content="Kierowcy" Click="MainWindowButton_Click"/>
+            <Button Name="BussesButton" Grid.Row="2" Content="Autobusy" Click="MainWindowButton_Click"/>
+            <Button Name="BusStopsButton"  Grid.Row="3" Content="Przystanki" Click="MainWindowButton_Click"/>
+            <Button Name="LinesButton" Grid.Row="4"  Content="Linie" Click="MainWindowButton_Click"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <Label Content="STRONA GŁÓWNA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
