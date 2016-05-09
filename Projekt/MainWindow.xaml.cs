@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,12 @@ namespace Projekt
         public MainWindow()
         {
             InitializeComponent();
+            DBConnect dbConnect = new DBConnect();
+            DataTable DT = dbConnect.SelectQuery("Select * from Driver");
         }
 
         private void MainWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(e.Source.ToString());
             AddEdit addEdit = new AddEdit();
             addEdit.List = new Dictionary<object, Func<int>>();
             addEdit.List[DriversButton] = addEdit.DriverFunction;

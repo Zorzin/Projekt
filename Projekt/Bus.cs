@@ -8,14 +8,14 @@ namespace Projekt
 {
     class Bus
     {
-        private int _busid;
-        private string _type;
-        private int _actualdriver;
-        private int _actualline;
-        private int _mileage;
-        private string _brand;
-        private string _model;
-        private string _techcondition;
+        private int     _busid;
+        private string  _type;
+        private int     _actualdriver;
+        private int     _actualline;
+        private int     _mileage;
+        private string  _brand;
+        private string  _model;
+        private string  _techcondition;
 
         public Bus(int busid, string type, int actualdriver, int actualline, int mileage, string brand, string model,
             string techcondition)
