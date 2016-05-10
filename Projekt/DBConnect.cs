@@ -12,7 +12,7 @@ namespace Projekt
     {
         private SQLiteConnection _sqlite;
 
-        public DBConnect(string path)
+        public DBConnect()
         {
             _sqlite = new SQLiteConnection("Data Source=WPFDB.db;New=False;Compress=True;");
 

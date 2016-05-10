@@ -24,8 +24,8 @@ namespace Projekt
         public MainWindow()
         {
             InitializeComponent();
-            DBConnect dbConnect = new DBConnect();
-            DataTable DT = dbConnect.SelectQuery("Select * from Driver");
+            /*DBConnect dbConnect = new DBConnect();
+            DataTable DT = dbConnect.SelectQuery("Select * from Driver");*/
         }
 
         private void MainWindowButton_Click(object sender, RoutedEventArgs e)
