@@ -28,7 +28,6 @@ namespace Projekt
         {
             MainWindow mainWindow = new MainWindow();
             this.Close();
-
         }
     }
 }

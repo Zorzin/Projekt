@@ -101,6 +101,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BusBrandListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BusListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +143,10 @@
     <Compile Include="Bus.cs" />
     <Compile Include="BusAddWindow.xaml.cs">
       <DependentUpon>BusAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BusBrand.cs" />
+    <Compile Include="BusBrandListWindow.xaml.cs">
+      <DependentUpon>BusBrandListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusListWindow.xaml.cs">
       <DependentUpon>BusListWindow.xaml</DependentUpon>

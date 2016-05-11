@@ -19,8 +19,9 @@ namespace Projekt
         private int     _actualline;
         private double  _salary;
         private double  _hoursworked;
+        private string  _photopath;
 
-        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, int actualline, double salary, double hoursworked)
+        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, int actualline, double salary, double hoursworked, string photopath)
         {
             _name = name;
             _secondname = secondname;
@@ -33,6 +34,7 @@ namespace Projekt
             _actualline = actualline;
             _salary = salary;
             _hoursworked = hoursworked;
+            _photopath = photopath;
         }
 
         public Driver()
@@ -48,6 +50,7 @@ namespace Projekt
             _actualline = -1;
             _salary = 0;
             _hoursworked = 0;
+            _photopath = null; //zmienic na default jakis
         }
 
 
