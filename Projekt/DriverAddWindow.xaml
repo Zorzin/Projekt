@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
-        Title="DriverAddWindow" Height="320" Width="500">
+        Title="DriverAddWindow" Height="370" Width="500">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -31,7 +33,7 @@
         <Label Grid.Row="2" Content="ID:"/>
         <TextBox Grid.Row="2" Grid.Column="1" />
         <Label Grid.Row="3" Content="Status:"/>
-        <ComboBox Grid.Row="3" Grid.Column="1"></ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="1"/>
         <Label Grid.Row="4" Content="Nr prawo jazdy:"/>
         <TextBox Grid.Column="1" Grid.Row="4" />
         <Label Grid.Row="5" Content="Miasto:"/>
@@ -40,9 +42,13 @@
         <TextBox Grid.Column="1" Grid.Row="6"/>
         <Label Grid.Row="7" Content="Ulica i nr domu:"/>
         <TextBox Grid.Column="1" Grid.Row="7"/>
-        <Label Grid.Row="8" Content="Aktualny kurs:"/>
-        <ComboBox Grid.Column="1" Grid.Row="8" />
-        <Button Click="AddButton" Grid.Row="9" Grid.ColumnSpan="2" Content="Dodaj"/>
-        <Button Command="local:Commands.BackButtonCommand" Grid.Row="10" Grid.ColumnSpan="2" Content="Powrót"/>
+        <Label Grid.Row="8" Content="Pensja(netto):"/>
+        <TextBox Grid.Row="8" Grid.Column="1"/>
+        <Label Grid.Row="9" Content="Przepracowane godziny w tym miesiącu: "/>
+        <TextBox Grid.Row="9" Grid.Column="1"/>
+        <Label Grid.Row="10" Content="Aktualny kurs:"/>
+        <ComboBox Grid.Column="1" Grid.Row="10" />
+        <Button Click="AddButton" Grid.Row="11" Grid.ColumnSpan="2" Content="Dodaj"/>
+        <Button Command="local:Commands.BackButtonCommand" Grid.Row="12" Grid.ColumnSpan="2" Content="Powrót"/>
     </Grid>
 </Window>

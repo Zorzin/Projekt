@@ -17,8 +17,10 @@ namespace Projekt
         private int     _zipcode;
         private string  _address;
         private int     _actualline;
+        private double  _salary;
+        private double  _hoursworked;
 
-        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, int actualline)
+        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, int actualline, double salary, double hoursworked)
         {
             _name = name;
             _secondname = secondname;
@@ -29,6 +31,8 @@ namespace Projekt
             _zipcode = zipcode;
             _address = address;
             _actualline = actualline;
+            _salary = salary;
+            _hoursworked = hoursworked;
         }
 
         public Driver()
@@ -42,6 +46,8 @@ namespace Projekt
             _zipcode = -1;
             _address = null;
             _actualline = -1;
+            _salary = 0;
+            _hoursworked = 0;
         }
 
 

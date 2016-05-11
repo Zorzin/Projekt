@@ -13,20 +13,17 @@ namespace Projekt
         private int     _actualdriver;
         private int     _actualline;
         private int     _mileage;
-        private string  _brand;
-        private string  _model;
+        private int     _busbrand;
         private string  _techcondition;
 
-        public Bus(int busid, string type, int actualdriver, int actualline, int mileage, string brand, string model,
-            string techcondition)
+        public Bus(int busid, string type, int actualdriver, int actualline, int mileage, int busbrand, string techcondition)
         {
             _busid = busid;
             _type = type;
             _actualdriver = actualdriver;
             _actualline = actualline;
             _mileage = mileage;
-            _brand = brand;
-            _model = model;
+            _busbrand = busbrand;
             _techcondition = techcondition;
         }
 
@@ -37,8 +34,7 @@ namespace Projekt
             _actualdriver = -1;
             _actualline = -1;
             _mileage = 0;
-            _brand = null;
-            _model = null;
+            _busbrand = -1;
             _techcondition = null;
         }
     }

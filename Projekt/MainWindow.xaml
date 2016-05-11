@@ -24,13 +24,15 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
             <Button Name="DriversButton" Grid.Row="1" Content="Kierowcy" Click="MainWindowButton_Click"/>
             <Button Name="BussesButton" Grid.Row="2" Content="Autobusy" Click="MainWindowButton_Click"/>
             <Button Name="BusStopsButton"  Grid.Row="3" Content="Przystanki" Click="MainWindowButton_Click"/>
             <Button Name="LinesButton" Grid.Row="4"  Content="Linie" Click="MainWindowButton_Click"/>
-            <Button Name="CloseButton" Grid.Row="5" Content="Zamknij" Click="CloseButton_Click"/>
+            <Button Name="BussesBrandButton" Grid.Row="5"  Content="Marki Autobusów" Click="MainWindowButton_Click"/>
+            <Button Name="CloseButton" Grid.Row="6" Content="Zamknij" Click="CloseButton_Click"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
