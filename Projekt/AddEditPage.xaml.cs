@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,19 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Projekt
 {
     /// <summary>
-    /// Interaction logic for KierowcaMain.xaml
+    /// Interaction logic for AddEditPAge.xaml
     /// </summary>
-    public partial class AddEdit : Window
+    public partial class AddEditPage : Page
     {
         public Dictionary<Object, Func<int>> List;
         public RoutedEventArgs EventArgs;
         private bool edit;
-        public AddEdit()
+        public AddEditPage()
         {
             InitializeComponent();
 
@@ -33,8 +33,9 @@ namespace Projekt
         {
             if (edit)
             {
-                DriverListWindow driverListWindow = new DriverListWindow();
-                driverListWindow.Show();
+                DriverListPage driverListPage = new DriverListPage();
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.MainFrame.Navigate(driverListPage);
             }
             else
             {
@@ -48,8 +49,9 @@ namespace Projekt
         {
             if (edit)
             {
-                BusStopListWindow busStopListWindow = new BusStopListWindow();
-                busStopListWindow.Show();
+                BusStopListPage busStopListPage = new BusStopListPage();
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.MainFrame.Navigate(busStopListPage);
             }
             else
             {
@@ -62,8 +64,9 @@ namespace Projekt
         {
             if (edit)
             {
-                BusListWindow busListWindow = new BusListWindow();
-                busListWindow.Show();
+                BusListPage busListPage = new BusListPage();
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.MainFrame.Navigate(busListPage);
             }
             else
             {
@@ -73,12 +76,28 @@ namespace Projekt
             return 1;
         }
 
+        public int ActualTrackFunction()
+        {
+            if (edit)
+            {
+                ActualTrackPage actualTrackPage = new ActualTrackPage();
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.MainFrame.Navigate(actualTrackPage);
+            }
+            else
+            {
+                ///
+            }
+            return 1;
+        }
+
         public int LineFunction()
         {
             if (edit)
             {
-                LineListWindow lineListWindow = new LineListWindow();
-                lineListWindow.Show();
+                LineListPage lineListPage = new LineListPage();
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                mainWindow.MainFrame.Navigate(lineListPage);
             }
             else
             {
@@ -91,20 +110,11 @@ namespace Projekt
         {
             edit = ReferenceEquals(e.Source, EditButton);
             List [EventArgs.Source].Invoke();
-            this.Close();
         }
 
         private void ButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
-        }
-
-        private void BackButton(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
-
         }
     }
 }

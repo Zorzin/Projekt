@@ -30,22 +30,31 @@ namespace Projekt
 
         private void MainWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            AddEdit addEdit = new AddEdit();
+            AddEditPage addEdit = new AddEditPage();
+            
             addEdit.List = new Dictionary<object, Func<int>>();
             addEdit.List[DriversButton] = addEdit.DriverFunction;
             addEdit.List[BusStopsButton] = addEdit.BusStopFunction;
             addEdit.List[BussesButton] = addEdit.BusFunction;
             addEdit.List[LinesButton] = addEdit.LineFunction;
+            addEdit.List[ActualTrackButton] = addEdit.ActualTrackFunction;
             addEdit.EventArgs = e;
-            var mainWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            mainWindow.Close();
-            addEdit.Show();
-            
+            MainFrame.Navigate(addEdit);
+            //var mainWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            //mainWindow.Close();
+            //addEdit.Show();
+
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void SearchButton_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchPage searchPage = new SearchPage();
+            MainFrame.Navigate(searchPage);
         }
     }
 }

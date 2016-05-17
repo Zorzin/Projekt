@@ -8,7 +8,7 @@
         Title="Strona Główna" Height="350" Width="525">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -25,31 +25,20 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+            <Label Margin="20,0" Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
             <Button Name="DriversButton" Grid.Row="1" Content="Kierowcy" Click="MainWindowButton_Click"/>
             <Button Name="BussesButton" Grid.Row="2" Content="Autobusy" Click="MainWindowButton_Click"/>
             <Button Name="BusStopsButton"  Grid.Row="3" Content="Przystanki" Click="MainWindowButton_Click"/>
             <Button Name="LinesButton" Grid.Row="4"  Content="Linie" Click="MainWindowButton_Click"/>
-            <Button Name="BussesBrandButton" Grid.Row="5"  Content="Marki Autobusów" Click="MainWindowButton_Click"/>
-            <Button Name="CloseButton" Grid.Row="6" Content="Zamknij" Click="CloseButton_Click"/>
+            <Button Name="ActualTrackButton" Grid.Row="5"  Content="Aktualne Kursy" Click="MainWindowButton_Click"/>
+            <Button Name="SearchButton" Grid.Row="6"  Content="Wyszukiwanie" Click="SearchButton_OnClickButton_Click"/>
+            <Button Name="CloseButton" Grid.Row="7" Content="Zamknij" Click="CloseButton_Click"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Label Content="Wyszukaj po: " HorizontalAlignment="Center"/>
-                <!--<Label Content="STRONA GŁÓWNA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>-->
-                <ComboBox Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wybierz" IsEditable="True" IsReadOnly="True">
-                    <ComboBoxItem Content="Kierowca"/>
-                    <ComboBoxItem Content="Autobus"/>
-                    <ComboBoxItem Content="Przystanek"/>
-                    <ComboBoxItem Content="Linia"/>
-                </ComboBox>
-                <Label Content="Wybierz pozycje z listy: " HorizontalAlignment="Center"/>
-                <ComboBox IsEnabled="False" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wybierz" IsEditable="True" IsReadOnly="True">
-                    <ComboBoxItem Content="asda"/>
-                </ComboBox>
-                <Button >Wyszukaj</Button>
-            </StackPanel>
-        </Grid>
+        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Grid.Row="1" Grid.Column="1">
+            
+        </Frame>
+        
     </Grid>
 </Window>

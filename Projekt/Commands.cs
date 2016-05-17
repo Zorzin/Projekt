@@ -21,12 +21,7 @@ namespace Projekt
         public static void BackButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var exist = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            if (exist != null)
-            {
-                exist.Close();
-            }
+            exist.Close();
         }
 
         public static void BackButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)

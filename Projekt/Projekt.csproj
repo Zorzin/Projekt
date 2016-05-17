@@ -93,6 +93,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActualTrackPage.xaml.cs">
+      <DependentUpon>ActualTrackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ActualTrackPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,7 +119,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BusListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BusListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BusStopListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,11 +139,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DriverListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DriverListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LineAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LineListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="ActualTrack.cs" />
+    <Compile Include="AddEditPage.xaml.cs">
+      <DependentUpon>AddEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -148,8 +182,15 @@
     <Compile Include="BusBrandListWindow.xaml.cs">
       <DependentUpon>BusBrandListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusListPage.xaml.cs">
+      <DependentUpon>BusListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusListWindow.xaml.cs">
       <DependentUpon>BusListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BusStop.cs" />
+    <Compile Include="BusStopListPage.xaml.cs">
+      <DependentUpon>BusStopListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusStopListWindow.xaml.cs">
       <DependentUpon>BusStopListWindow.xaml</DependentUpon>
@@ -160,12 +201,18 @@
     <Compile Include="DriverAddWindow.xaml.cs">
       <DependentUpon>DriverAddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DriverListPage.xaml.cs">
+      <DependentUpon>DriverListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DriverListWindow.xaml.cs">
       <DependentUpon>DriverListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Line.cs" />
     <Compile Include="LineAddWindow.xaml.cs">
       <DependentUpon>LineAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LineListPage.xaml.cs">
+      <DependentUpon>LineListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LineListWindow.xaml.cs">
       <DependentUpon>LineListWindow.xaml</DependentUpon>
@@ -174,6 +221,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
