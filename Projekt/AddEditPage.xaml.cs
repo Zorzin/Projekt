@@ -22,7 +22,7 @@ namespace Projekt
     {
         public Dictionary<Object, Func<int>> List;
         public RoutedEventArgs EventArgs;
-        private bool edit;
+        private bool _edit;
         public AddEditPage()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace Projekt
 
         public int DriverFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 DriverListPage driverListPage = new DriverListPage();
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -47,7 +47,7 @@ namespace Projekt
 
         public int BusStopFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 BusStopListPage busStopListPage = new BusStopListPage();
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -62,7 +62,7 @@ namespace Projekt
 
         public int BusFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 BusListPage busListPage = new BusListPage();
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -78,7 +78,7 @@ namespace Projekt
 
         public int ActualTrackFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 ActualTrackPage actualTrackPage = new ActualTrackPage();
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -86,14 +86,15 @@ namespace Projekt
             }
             else
             {
-                ///
+                ActualTrackAddWindow actualTrackAddWindow = new ActualTrackAddWindow();
+                actualTrackAddWindow.Show();
             }
             return 1;
         }
 
         public int LineFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 LineListPage lineListPage = new LineListPage();
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -108,7 +109,7 @@ namespace Projekt
         }
         private void ButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            edit = ReferenceEquals(e.Source, EditButton);
+            _edit = ReferenceEquals(e.Source, EditButton);
             List [EventArgs.Source].Invoke();
         }
 

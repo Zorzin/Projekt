@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Projekt
+﻿namespace Projekt
 {
-    class BusStop
+    internal class BusStop
     {
-        private int     _id;
-        private string  _name;
-        private int     _area;
-
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Area { get; set; }
         public BusStop(int id, string name, int area)
         {
-            _id = id;
-            _name = name;
-            _area = area;
+            Id = id;
+            Name = name;
+            Area = area;
         }
     }
 }

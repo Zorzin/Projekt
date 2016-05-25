@@ -22,7 +22,7 @@ namespace Projekt
     {
         public Dictionary<Object, Func<int>> List;
         public RoutedEventArgs EventArgs;
-        private bool edit;
+        private bool _edit;
         public AddEdit()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace Projekt
 
         public int DriverFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 DriverListWindow driverListWindow = new DriverListWindow();
                 driverListWindow.Show();
@@ -46,7 +46,7 @@ namespace Projekt
 
         public int BusStopFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 BusStopListWindow busStopListWindow = new BusStopListWindow();
                 busStopListWindow.Show();
@@ -60,7 +60,7 @@ namespace Projekt
 
         public int BusFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 BusListWindow busListWindow = new BusListWindow();
                 busListWindow.Show();
@@ -75,7 +75,7 @@ namespace Projekt
 
         public int LineFunction()
         {
-            if (edit)
+            if (_edit)
             {
                 LineListWindow lineListWindow = new LineListWindow();
                 lineListWindow.Show();
@@ -89,7 +89,7 @@ namespace Projekt
         }
         private void ButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            edit = ReferenceEquals(e.Source, EditButton);
+            _edit = ReferenceEquals(e.Source, EditButton);
             List [EventArgs.Source].Invoke();
             this.Close();
         }

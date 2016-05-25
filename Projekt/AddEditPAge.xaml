@@ -11,8 +11,10 @@
         <CommandBinding Command="local:Commands.ButtonCommand" Executed="ButtonCommandExecuted" CanExecute="ButtonCommandCanExecute" />
     </Page.CommandBindings>
     <Grid>
+        
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Button Command="local:Commands.ButtonCommand" Name="EditButton" Content="Edytuj/Usuń" Margin="15" Padding="10"/>
+            <Label Name="PageNameLabel" Content="Content" Margin="15" Padding="10" HorizontalAlignment="Center"/>
+            <Button Command="local:Commands.ButtonCommand" Name="EditButton" Content="Edytuj/Usuń" Margin="15" Padding="10"/>
             <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" Margin="15" Padding="10"/>
         </StackPanel>
     </Grid>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +14,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Projekt
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+
     public partial class MainWindow : Window
     {
+        List<ActualTrack> actualTracks;
         public MainWindow()
         {
+            actualTracks = new List<ActualTrack>();
             InitializeComponent();
+            LoadJson();
+            CheckSmallBus();
             /*DBConnect dbConnect = new DBConnect();
             DataTable DT = dbConnect.SelectQuery("Select * from Driver");*/
         }
@@ -39,10 +48,9 @@ namespace Projekt
             addEdit.List[LinesButton] = addEdit.LineFunction;
             addEdit.List[ActualTrackButton] = addEdit.ActualTrackFunction;
             addEdit.EventArgs = e;
+            Button b = (Button)e.Source;
+            addEdit.PageNameLabel.Content = b.Content.ToString();
             MainFrame.Navigate(addEdit);
-            //var mainWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            //mainWindow.Close();
-            //addEdit.Show();
 
         }
 
@@ -55,6 +63,35 @@ namespace Projekt
         {
             SearchPage searchPage = new SearchPage();
             MainFrame.Navigate(searchPage);
+        }
+
+        private void LoadJson()
+        {
+            JArray array = JArray.Parse(File.ReadAllText("schedule.json"));
+            foreach (var obj in array.Children())
+            {
+                ActualTrack at = new ActualTrack();
+                var itemProperties = obj.Children<JProperty>();
+                at.StartBusStop = Lists.GetBusStop((int)itemProperties.First(x => x.Name == "startBusStop").Value);
+                at.Driver = Lists.GetDriver((int)itemProperties.First(x=> x.Name == "driver").Value);
+                at.EndBusStop = Lists.GetBusStop((int)itemProperties.First(x => x.Name == "endBusStop").Value);
+                var date = (string)itemProperties.First(x => x.Name == "startHour").Value;
+                at.StartHour = DateTime.ParseExact(date, "g",null);
+                var enddate = (string) itemProperties.First(x => x.Name == "endHour").Value;
+                at.EndHour = DateTime.ParseExact(enddate, "g", null);
+                at.Line = Lists.GetLine((int) itemProperties.First(x => x.Name == "line").Value);
+                actualTracks.Add(at);
+
+            }
+        }
+
+        private void CheckSmallBus()
+        {
+            foreach (var tracks in actualTracks)
+            {
+                //pobrac z bazy danych czy dla takiej daty i takiej linii jest duzy czy maly
+                // zmienic smallbus na true lub false
+            }
         }
     }
 }

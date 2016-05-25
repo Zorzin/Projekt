@@ -8,49 +8,49 @@ namespace Projekt
 {
     class Driver
     {
-        private string  _name;
-        private string  _secondname;
-        private int     _id;
-        private string  _status;
-        private int     _driverlicenseid;
-        private string  _city;
-        private int     _zipcode;
-        private string  _address;
-        private int     _actualline;
-        private double  _salary;
-        private double  _hoursworked;
-        private string  _photopath;
+        public string  Name;
+        public string  Secondname;
+        public int     Id;
+        public string  Status;
+        public int     Driverlicenseid;
+        public string  City;
+        public int     Zipcode;
+        public string  Address;
+        public int     Actualline;
+        public double  Salary;
+        public double  Hoursworked;
+        public string  Photopath;
 
         public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, int actualline, double salary, double hoursworked, string photopath)
         {
-            _name = name;
-            _secondname = secondname;
-            _id = id;
-            _status = status;
-            _driverlicenseid = driverlicenseid;
-            _city = city;
-            _zipcode = zipcode;
-            _address = address;
-            _actualline = actualline;
-            _salary = salary;
-            _hoursworked = hoursworked;
-            _photopath = photopath;
+            Name = name;
+            Secondname = secondname;
+            Id = id;
+            Status = status;
+            Driverlicenseid = driverlicenseid;
+            City = city;
+            Zipcode = zipcode;
+            Address = address;
+            Actualline = actualline;
+            Salary = salary;
+            Hoursworked = hoursworked;
+            Photopath = photopath;
         }
 
         public Driver()
         {
-            _name = null;
-            _secondname = null;
-            _id = -1;
-            _status = null;
-            _driverlicenseid = -1;
-            _city = null;
-            _zipcode = -1;
-            _address = null;
-            _actualline = -1;
-            _salary = 0;
-            _hoursworked = 0;
-            _photopath = null; //zmienic na default jakis
+            Name = null;
+            Secondname = null;
+            Id = -1;
+            Status = null;
+            Driverlicenseid = -1;
+            City = null;
+            Zipcode = -1;
+            Address = null;
+            Actualline = -1;
+            Salary = 0;
+            Hoursworked = 0;
+            Photopath = null; //zmienic na default jakis
         }
 
 

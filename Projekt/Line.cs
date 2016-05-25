@@ -8,37 +8,37 @@ namespace Projekt
 {
     class Line
     {
-        private int     _number;
-        private int     _length;
-        private string  _destination1;
-        private string  _destination2;
-        private string  _firststop;
-        private string  _laststop;
-        private int     _actualdriver;
-        private int     _actualbus;
+        public int     Number;
+        public int     Length;
+        public string  Destination1;
+        public string  Destination2;
+        public string  Firststop;
+        public string  Laststop;
+        public int     Actualdriver;
+        public int     Actualbus;
 
         public Line(int number, int lenght, string destination1, string destination2, string firststop, string laststop, int actualdriver, int actualbus)
         {
-            _number = number;
-            _length = lenght;
-            _destination1 = destination1;
-            _destination2 = destination2;
-            _firststop = firststop;
-            _laststop = laststop;
-            _actualdriver = actualdriver;
-            _actualbus = actualbus;
+            Number = number;
+            Length = lenght;
+            Destination1 = destination1;
+            Destination2 = destination2;
+            Firststop = firststop;
+            Laststop = laststop;
+            Actualdriver = actualdriver;
+            Actualbus = actualbus;
         }
 
         public Line()
         {
-            _number = -1;
-            _length = -1;
-            _destination1 = null;
-            _destination2 = null;
-            _firststop = null;
-            _laststop = null;
-            _actualdriver = -1;
-            _actualbus = -1;
+            Number = -1;
+            Length = -1;
+            Destination1 = null;
+            Destination2 = null;
+            Firststop = null;
+            Laststop = null;
+            Actualdriver = -1;
+            Actualbus = -1;
         }
     }
 }

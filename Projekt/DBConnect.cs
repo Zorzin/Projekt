@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
-    class DBConnect
+    class DbConnect
     {
         private SQLiteConnection _sqlite;
 
-        public DBConnect()
+        public DbConnect()
         {
             _sqlite = new SQLiteConnection("Data Source=WPFDB.db;New=False;Compress=True;");
 
