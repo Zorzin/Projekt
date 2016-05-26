@@ -27,14 +27,15 @@ namespace Projekt
     public partial class MainWindow : Window
     {
         List<ActualTrack> actualTracks;
+        private DbConnect dbConnect;
         public MainWindow()
         {
             actualTracks = new List<ActualTrack>();
+            dbConnect = new DbConnect();
             InitializeComponent();
+            LoadDataFromDataBase();
             LoadJson();
             CheckSmallBus();
-            /*DBConnect dbConnect = new DBConnect();
-            DataTable DT = dbConnect.SelectQuery("Select * from Driver");*/
         }
 
         private void MainWindowButton_Click(object sender, RoutedEventArgs e)
@@ -91,6 +92,67 @@ namespace Projekt
             {
                 //pobrac z bazy danych czy dla takiej daty i takiej linii jest duzy czy maly
                 // zmienic smallbus na true lub false
+            }
+        }
+
+        private void LoadDataFromDataBase()
+        {
+            LoadDriver();
+            LoadBusStop();
+            LoadLine();
+        }
+
+        private void LoadLine()
+        {
+            DataTable dt = dbConnect.SelectQuery("Select * from Line");
+            int dtcount = dt.Rows.Count;
+            for (int i = 0; i < dtcount; i++)
+            {
+                Line line = new Line();
+                line.Number = Int32.Parse(dt.Rows[i]["idline"].ToString());
+                line.Length = Double.Parse(dt.Rows[i]["lenght"].ToString());
+                //line.Firststop = Int32.Parse(dt.Rows[i]["firststop"].ToString());
+                //line.Laststop = Int32.Parse(dt.Rows[i]["laststop"].ToString());
+                line.Actualdriver = Int32.Parse(dt.Rows[i]["actualdriver"].ToString());
+                line.Actualbus = Int32.Parse(dt.Rows[i]["actualbus"].ToString());
+                Lists.Lines.Add(line);
+            }
+        }
+
+        private void LoadBusStop()
+        {
+            DataTable dt = dbConnect.SelectQuery("Select * from BusStop");
+            int dtcount = dt.Rows.Count;
+            for (int i = 0; i < dtcount; i++)
+            {
+                BusStop bs = new BusStop();
+                bs.Id = Int32.Parse(dt.Rows[i]["idBusStop"].ToString());
+                bs.Name = dt.Rows[i]["name"].ToString();
+                //bs.Area = Int32.Parse(dt.Rows[i]["area"].ToString());
+                Lists.BusStops.Add(bs);
+            }
+        }
+
+        private void LoadDriver()
+        {
+            DataTable dt = dbConnect.SelectQuery("Select * from Driver");
+            int dtcount = dt.Rows.Count;
+            for (int i = 0; i < dtcount; i++)
+            {
+                Driver driver = new Driver();
+                driver.Id = Int32.Parse(dt.Rows[i]["iddriver"].ToString());
+                driver.Name = dt.Rows[i]["name"].ToString();
+                driver.Secondname = dt.Rows[i]["secondname"].ToString();
+                driver.Status = dt.Rows[i]["status"].ToString();
+                driver.Driverlicenseid = Int32.Parse(dt.Rows[i]["driverlicenseid"].ToString());
+                driver.City = dt.Rows[i]["city"].ToString();
+                driver.Zipcode = Int32.Parse(dt.Rows[i]["zipcode"].ToString());
+                driver.Address = dt.Rows[i]["address"].ToString();
+                driver.Actualline = Int32.Parse(dt.Rows[i]["actualline"].ToString());
+                driver.Salary = Double.Parse(dt.Rows[i]["salary"].ToString());
+                driver.Hoursworked = Double.Parse(dt.Rows[i]["hoursworked"].ToString());
+                driver.Photopath = dt.Rows[i]["photopath"].ToString();
+                Lists.Drivers.Add(driver);
             }
         }
     }

@@ -11,5 +11,12 @@
             Name = name;
             Area = area;
         }
+
+        public BusStop()
+        {
+            Id = -1;
+            Name = null;
+            Area = -1;
+        }
     }
 }

@@ -1,0 +1,66 @@
+[
+{
+"startHour": "2016-26-05 05:43",
+"endHour": "12:23",
+"startBusStop":"34",
+"endBusStop":"67",
+"driver":"1",
+"line":"5"
+},
+{
+"startHour": "6:38",
+"endHour": "14:23",
+"startBusStop":"34",
+"endBusStop":"67",
+"driver":"5",
+"line":"2"
+},
+{
+"startHour": "1",
+"endHour": "12",
+"startBusStop":"23",
+"endBusStop":"34",
+"driver":"1",
+"line":"5"
+},
+{
+"startHour": "1",
+"endHour": "12",
+"startBusStop":"23",
+"endBusStop":"34",
+"driver":"1",
+"line":"5"
+},
+{
+"startHour": "1",
+"endHour": "12",
+"startBusStop":"23",
+"endBusStop":"34",
+"driver":"1",
+"line":"5"
+},
+{
+"startHour": "1",
+"endHour": "12",
+"startBusStop":"23",
+"endBusStop":"34",
+"driver":"1",
+"line":"5"
+},
+{
+"startHour": "1",
+"endHour": "12",
+"startBusStop":"23",
+"endBusStop":"34",
+"driver":"1",
+"line":"5"
+},
+{
+"startHour": "1",
+"endHour": "12",
+"startBusStop":"23",
+"endBusStop":"34",
+"driver":"1",
+"line":"5"
+}
+]
