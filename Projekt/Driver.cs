@@ -8,20 +8,20 @@ namespace Projekt
 {
     class Driver
     {
-        public string  Name;
-        public string  Secondname;
-        public int     Id;
-        public string  Status;
-        public int     Driverlicenseid;
-        public string  City;
-        public int     Zipcode;
-        public string  Address;
-        public int     Actualline;
-        public double  Salary;
-        public double  Hoursworked;
-        public string  Photopath;
+        public string  Name             { get; set; }
+        public string  Secondname       { get; set; }
+        public int     Id               { get; set; }
+        public string  Status           { get; set; }
+        public int     Driverlicenseid  { get; set; }
+        public string  City             { get; set; }
+        public int     Zipcode          { get; set; }
+        public string  Address          { get; set; }
+        public Line    Actualline       { get; set; }
+        public double  Salary           { get; set; }
+        public double  Hoursworked      { get; set; }
+        public string  Photopath        { get; set; }
 
-        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, int actualline, double salary, double hoursworked, string photopath)
+        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Line actualline, double salary, double hoursworked, string photopath)
         {
             Name = name;
             Secondname = secondname;
@@ -47,10 +47,10 @@ namespace Projekt
             City = null;
             Zipcode = -1;
             Address = null;
-            Actualline = -1;
+            Actualline = null;
             Salary = 0;
             Hoursworked = 0;
-            Photopath = null; //zmienic na default jakis
+            Photopath = "default.jpg"; //zmienic na default jakis
         }
 
 

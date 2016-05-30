@@ -41,7 +41,6 @@ namespace Projekt
         private void MainWindowButton_Click(object sender, RoutedEventArgs e)
         {
             AddEditPage addEdit = new AddEditPage();
-            
             addEdit.List = new Dictionary<object, Func<int>>();
             addEdit.List[DriversButton] = addEdit.DriverFunction;
             addEdit.List[BusStopsButton] = addEdit.BusStopFunction;
@@ -77,9 +76,9 @@ namespace Projekt
                 at.Driver = Lists.GetDriver((int)itemProperties.First(x=> x.Name == "driver").Value);
                 at.EndBusStop = Lists.GetBusStop((int)itemProperties.First(x => x.Name == "endBusStop").Value);
                 var date = (string)itemProperties.First(x => x.Name == "startHour").Value;
-                at.StartHour = DateTime.ParseExact(date, "g",null);
+                at.StartHour = DateTime.Parse(date);
                 var enddate = (string) itemProperties.First(x => x.Name == "endHour").Value;
-                at.EndHour = DateTime.ParseExact(enddate, "g", null);
+                at.EndHour = DateTime.Parse(enddate);
                 at.Line = Lists.GetLine((int) itemProperties.First(x => x.Name == "line").Value);
                 actualTracks.Add(at);
 
@@ -90,6 +89,33 @@ namespace Projekt
         {
             foreach (var tracks in actualTracks)
             {
+                string day = tracks.StartHour.DayOfWeek.ToString();
+                switch (day)
+                {
+                    case "sunday":
+                        day = "niedziela";
+                        break;
+                    case "saturday":
+                        day = "sobota";
+                        break;
+                    default:
+                        day = "roboczy";
+                        break;
+                }
+                string date = tracks.StartHour.TimeOfDay.ToString().Substring(0,5);
+                DataTable dt = dbConnect.SelectQuery("Select small from track_bus where startdate = '"+date+"' and day = '"+day+"' and lineid='"+tracks.Line.Number+"'");
+                if (dt.Rows.Count!=0)
+                {
+                    string issmall = dt.Rows[0]["small"].ToString();
+                    if (issmall == "0")
+                    {
+                        tracks.Smallbus = true;
+                    }
+                    else
+                    {
+                        tracks.Smallbus = false;
+                    }
+                }
                 //pobrac z bazy danych czy dla takiej daty i takiej linii jest duzy czy maly
                 // zmienic smallbus na true lub false
             }
@@ -100,6 +126,37 @@ namespace Projekt
             LoadDriver();
             LoadBusStop();
             LoadLine();
+            LoadBus();
+        }
+
+        private void LoadBus()
+        {
+            DataTable dt = dbConnect.SelectQuery("Select * from Bus");
+            int dtcount = dt.Rows.Count;
+            for (int i = 0; i < dtcount; i++)
+            {
+                try
+                {
+                    Bus bus = new Bus();
+                    bus.Busid = Int32.Parse(dt.Rows[i]["idbus"].ToString());
+                    bus.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows[i]["actualdriver"].ToString()));
+                    bus.Actualline = Lists.GetLine(Int32.Parse(dt.Rows[i]["actualline"].ToString()));
+                    if (bus.Actualline != null)
+                    {
+                        bus.Actualline.Actualbus = bus;
+                    }
+                    bus.Busbrand = dt.Rows[i]["busbrand"].ToString();
+                    bus.Mileage = Double.Parse(dt.Rows[i]["mileage"].ToString());
+                    bus.Techcondition = dt.Rows[i]["techcondition"].ToString();
+                    bus.Type = dt.Rows[i]["type"].ToString();
+                    Lists.Buses.Add(bus);
+                }
+                catch (Exception)
+                {
+                    MessageBoxButton mbb = MessageBoxButton.OK;
+                    MessageBox.Show("Błąd bazy danych przy wczytywaniu autobusów", "Błąd", mbb);
+                }
+            }
         }
 
         private void LoadLine()
@@ -108,14 +165,26 @@ namespace Projekt
             int dtcount = dt.Rows.Count;
             for (int i = 0; i < dtcount; i++)
             {
-                Line line = new Line();
-                line.Number = Int32.Parse(dt.Rows[i]["idline"].ToString());
-                line.Length = Double.Parse(dt.Rows[i]["lenght"].ToString());
-                //line.Firststop = Int32.Parse(dt.Rows[i]["firststop"].ToString());
-                //line.Laststop = Int32.Parse(dt.Rows[i]["laststop"].ToString());
-                line.Actualdriver = Int32.Parse(dt.Rows[i]["actualdriver"].ToString());
-                line.Actualbus = Int32.Parse(dt.Rows[i]["actualbus"].ToString());
-                Lists.Lines.Add(line);
+                try
+                {
+                    Line line = new Line();
+                    line.Number = Int32.Parse(dt.Rows [i] ["idline"].ToString());
+                    line.Length = Double.Parse(dt.Rows [i] ["lenght"].ToString()); //tu
+                    line.Firststop = Lists.GetBusStop(Int32.Parse(dt.Rows [i] ["firststop"].ToString()));
+                    line.Laststop = Lists.GetBusStop(Int32.Parse(dt.Rows [i] ["laststop"].ToString()));
+                    line.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows [i] ["actualdriver"].ToString()));
+                    if (line.Actualdriver != null)
+                    {
+                        line.Actualdriver.Actualline = line;
+                    }
+                    line.Actualbus = Lists.GetBus(Int32.Parse(dt.Rows [i] ["actualbus"].ToString()));
+                    Lists.Lines.Add(line);
+                }
+                catch (Exception)
+                {
+                    MessageBoxButton mbb = MessageBoxButton.OK;
+                    MessageBox.Show("Błąd bazy danych przy wczytywaniu linii", "Błąd", mbb);
+                }
             }
         }
 
@@ -127,7 +196,7 @@ namespace Projekt
             {
                 BusStop bs = new BusStop();
                 bs.Id = Int32.Parse(dt.Rows[i]["idBusStop"].ToString());
-                bs.Name = dt.Rows[i]["name"].ToString();
+                bs.Name = dt.Rows[i]["busstopname"].ToString();
                 //bs.Area = Int32.Parse(dt.Rows[i]["area"].ToString());
                 Lists.BusStops.Add(bs);
             }
@@ -139,20 +208,29 @@ namespace Projekt
             int dtcount = dt.Rows.Count;
             for (int i = 0; i < dtcount; i++)
             {
-                Driver driver = new Driver();
-                driver.Id = Int32.Parse(dt.Rows[i]["iddriver"].ToString());
-                driver.Name = dt.Rows[i]["name"].ToString();
-                driver.Secondname = dt.Rows[i]["secondname"].ToString();
-                driver.Status = dt.Rows[i]["status"].ToString();
-                driver.Driverlicenseid = Int32.Parse(dt.Rows[i]["driverlicenseid"].ToString());
-                driver.City = dt.Rows[i]["city"].ToString();
-                driver.Zipcode = Int32.Parse(dt.Rows[i]["zipcode"].ToString());
-                driver.Address = dt.Rows[i]["address"].ToString();
-                driver.Actualline = Int32.Parse(dt.Rows[i]["actualline"].ToString());
-                driver.Salary = Double.Parse(dt.Rows[i]["salary"].ToString());
-                driver.Hoursworked = Double.Parse(dt.Rows[i]["hoursworked"].ToString());
-                driver.Photopath = dt.Rows[i]["photopath"].ToString();
-                Lists.Drivers.Add(driver);
+                try
+                {
+                    Driver driver = new Driver();
+                    driver.Id = Int32.Parse(dt.Rows [i] ["iddriver"].ToString());
+                    driver.Name = dt.Rows [i] ["name"].ToString();
+                    driver.Secondname = dt.Rows [i] ["secondname"].ToString();
+                    driver.Status = dt.Rows [i] ["status"].ToString();
+                    driver.Driverlicenseid = Int32.Parse(dt.Rows [i] ["driverlicenceid"].ToString());
+                    driver.City = dt.Rows [i] ["city"].ToString();
+                    driver.Zipcode = Int32.Parse(dt.Rows [i] ["zipcode"].ToString());
+                    driver.Address = dt.Rows [i] ["address"].ToString();
+                    driver.Actualline = Lists.GetLine(Int32.Parse(dt.Rows [i] ["actualline"].ToString()));
+                    driver.Salary = Double.Parse(dt.Rows [i] ["salary"].ToString());
+                    driver.Hoursworked = Double.Parse(dt.Rows [i] ["hoursworked"].ToString());
+                    driver.Photopath = dt.Rows [i] ["photopath"].ToString();
+                    Lists.Drivers.Add(driver);
+                }
+                catch (Exception)
+                {
+                    MessageBoxButton mbb = MessageBoxButton.OK;
+                    MessageBox.Show("Błąd bazy danych przy wczytywaniu kierowcow", "Błąd", mbb);
+                }
+                
             }
         }
     }

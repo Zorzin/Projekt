@@ -8,14 +8,14 @@ namespace Projekt
 {
     class Line
     {
-        public int     Number;
-        public double     Length;
-        public string  Firststop;
-        public string  Laststop;
-        public int     Actualdriver;
-        public int     Actualbus;
+        public int      Number          { get; set; }
+        public double   Length          { get; set; }
+        public BusStop  Firststop       { get; set; }
+        public BusStop  Laststop        { get; set; }
+        public Driver   Actualdriver    { get; set; }
+        public Bus      Actualbus       { get; set; }
 
-        public Line(int number, double lenght, string firststop, string laststop, int actualdriver, int actualbus)
+        public Line(int number, double lenght, BusStop firststop, BusStop laststop, Driver actualdriver, Bus actualbus)
         {
             Number = number;
             Length = lenght;
@@ -31,8 +31,8 @@ namespace Projekt
             Length = -1;
             Firststop = null;
             Laststop = null;
-            Actualdriver = -1;
-            Actualbus = -1;
+            Actualdriver = null;
+            Actualbus = null;
         }
     }
 }

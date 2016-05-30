@@ -83,6 +83,7 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.101.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -128,10 +129,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BusAddWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BusBrandListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,10 +190,6 @@
     <Compile Include="Bus.cs" />
     <Compile Include="BusAddWindow.xaml.cs">
       <DependentUpon>BusAddWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BusBrand.cs" />
-    <Compile Include="BusBrandListWindow.xaml.cs">
-      <DependentUpon>BusBrandListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusListPage.xaml.cs">
       <DependentUpon>BusListPage.xaml</DependentUpon>

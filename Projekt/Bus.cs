@@ -8,34 +8,34 @@ namespace Projekt
 {
     class Bus
     {
-        private int     _busid;
-        private string  _type;
-        private int     _actualdriver;
-        private int     _actualline;
-        private int     _mileage;
-        private int     _busbrand;
-        private string  _techcondition;
+        public int     Busid            { get; set; }
+        public string  Type             { get; set; }
+        public Driver  Actualdriver     { get; set; }
+        public Line    Actualline       { get; set; }
+        public double  Mileage          { get; set; }
+        public string  Busbrand         { get; set; }
+        public string  Techcondition    { get; set; }
 
-        public Bus(int busid, string type, int actualdriver, int actualline, int mileage, int busbrand, string techcondition)
+        public Bus(int busid, string type, Driver actualdriver, Line actualline, double mileage, string busbrand, string techcondition)
         {
-            _busid = busid;
-            _type = type;
-            _actualdriver = actualdriver;
-            _actualline = actualline;
-            _mileage = mileage;
-            _busbrand = busbrand;
-            _techcondition = techcondition;
+            Busid = busid;
+            Type = type;
+            Actualdriver = actualdriver;
+            Actualline = actualline;
+            Mileage = mileage;
+            Busbrand = busbrand;
+            Techcondition = techcondition;
         }
 
         public Bus()
         {
-            _busid = -1;
-            _type = null;
-            _actualdriver = -1;
-            _actualline = -1;
-            _mileage = 0;
-            _busbrand = -1;
-            _techcondition = null;
+            Busid = -1;
+            Type = null;
+            Actualdriver = null;
+            Actualline = null;
+            Mileage = 0;
+            Busbrand = null;
+            Techcondition = null;
         }
     }
 }

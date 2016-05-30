@@ -8,13 +8,13 @@ namespace Projekt
 {
     class ActualTrack
     {
-        public DateTime     StartHour { get; set; }
-        public DateTime     EndHour { get; set; }
-        public BusStop      StartBusStop { get; set; }
-        public BusStop      EndBusStop { get; set; }
-        public Driver       Driver { get; set; }
-        public bool         Smallbus { get; set; }
-        public Line         Line { get; set; }
+        public DateTime     StartHour       { get; set; }
+        public DateTime     EndHour         { get; set; }
+        public BusStop      StartBusStop    { get; set; }
+        public BusStop      EndBusStop      { get; set; }
+        public Driver       Driver          { get; set; }
+        public bool         Smallbus        { get; set; }
+        public Line         Line            { get; set; }
 
         public ActualTrack(DateTime startHour, DateTime endHour, BusStop startBusStop, BusStop endBusStop, Driver driver, bool smallbus, Line line)
         {
