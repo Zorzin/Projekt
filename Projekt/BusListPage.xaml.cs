@@ -23,6 +23,8 @@ namespace Projekt
         public BusListPage()
         {
             InitializeComponent();
+            Commands.AddList[AddButton] = Commands.BusAddFunction;
+            ListBox.ItemsSource = Lists.Buses;
         }
     }
 }

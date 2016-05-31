@@ -23,6 +23,8 @@ namespace Projekt
         public LineListPage()
         {
             InitializeComponent();
+            Commands.AddList[AddButton] = Commands.LineAddFunction;
+            ListBox.ItemsSource = Lists.Lines;
         }
     }
 }

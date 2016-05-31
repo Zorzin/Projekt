@@ -26,34 +26,17 @@ namespace Projekt
 
     public partial class MainWindow : Window
     {
-        List<ActualTrack> actualTracks;
         private DbConnect dbConnect;
         public MainWindow()
         {
-            actualTracks = new List<ActualTrack>();
             dbConnect = new DbConnect();
             InitializeComponent();
+            Commands.BindCommandsToWindow(this);
+            LoadButtonFunctions();
             LoadDataFromDataBase();
             LoadJson();
             CheckSmallBus();
         }
-
-        private void MainWindowButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddEditPage addEdit = new AddEditPage();
-            addEdit.List = new Dictionary<object, Func<int>>();
-            addEdit.List[DriversButton] = addEdit.DriverFunction;
-            addEdit.List[BusStopsButton] = addEdit.BusStopFunction;
-            addEdit.List[BussesButton] = addEdit.BusFunction;
-            addEdit.List[LinesButton] = addEdit.LineFunction;
-            addEdit.List[ActualTrackButton] = addEdit.ActualTrackFunction;
-            addEdit.EventArgs = e;
-            Button b = (Button)e.Source;
-            addEdit.PageNameLabel.Content = b.Content.ToString();
-            MainFrame.Navigate(addEdit);
-
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -65,6 +48,15 @@ namespace Projekt
             MainFrame.Navigate(searchPage);
         }
 
+        private void LoadButtonFunctions()
+        {
+            Commands.List = new Dictionary<object, Func<int>>();
+            Commands.List [DriversButton] = Commands.DriverFunction;
+            Commands.List [BusStopsButton] = Commands.BusStopFunction;
+            Commands.List [BussesButton] = Commands.BusFunction;
+            Commands.List [LinesButton] = Commands.LineFunction;
+            Commands.List [ActualTrackButton] = Commands.ActualTrackFunction;
+        }
         private void LoadJson()
         {
             JArray array = JArray.Parse(File.ReadAllText("schedule.json"));
@@ -80,14 +72,14 @@ namespace Projekt
                 var enddate = (string) itemProperties.First(x => x.Name == "endHour").Value;
                 at.EndHour = DateTime.Parse(enddate);
                 at.Line = Lists.GetLine((int) itemProperties.First(x => x.Name == "line").Value);
-                actualTracks.Add(at);
+                Lists.ActualTracks.Add(at);
 
             }
         }
 
         private void CheckSmallBus()
         {
-            foreach (var tracks in actualTracks)
+            foreach (var tracks in Lists.ActualTracks)
             {
                 string day = tracks.StartHour.DayOfWeek.ToString();
                 switch (day)
@@ -116,8 +108,6 @@ namespace Projekt
                         tracks.Smallbus = false;
                     }
                 }
-                //pobrac z bazy danych czy dla takiej daty i takiej linii jest duzy czy maly
-                // zmienic smallbus na true lub false
             }
         }
 

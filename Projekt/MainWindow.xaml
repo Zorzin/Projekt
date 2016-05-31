@@ -28,11 +28,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Margin="20,0" Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
-            <Button Name="DriversButton" Grid.Row="1" Content="Kierowcy" Click="MainWindowButton_Click"/>
-            <Button Name="BussesButton" Grid.Row="2" Content="Autobusy" Click="MainWindowButton_Click"/>
-            <Button Name="BusStopsButton"  Grid.Row="3" Content="Przystanki" Click="MainWindowButton_Click"/>
-            <Button Name="LinesButton" Grid.Row="4"  Content="Linie" Click="MainWindowButton_Click"/>
-            <Button Name="ActualTrackButton" Grid.Row="5"  Content="Aktualne Kursy" Click="MainWindowButton_Click"/>
+            <Button Name="DriversButton" Grid.Row="1" Content="Kierowcy" Command="local:Commands.ButtonCommand"/>
+            <Button Name="BussesButton" Grid.Row="2" Content="Autobusy" Command="local:Commands.ButtonCommand"/>
+            <Button Name="BusStopsButton"  Grid.Row="3" Content="Przystanki" Command="local:Commands.ButtonCommand"/>
+            <Button Name="LinesButton" Grid.Row="4"  Content="Linie" Command="local:Commands.ButtonCommand"/>
+            <Button Name="ActualTrackButton" Grid.Row="5"  Content="Aktualne Kursy" Command="local:Commands.ButtonCommand"/>
             <Button Name="SearchButton" Grid.Row="6"  Content="Wyszukiwanie" Click="SearchButton_OnClickButton_Click"/>
             <Button Name="CloseButton" Grid.Row="7" Content="Zamknij" Click="CloseButton_Click"/>
         </Grid>

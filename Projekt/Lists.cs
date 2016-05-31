@@ -8,6 +8,7 @@ namespace Projekt
 {
     static class Lists
     {
+        public static List<ActualTrack> ActualTracks = new List<ActualTrack>();
         public static List<BusStop> BusStops = new List<BusStop>();
         public static List<Driver> Drivers = new List<Driver>();
         public static List<Line> Lines = new List<Line>();

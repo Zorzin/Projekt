@@ -120,14 +120,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddEditPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="BusAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,15 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BusListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="BusStopListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="BusStopListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,10 +140,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DriverListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="LineAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,24 +148,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LineListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ActualTrack.cs" />
-    <Compile Include="AddEditPage.xaml.cs">
-      <DependentUpon>AddEditPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AddEditWindow.xaml.cs">
-      <DependentUpon>AddEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bus.cs" />
     <Compile Include="BusAddWindow.xaml.cs">
@@ -194,15 +164,9 @@
     <Compile Include="BusListPage.xaml.cs">
       <DependentUpon>BusListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BusListWindow.xaml.cs">
-      <DependentUpon>BusListWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BusStop.cs" />
     <Compile Include="BusStopListPage.xaml.cs">
       <DependentUpon>BusStopListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="BusStopListWindow.xaml.cs">
-      <DependentUpon>BusStopListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands.cs" />
     <Compile Include="DBConnect.cs" />
@@ -213,18 +177,12 @@
     <Compile Include="DriverListPage.xaml.cs">
       <DependentUpon>DriverListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DriverListWindow.xaml.cs">
-      <DependentUpon>DriverListWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Line.cs" />
     <Compile Include="LineAddWindow.xaml.cs">
       <DependentUpon>LineAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LineListPage.xaml.cs">
       <DependentUpon>LineListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LineListWindow.xaml.cs">
-      <DependentUpon>LineListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

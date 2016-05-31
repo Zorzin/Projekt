@@ -18,12 +18,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.BackButtonCommand" Content="Powrót"/>
-            <Button Content="Dodaj"/>
+            <Button Command="local:Commands.AddButtonCommand" Name="AddButton" Content="Dodaj"/>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
-        <ListBox Grid.Column="0" Grid.Row="1"/>
-        <Grid Grid.Column="1" Grid.Row="1">
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1"/>
+        <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -39,19 +38,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr boczny:"/>
-            <TextBox Grid.Column="1" />
+            <TextBox Grid.Column="1" Text="{Binding Busid, Mode=TwoWay}"/>
             <Label Grid.Row="1" Content="Typ autobusu:"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Type, Mode=TwoWay}"/>
             <Label Grid.Row="2" Content="Aktualny kierowca:"/>
-            <ComboBox Grid.Row="2" Grid.Column="1"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ActualDriver.Id, Mode=TwoWay}"/>
             <Label Grid.Row="3" Content="Aktualna linia:"/>
-            <ComboBox Grid.Row="3" Grid.Column="1"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ActualLine.Number, Mode=TwoWay}"/>
             <Label Grid.Row="4" Content="Przebieg:"/>
-            <TextBox Grid.Row="4" Grid.Column="1"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Mileage, Mode=TwoWay}"/>
             <Label Grid.Row="5" Content="Model:"/>
-            <ComboBox Grid.Row="5" Grid.Column="1"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Busbrand, Mode=TwoWay}"/>
             <Label Grid.Row="6" Content="Stan techniczny:"/>
-            <ComboBox Grid.Row="6" Grid.Column="1"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Techcondition, Mode=TwoWay}"/>
             <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Usuń"/>
         </Grid>
     </Grid>

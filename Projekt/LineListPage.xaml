@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="LineListPage">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*"/>
@@ -18,12 +17,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.BackButtonCommand" Content="Powrót"/>
-            <Button Content="Dodaj"/>
+            <Button Command="local:Commands.AddButtonCommand" Name="AddButton" Content="Dodaj"/>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
-        <ListBox Grid.Column="0" Grid.Row="1"/>
-        <Grid Grid.Column="1" Grid.Row="1">
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" />
+        <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -39,19 +37,17 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr linii:"/>
-            <TextBox Grid.Column="1" />
+            <TextBox Grid.Column="1" Text="{Binding Number, Mode=TwoWay}"/>
             <Label Grid.Row="1" Content="Długość trasy:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" />
-            <Label Grid.Row="2" Content="Kierunki:"/>
-            <ComboBox Grid.Row="2" Grid.Column="1"></ComboBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Length, Mode=TwoWay}"/>
             <Label Grid.Row="3" Content="Pierwszy przystanek:"/>
-            <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Firststop.Id, Mode=TwoWay}"/>
             <Label Grid.Row="4" Content="Ostatni Przystanek:"/>
-            <TextBox Grid.Column="1" Grid.Row="4" />
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Laststop.Id, Mode=TwoWay}"/>
             <Label Grid.Row="5" Content="Aktualny kierowca:"/>
-            <ComboBox Grid.Column="1" Grid.Row="5" />
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Actualdriver.Id, Mode=TwoWay}"/>
             <Label Grid.Row="6" Content="Aktualny autobus:"/>
-            <ComboBox Grid.Column="1" Grid.Row="6"/>
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Actualbus.Busid, Mode=TwoWay}"/>
             <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Usuń"/>
         </Grid>
     </Grid>

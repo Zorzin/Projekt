@@ -23,6 +23,8 @@ namespace Projekt
         public DriverListPage()
         {
             InitializeComponent();
+            Commands.AddList [AddButton] = Commands.DriverAddFunction;
+            ListBox.ItemsSource = Lists.Drivers;
         }
     }
 }
