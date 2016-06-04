@@ -1,16 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Projekt.Annotations;
 
 namespace Projekt
 {
-    class Driver
+    class Driver:INotifyPropertyChanged
     {
-        public string  Name             { get; set; }
-        public string  Secondname       { get; set; }
-        public int     Id               { get; set; }
+        private string  _name;
+        private string  _secondname;
+        private int     _id;
+
+        public string   Name
+        {
+            get { return _name; }
+            set { _name = value; OnPropertyChanged("DriverShow"); }
+        }
+
+        public string   Secondname
+        {
+            get { return _secondname; }
+            set { _secondname = value; OnPropertyChanged("DriverShow"); }
+        }
+
+        public int      Id
+        {
+            get { return _id; }
+            set { _id = value; OnPropertyChanged("DriverShow"); }
+            
+        }
         public string  Status           { get; set; }
         public int     Driverlicenseid  { get; set; }
         public string  City             { get; set; }
@@ -21,11 +43,16 @@ namespace Projekt
         public double  Hoursworked      { get; set; }
         public string  Photopath        { get; set; }
 
+        public string DriverShow
+        {
+            get { return Name.Substring(0, 1) + "." + Secondname + ": " + Id; }
+        }
+
         public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Line actualline, double salary, double hoursworked, string photopath)
         {
-            Name = name;
-            Secondname = secondname;
-            Id = id;
+            _name = name;
+            _secondname = secondname;
+            _id = id;
             Status = status;
             Driverlicenseid = driverlicenseid;
             City = city;
@@ -50,9 +77,18 @@ namespace Projekt
             Actualline = null;
             Salary = 0;
             Hoursworked = 0;
-            Photopath = "default.jpg"; //zmienic na default jakis
+            Photopath = "photos/default.jpg";
         }
 
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this,
+                new PropertyChangedEventArgs(property));
+        }
     }
 }

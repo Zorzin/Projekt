@@ -1,30 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Projekt.Annotations;
 
 namespace Projekt
 {
-    class ActualTrack
+    class ActualTrack:INotifyPropertyChanged
     {
-        public DateTime     StartHour       { get; set; }
-        public DateTime     EndHour         { get; set; }
+        private Line        _line;
+        private DateTime    _startHour;
+        private DateTime    _endHour;
+        public DateTime     StartHour
+        {
+            get { return _startHour; }
+            set { _startHour = value; OnPropertyChanged("ActualTrackShow"); }
+            
+        }
+        public DateTime     EndHour
+        {
+            get { return _endHour; }
+            set { _endHour = value; OnPropertyChanged("ActualTrackShow"); }
+            
+        }
+        public Line         Line
+        {
+            get { return _line; }
+            set { _line = value; OnPropertyChanged("ActualTrackShow"); }
+
+        }
         public BusStop      StartBusStop    { get; set; }
         public BusStop      EndBusStop      { get; set; }
         public Driver       Driver          { get; set; }
         public bool         Smallbus        { get; set; }
-        public Line         Line            { get; set; }
+        public string       ActualTrackShow
+        {
+            get { return "Linia: " + Line.Number + ", od " + StartHour.TimeOfDay + "do " + EndHour.TimeOfDay; }
+        }
 
         public ActualTrack(DateTime startHour, DateTime endHour, BusStop startBusStop, BusStop endBusStop, Driver driver, bool smallbus, Line line)
         {
             StartBusStop = startBusStop;
-            StartHour = startHour;
-            EndHour = endHour;
+            _startHour = startHour;
+            _endHour = endHour;
             EndBusStop = endBusStop;
             Driver = driver;
             Smallbus = smallbus;
-            Line = line;
+            _line = line;
         }
 
         public ActualTrack()
@@ -38,5 +63,14 @@ namespace Projekt
             Line = null;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this,
+                new PropertyChangedEventArgs(property));
+        }
     }
 }

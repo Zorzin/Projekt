@@ -26,5 +26,10 @@ namespace Projekt
             Commands.AddList[AddButton] = Commands.BusAddFunction;
             ListBox.ItemsSource = Lists.Buses;
         }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Wypisz");
+        }
     }
 }

@@ -109,6 +109,7 @@
       <DependentUpon>ActualTrackPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lists.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
