@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,11 @@ namespace Projekt
 {
     static class Lists
     {
-        public static List<ActualTrack> ActualTracks = new List<ActualTrack>();
-        public static List<BusStop> BusStops = new List<BusStop>();
-        public static List<Driver> Drivers = new List<Driver>();
-        public static List<Line> Lines = new List<Line>();
-        public static List<Bus> Buses = new List<Bus>();
+        public static ObservableCollection<ActualTrack> ActualTracks = new ObservableCollection<ActualTrack>();
+        public static ObservableCollection<BusStop> BusStops = new ObservableCollection<BusStop>();
+        public static ObservableCollection<Driver> Drivers = new ObservableCollection<Driver>();
+        public static ObservableCollection<Line> Lines = new ObservableCollection<Line>();
+        public static ObservableCollection<Bus> Buses = new ObservableCollection<Bus>();
 
         public static BusStop GetBusStop(int id)
         {

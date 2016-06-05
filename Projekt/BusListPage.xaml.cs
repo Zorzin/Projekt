@@ -23,13 +23,17 @@ namespace Projekt
         public BusListPage()
         {
             InitializeComponent();
-            Commands.AddList[AddButton] = Commands.BusAddFunction;
+            Commands.List[AddButton] = Commands.BusAddFunction;
             ListBox.ItemsSource = Lists.Buses;
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("Wypisz");
+            DbConnect db = new DbConnect();
+            Bus bus = (Bus)ListBox.SelectedItem;
+            db.Delete("Bus",bus.Busid.ToString());
+            Lists.Buses.RemoveAt(ListBox.SelectedIndex);
+            ListBox.SelectedIndex = ListBox.Items.Count - 1;
         }
     }
 }

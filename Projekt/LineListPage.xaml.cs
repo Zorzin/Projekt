@@ -23,8 +23,16 @@ namespace Projekt
         public LineListPage()
         {
             InitializeComponent();
-            Commands.AddList[AddButton] = Commands.LineAddFunction;
+            Commands.List[AddButton] = Commands.LineAddFunction;
             ListBox.ItemsSource = Lists.Lines;
+        }
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DbConnect db = new DbConnect();
+            Line line = (Line)ListBox.SelectedItem;
+            db.Delete("line", line.Number.ToString());
+            Lists.Lines.RemoveAt(ListBox.SelectedIndex);
+            ListBox.SelectedIndex = ListBox.Items.Count - 1;
         }
     }
 }

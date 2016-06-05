@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Projekt
 {
     internal class Commands
     {
-        private static bool _add;
         public static RoutedEventArgs Source;
         public static Dictionary<object, Func<int>> List;
-        public static Dictionary<object, Func<int>> AddList = new Dictionary<object, Func<int>>();
 
         static Commands()
         {
-            AddButtonCommand = new RoutedUICommand("Add new record","add",typeof(Commands));
             ButtonCommand = new RoutedUICommand("Edit existing record", "edit", typeof (Commands));
             BackButtonCommand = new RoutedUICommand("Return to main window", "return", typeof (Commands));
         }
-
-        public static RoutedUICommand AddButtonCommand { get; set; }
         public static RoutedUICommand ButtonCommand { get; set; }
         public static RoutedUICommand BackButtonCommand { get; set; }
 
@@ -45,24 +41,12 @@ namespace Projekt
             e.CanExecute = true;
         }
 
-        public static void AddButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            AddList[e.Source].Invoke();
-        }
-
-        public static void AddButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
         public static void BindCommandsToWindow(Window window)
         {
             window.CommandBindings.Add(
                 new CommandBinding(BackButtonCommand, BackButtonCommandExecuted, BackButtonCommandCanExecute));
             window.CommandBindings.Add(new CommandBinding(ButtonCommand, ButtonCommandExecuted,
                 ButtonCommandCanExecute));
-            window.CommandBindings.Add(new CommandBinding(AddButtonCommand, AddButtonCommandExecuted,
-                AddButtonCommandCanExecute));
         }
 
         public static int DriverFunction()

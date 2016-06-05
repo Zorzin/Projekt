@@ -8,9 +8,18 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ActualTrackPage">
     <Page.Resources>
+        <local:ActualTrackConverter x:Key="ActualTrackConverter"
+                                            Actual="Green"
+                                            NotActual="Red"/>
         <DataTemplate x:Key="ActualTrackDataTemplate">
             <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="Black">
                 <Grid>
+                    <Grid.Background>
+                        <MultiBinding Converter="{StaticResource ActualTrackConverter}">
+                            <Binding Path="StartHour"/>
+                            <Binding Path="EndHour"/>
+                        </MultiBinding>
+                    </Grid.Background>
                     <TextBlock Text="{Binding Path=ActualTrackShow}"/>
                 </Grid>
             </Border>
@@ -26,7 +35,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.AddButtonCommand" Name="AddButton" Content="Dodaj" />
+            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" />
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ActualTrackDataTemplate}"/>
@@ -48,7 +57,7 @@
             <Label Content="Nr linii:" />
             <TextBox Grid.Column="1" Text="{Binding Line.Number, Mode=TwoWay}" />
             <Label Grid.Row="1" Content="Nr Autobusu:" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Driver.Actualbus.Id, Mode=TwoWay}" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Driver.Actualbus.Busid, Mode=TwoWay}" />
             <Label Grid.Row="2" Content="Godzina startu:" />
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding StartHour, Mode=TwoWay}" />
             <Label Grid.Row="3" Content="Godzina zakończenia:" />
@@ -59,7 +68,6 @@
             <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding EndBusStop.Id, Mode=TwoWay}" />
             <Label Grid.Row="6" Content="Nr Kierowcy:" />
             <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Driver.Id, Mode=TwoWay}" />
-            <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Usuń" />
         </Grid>
     </Grid>
 </Page>

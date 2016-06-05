@@ -22,17 +22,13 @@ namespace Projekt
         public double   Length          { get; set; }
         public BusStop  Firststop       { get; set; }
         public BusStop  Laststop        { get; set; }
-        public Driver   Actualdriver    { get; set; }
-        public Bus      Actualbus       { get; set; }
 
-        public Line(int number, double lenght, BusStop firststop, BusStop laststop, Driver actualdriver, Bus actualbus)
+        public Line(int number, double lenght, BusStop firststop, BusStop laststop)
         {
             _number = number;
             Length = lenght;
             Firststop = firststop;
             Laststop = laststop;
-            Actualdriver = actualdriver;
-            Actualbus = actualbus;
         }
 
         public Line()
@@ -41,8 +37,6 @@ namespace Projekt
             Length = -1;
             Firststop = null;
             Laststop = null;
-            Actualdriver = null;
-            Actualbus = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -6,6 +6,8 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 
 namespace Projekt
@@ -35,6 +37,15 @@ namespace Projekt
             ad.Fill(dt); //fill the datasource
             _mySqlConnection.Close();
             return dt;
+        }
+
+        public void Delete(string table, string id)
+        {
+            _mySqlConnection.Open();
+            var cmd = _mySqlConnection.CreateCommand();
+            cmd.CommandText = "delete from projekt."+table+" where id"+table+"=" + id + ";";
+            cmd.CommandType= CommandType.Text;
+            cmd.ExecuteNonQuery();
         }
     }
 }

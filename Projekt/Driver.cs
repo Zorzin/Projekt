@@ -14,7 +14,9 @@ namespace Projekt
         private string  _name;
         private string  _secondname;
         private int     _id;
-
+        private Bus    _actualline;
+        private string  _photopath;
+        private double  _salary;
         public string   Name
         {
             get { return _name; }
@@ -33,22 +35,39 @@ namespace Projekt
             set { _id = value; OnPropertyChanged("DriverShow"); }
             
         }
+
+        public Bus Actualbus
+        {
+            get { return _actualline; }
+            set { _actualline = value; OnPropertyChanged("Actualbus"); }
+            
+        }
+
+        public string Photopath
+        {
+            get { return _photopath; }
+            set { _photopath = value; OnPropertyChanged("Photopath"); }
+            
+        }
+
+        public double Salary
+        {
+            get { return _salary; }
+            set { _salary = value; OnPropertyChanged("Salary"); }
+            
+        }
         public string  Status           { get; set; }
         public int     Driverlicenseid  { get; set; }
         public string  City             { get; set; }
         public int     Zipcode          { get; set; }
         public string  Address          { get; set; }
-        public Line    Actualline       { get; set; }
-        public double  Salary           { get; set; }
         public double  Hoursworked      { get; set; }
-        public string  Photopath        { get; set; }
-
         public string DriverShow
         {
             get { return Name.Substring(0, 1) + "." + Secondname + ": " + Id; }
         }
 
-        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Line actualline, double salary, double hoursworked, string photopath)
+        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Bus actualbus, double salary, double hoursworked, string photopath)
         {
             _name = name;
             _secondname = secondname;
@@ -58,7 +77,7 @@ namespace Projekt
             City = city;
             Zipcode = zipcode;
             Address = address;
-            Actualline = actualline;
+            Actualbus = actualbus;
             Salary = salary;
             Hoursworked = hoursworked;
             Photopath = photopath;
@@ -74,7 +93,7 @@ namespace Projekt
             City = null;
             Zipcode = -1;
             Address = null;
-            Actualline = null;
+            Actualbus = null;
             Salary = 0;
             Hoursworked = 0;
             Photopath = "photos/default.jpg";

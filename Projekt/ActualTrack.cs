@@ -14,33 +14,37 @@ namespace Projekt
         private Line        _line;
         private DateTime    _startHour;
         private DateTime    _endHour;
-        public DateTime     StartHour
+        public  DateTime     StartHour
         {
             get { return _startHour; }
-            set { _startHour = value; OnPropertyChanged("ActualTrackShow"); }
+            set { _startHour = value;
+                OnPropertyChanged("ActualTrackShow");
+                OnPropertyChanged("StartHour");}
             
         }
-        public DateTime     EndHour
+        public  DateTime     EndHour
         {
             get { return _endHour; }
-            set { _endHour = value; OnPropertyChanged("ActualTrackShow"); }
+            set { _endHour = value;
+                OnPropertyChanged("ActualTrackShow");
+                OnPropertyChanged("EndHour");}
             
         }
-        public Line         Line
+        public  Line         Line
         {
             get { return _line; }
-            set { _line = value; OnPropertyChanged("ActualTrackShow"); }
+            set { _line = value;
+                OnPropertyChanged("ActualTrackShow"); }
 
         }
-        public BusStop      StartBusStop    { get; set; }
-        public BusStop      EndBusStop      { get; set; }
-        public Driver       Driver          { get; set; }
+        public  BusStop      StartBusStop    { get; set; }
+        public  BusStop      EndBusStop      { get; set; }
+        public  Driver       Driver          { get; set; }
         public bool         Smallbus        { get; set; }
         public string       ActualTrackShow
         {
             get { return "Linia: " + Line.Number + ", od " + StartHour.TimeOfDay + "do " + EndHour.TimeOfDay; }
         }
-
         public ActualTrack(DateTime startHour, DateTime endHour, BusStop startBusStop, BusStop endBusStop, Driver driver, bool smallbus, Line line)
         {
             StartBusStop = startBusStop;

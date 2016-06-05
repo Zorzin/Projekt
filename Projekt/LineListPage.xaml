@@ -26,14 +26,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.AddButtonCommand" Name="AddButton" Content="Dodaj"/>
+            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj"/>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LineDataTemplate}"/>
         <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -46,18 +44,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr linii:"/>
-            <TextBox Grid.Column="1" Text="{Binding Number, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Number}"/>
             <Label Grid.Row="1" Content="Długość trasy:"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Length, Mode=TwoWay}"/>
             <Label Grid.Row="3" Content="Pierwszy przystanek:"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Firststop.Id, Mode=TwoWay}"/>
             <Label Grid.Row="4" Content="Ostatni Przystanek:"/>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Laststop.Id, Mode=TwoWay}"/>
-            <Label Grid.Row="5" Content="Aktualny kierowca:"/>
-            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Actualdriver.Id, Mode=TwoWay}"/>
-            <Label Grid.Row="6" Content="Aktualny autobus:"/>
-            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Actualbus.Busid, Mode=TwoWay}"/>
-            <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Usuń"/>
+            <Button Grid.Row="5" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click"/>
         </Grid>
     </Grid>
 </Page>

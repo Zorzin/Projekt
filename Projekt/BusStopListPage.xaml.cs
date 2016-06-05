@@ -23,8 +23,16 @@ namespace Projekt
         public BusStopListPage()
         {
             InitializeComponent();
-            Commands.AddList[AddButton] = Commands.BusStopAddFunction;
+            Commands.List[AddButton] = Commands.BusStopAddFunction;
             ListBox.ItemsSource = Lists.BusStops;
+        }
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DbConnect db = new DbConnect();
+            BusStop busstop = (BusStop)ListBox.SelectedItem;
+            db.Delete("Busstop", busstop.Id.ToString());
+            Lists.BusStops.RemoveAt(ListBox.SelectedIndex);
+            ListBox.SelectedIndex = ListBox.Items.Count - 1;
         }
     }
 }

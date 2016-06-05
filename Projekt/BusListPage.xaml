@@ -8,15 +8,23 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="BusListPage">
     <Page.Resources>
+        <local:DriverConverter x:Key="DriverConverter"/>
+        <local:LineConverter x:Key="LineConverter"/>
+        <local:BusBackgroundConverter x:Key="BusBackgroundConverter"
+                                      FreeBrush="Green"
+                                      BusyBrush="Red"/>
+        <local:BusTechConverter x:Key="BusTechConverter"
+                                        Ok="Green"
+                                        Bad="Red"/>
         <DataTemplate x:Key="BusDataTemplate">
-            <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="Black">
-                <Grid Background="{Binding ActualLine}"> <!-- Converter={StaticResource BusBackgroundConverter} czerwony to zepsuty, zolty jezdzi, zielony wolny -->
+            <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="{Binding Techcondition, Converter={StaticResource BusTechConverter}}">
+                <Grid Background="{Binding Actualline, Converter={StaticResource BusBackgroundConverter}}">
                     <TextBlock Text="{Binding BusShow}"/>
                 </Grid>
             </Border>
         </DataTemplate>
     </Page.Resources>
-    <Grid>
+    <Grid DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
@@ -26,11 +34,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.AddButtonCommand" Name="AddButton" Content="Dodaj" VerticalAlignment="Top" Click="AddButton_Click"/>
+            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" VerticalAlignment="Top"/>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource BusDataTemplate}"/>
-        <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
+        <Grid Grid.Column="1" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -46,20 +54,20 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr boczny:"/>
-            <TextBox Grid.Column="1" Text="{Binding Busid, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Busid, Mode=TwoWay}"/>
             <Label Grid.Row="1" Content="Typ autobusu:"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Type, Mode=TwoWay}"/>
             <Label Grid.Row="2" Content="Aktualny kierowca:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ActualDriver.Id, Mode=TwoWay}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Actualdriver, TargetNullValue=0, Mode=TwoWay, Converter={StaticResource DriverConverter}}"/>
             <Label Grid.Row="3" Content="Aktualna linia:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ActualLine.Number, Mode=TwoWay}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Actualline, Mode=TwoWay,TargetNullValue=0, Converter={StaticResource LineConverter}}"/>
             <Label Grid.Row="4" Content="Przebieg:"/>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Mileage, Mode=TwoWay}"/>
             <Label Grid.Row="5" Content="Model:"/>
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Busbrand, Mode=TwoWay}"/>
             <Label Grid.Row="6" Content="Stan techniczny:"/>
             <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Techcondition, Mode=TwoWay}"/>
-            <Button Grid.Row="7" Grid.ColumnSpan="2" Content="Usuń"/>
+            <Button Grid.Row="7" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click"/>
         </Grid>
     </Grid>
 </Page>

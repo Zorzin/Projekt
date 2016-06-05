@@ -23,7 +23,7 @@ namespace Projekt
         public ActualTrackPage()
         {
             InitializeComponent();
-            Commands.AddList[AddButton] = Commands.ActualTrackAddFunction;
+            Commands.List[AddButton] = Commands.ActualTrackAddFunction;
             ListBox.ItemsSource = Lists.ActualTracks;
         }
     }

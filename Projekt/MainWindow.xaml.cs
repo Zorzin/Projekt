@@ -36,6 +36,7 @@ namespace Projekt
             LoadDataFromDataBase();
             LoadJson();
             CheckSmallBus();
+            RefreshData.Execute();
         }
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -131,10 +132,6 @@ namespace Projekt
                     bus.Busid = Int32.Parse(dt.Rows[i]["idbus"].ToString());
                     bus.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows[i]["actualdriver"].ToString()));
                     bus.Actualline = Lists.GetLine(Int32.Parse(dt.Rows[i]["actualline"].ToString()));
-                    if (bus.Actualline != null)
-                    {
-                        bus.Actualline.Actualbus = bus;
-                    }
                     bus.Busbrand = dt.Rows[i]["busbrand"].ToString();
                     bus.Mileage = Double.Parse(dt.Rows[i]["mileage"].ToString());
                     bus.Techcondition = dt.Rows[i]["techcondition"].ToString();
@@ -162,12 +159,6 @@ namespace Projekt
                     line.Length = Double.Parse(dt.Rows [i] ["lenght"].ToString()); //tu
                     line.Firststop = Lists.GetBusStop(Int32.Parse(dt.Rows [i] ["firststop"].ToString()));
                     line.Laststop = Lists.GetBusStop(Int32.Parse(dt.Rows [i] ["laststop"].ToString()));
-                    line.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows [i] ["actualdriver"].ToString()));
-                    if (line.Actualdriver != null)
-                    {
-                        line.Actualdriver.Actualline = line;
-                    }
-                    line.Actualbus = Lists.GetBus(Int32.Parse(dt.Rows [i] ["actualbus"].ToString()));
                     Lists.Lines.Add(line);
                 }
                 catch (Exception)
@@ -209,7 +200,7 @@ namespace Projekt
                     driver.City = dt.Rows [i] ["city"].ToString();
                     driver.Zipcode = Int32.Parse(dt.Rows [i] ["zipcode"].ToString());
                     driver.Address = dt.Rows [i] ["address"].ToString();
-                    driver.Actualline = Lists.GetLine(Int32.Parse(dt.Rows [i] ["actualline"].ToString()));
+                    driver.Actualbus = Lists.GetBus(Int32.Parse(dt.Rows [i] ["actualbus"].ToString()));
                     driver.Salary = Double.Parse(dt.Rows [i] ["salary"].ToString());
                     driver.Hoursworked = Double.Parse(dt.Rows [i] ["hoursworked"].ToString());
                     driver.Photopath = dt.Rows [i] ["photopath"].ToString();
