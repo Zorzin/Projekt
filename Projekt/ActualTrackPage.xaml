@@ -36,6 +36,18 @@
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
             <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" />
+            <Button Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click">
+                <Button.Style>
+                    <Style>
+                        <Setter Property="Button.IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ListBox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ActualTrackDataTemplate}"/>

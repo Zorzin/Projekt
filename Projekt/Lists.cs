@@ -57,5 +57,17 @@ namespace Projekt
             }
             
         }
+
+        public static ActualTrack GetActualTrackByDriver(int id)
+        {
+            try
+            {
+                return ActualTracks.First(driver => driver.Driver.Id == id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

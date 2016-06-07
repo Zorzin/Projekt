@@ -26,5 +26,29 @@ namespace Projekt
             Commands.List[AddButton] = Commands.ActualTrackAddFunction;
             ListBox.ItemsSource = Lists.ActualTracks;
         }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var actualTrack = (ActualTrack) ListBox.SelectedItem;
+            if (actualTrack.Driver.Actualbus != null)
+            {
+                MessageBoxButton mbb = MessageBoxButton.YesNo;
+                MessageBoxResult dr = MessageBox.Show("Usuwany kurs jest aktualnie na trasie, usunąć?", "Usunąć?", mbb);
+                if (dr == MessageBoxResult.Yes)
+                {
+                    actualTrack.Driver.Actualbus.Actualdriver = null;
+                    actualTrack.Driver.Actualbus.Actualline = null;
+                    actualTrack.Driver.Actualbus = null;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            actualTrack.Driver = null;
+            actualTrack.Line = null;
+            Lists.ActualTracks.RemoveAt(ListBox.SelectedIndex);
+            ListBox.SelectedIndex = ListBox.Items.Count - 1;
+        }
     }
 }

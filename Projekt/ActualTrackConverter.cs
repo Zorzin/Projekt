@@ -17,7 +17,11 @@ namespace Projekt
         {
             DateTime start = (DateTime)values[0];
             DateTime end = (DateTime) values[1];
-            if (start < DateTime.Now && end > DateTime.Now)
+            var dt = DateTime.Now;
+            dt = dt.AddMilliseconds(-dt.Millisecond);
+            dt = dt.AddSeconds(-dt.Second);
+            dt = dt.AddTicks(-dt.Ticks % 10000000);
+            if (start <= dt && end >= dt)
             {
                 return Actual;
             }

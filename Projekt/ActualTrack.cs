@@ -43,7 +43,19 @@ namespace Projekt
         public bool         Smallbus        { get; set; }
         public string       ActualTrackShow
         {
-            get { return "Linia: " + Line.Number + ", od " + StartHour.TimeOfDay + "do " + EndHour.TimeOfDay; }
+            get
+            {
+                try
+                {
+                    return "Linia: " + Line.Number + ", od " + StartHour.TimeOfDay + " do " + EndHour.TimeOfDay;
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+                
+            }
         }
         public ActualTrack(DateTime startHour, DateTime endHour, BusStop startBusStop, BusStop endBusStop, Driver driver, bool smallbus, Line line)
         {

@@ -28,7 +28,15 @@ namespace Projekt
                 return null;
             }
             int number = Int32.Parse(val);
-            return Lists.Buses.First(x => x.Busid == number);
+            try
+            {
+                return Lists.Buses.First(x => x.Busid == number);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
     }
 }

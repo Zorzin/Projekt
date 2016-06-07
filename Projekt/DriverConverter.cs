@@ -22,12 +22,23 @@ namespace Projekt
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (string.IsNullOrEmpty(value.ToString()) || Int32.Parse(value.ToString()) <= 0)
+            if (string.IsNullOrEmpty(value.ToString()))
+            {
+                return null;
+            }
+            else if (Int32.Parse(value.ToString()) <= 0)
             {
                 return null;
             }
             int number = Int32.Parse(value.ToString());
-            return Lists.Drivers.First(x => x.Id == number);
+            try
+            {
+                return Lists.Drivers.First(x => x.Id == number);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

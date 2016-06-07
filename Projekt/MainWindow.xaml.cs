@@ -130,8 +130,8 @@ namespace Projekt
                 {
                     Bus bus = new Bus();
                     bus.Busid = Int32.Parse(dt.Rows[i]["idbus"].ToString());
-                    bus.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows[i]["actualdriver"].ToString()));
-                    bus.Actualline = Lists.GetLine(Int32.Parse(dt.Rows[i]["actualline"].ToString()));
+                    //bus.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows[i]["actualdriver"].ToString()));
+                    //bus.Actualline = Lists.GetLine(Int32.Parse(dt.Rows[i]["actualline"].ToString()));
                     bus.Busbrand = dt.Rows[i]["busbrand"].ToString();
                     bus.Mileage = Double.Parse(dt.Rows[i]["mileage"].ToString());
                     bus.Techcondition = dt.Rows[i]["techcondition"].ToString();
@@ -200,7 +200,7 @@ namespace Projekt
                     driver.City = dt.Rows [i] ["city"].ToString();
                     driver.Zipcode = Int32.Parse(dt.Rows [i] ["zipcode"].ToString());
                     driver.Address = dt.Rows [i] ["address"].ToString();
-                    driver.Actualbus = Lists.GetBus(Int32.Parse(dt.Rows [i] ["actualbus"].ToString()));
+                    //driver.Actualbus = Lists.GetBus(Int32.Parse(dt.Rows [i] ["actualbus"].ToString()));
                     driver.Salary = Double.Parse(dt.Rows [i] ["salary"].ToString());
                     driver.Hoursworked = Double.Parse(dt.Rows [i] ["hoursworked"].ToString());
                     driver.Photopath = dt.Rows [i] ["photopath"].ToString();

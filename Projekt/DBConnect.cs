@@ -47,6 +47,11 @@ namespace Projekt
             cmd.CommandType= CommandType.Text;
             cmd.ExecuteNonQuery();
         }
+
+        public void Update()
+        {
+            
+        }
     }
 }
 

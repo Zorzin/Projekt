@@ -22,7 +22,7 @@
             </Border>
         </DataTemplate>
     </Page.Resources>
-    <Grid>
+    <Grid Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="*"/>
@@ -33,12 +33,35 @@
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
             <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj"/>
+            <Button Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click">
+                <Button.Style>
+                    <Style>
+                        <Setter Property="Button.IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ListBox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Name="PrintButton" Content="Drukuj" Click="PrintButton_Click">
+                <Button.Style>
+                    <Style>
+                        <Setter Property="Button.IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ListBox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource DriverDataTemplate}"/>
         <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -88,11 +111,10 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Content="Wybierz" Click="Button_Click"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="Wybierz" Click="PathButton_Click"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Name="PathTextBox" Text="{Binding Photopath, Mode=TwoWay}"/>
             </Grid>
             <Image Grid.Row="13" Grid.ColumnSpan="2" Width="100" Height="100" Source="{Binding Photopath, Converter={StaticResource PhotoPathConverter}}"/>
-            <Button Grid.Row="14" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click"/>
         </Grid>
     </Grid>
 </Page>
