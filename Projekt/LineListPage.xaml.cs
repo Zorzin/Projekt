@@ -28,11 +28,60 @@ namespace Projekt
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            Line line = (Line) ListBox.SelectedItem;
+            bool firsttrack = false;
+            int trackscount = Lists.ActualTracks.Count;
+            for(int i=trackscount-1;i>=0;i--)
+            {
+                var actualTrack = Lists.ActualTracks[i];
+                if (actualTrack.Line == line )
+                {
+                    if (!firsttrack)
+                    {
+                        firsttrack = true;
+                        MessageBoxButton mbb = MessageBoxButton.YesNo;
+                        MessageBoxResult dr = MessageBox.Show("Usuwana linia ma zaplanowane kursy, usunąć wraz z kursami?", "Usunąć?", mbb);
+                        if (dr == MessageBoxResult.Yes)
+                        {
+                            RemoveJoining(actualTrack,line);
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        RemoveJoining(actualTrack, line);
+                    }
+                }
+            }
             DbConnect db = new DbConnect();
-            Line line = (Line)ListBox.SelectedItem;
             db.Delete("line", line.Number.ToString());
             Lists.Lines.RemoveAt(ListBox.SelectedIndex);
             ListBox.SelectedIndex = ListBox.Items.Count - 1;
+        }
+
+        private void RemoveJoining(ActualTrack track, Line line)
+        {
+            if (track.Driver != null)
+            {
+                if (track.Driver.Actualbus!=null)
+                {
+                    if (track.Driver.Actualbus.Actualdriver!=null)
+                    {
+                        if (track.Driver.Actualbus.Actualline!=null)
+                        {
+                            track.Driver.Actualbus.Actualline = null;
+                        }
+                        track.Driver.Actualbus.Actualdriver = null;
+                    }
+                    track.Driver.Actualbus = null;
+                }
+                track.Driver = null;
+            }
+            track.Line = null;
+            Lists.ActualTracks.Remove(track);
         }
     }
 }

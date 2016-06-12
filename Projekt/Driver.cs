@@ -9,7 +9,7 @@ using Projekt.Annotations;
 
 namespace Projekt
 {
-    class Driver:INotifyPropertyChanged
+    class Driver:INotifyPropertyChanged, IDataErrorInfo
     {
         private string  _name;
         private string  _secondname;
@@ -109,5 +109,100 @@ namespace Projekt
                 PropertyChanged(this,
                 new PropertyChangedEventArgs(property));
         }
+
+        public string this[string columnName]
+        {
+            get {
+                switch (columnName)
+                {
+
+                    case "Name":
+                        if (string.IsNullOrEmpty(Name))
+                        {
+                            return "name can't be empty";
+                        }
+                        break;
+                    case "Secondname":
+                        if (string.IsNullOrEmpty(Secondname))
+                        {
+                            return "second name can't be empty";
+                        }
+                        break;
+                    case "Status":
+                        if (string.IsNullOrEmpty(Status))
+                        {
+                            return "status can't be empty";
+                        }
+                        break;
+                    case "Driverlicenseid":
+                        if (Driverlicenseid.ToString().Length < 1)
+                        {
+                            return "id can't be empty";
+                        }
+                        if (Driverlicenseid< 1)
+                        {
+                            return "id can't be smaller than 1";
+                        }
+                        break;
+                    case "City":
+                        if (string.IsNullOrEmpty(City))
+                        {
+                            return "city can't be empty";
+                        }
+                        break;
+                    case "Zipcode":
+                        if (Zipcode.ToString().Length < 5)
+                        {
+                            return "zipcode too short";
+                        }
+                        if (Zipcode.ToString().Length > 5)
+                        {
+                            return "zipcose too long";
+                        }
+                        if (Zipcode < 0)
+                        {
+                            return "zipcode can't be smaller than 1";
+                        }
+                        break;
+                    case "Address":
+                        if (string.IsNullOrEmpty(Address))
+                        {
+                            return "address can't be empty";
+                        }
+                        break;
+                    case "Salary":
+                        if (Salary.ToString().Length < 1)
+                        {
+                            return "salary can't be empty";
+                        }
+                        if (Salary < 0)
+                        {
+                            return "salary can't be smaller than 1";
+                        }
+                        break;
+                    case "Hoursworked":
+                        if (Hoursworked.ToString().Length < 1)
+                        {
+                            return "hoursworked can't be empty";
+                        }
+                        if (Hoursworked < 1)
+                        {
+                            return "hoursworked can't be smaller than 1";
+                        }
+                        break;
+                    case "Photopath":
+                        if (string.IsNullOrEmpty(Photopath))
+                        {
+                            return "Photopath can't be empty";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }
+
+        public string Error { get { return null; } }
     }
 }

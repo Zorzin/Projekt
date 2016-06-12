@@ -9,7 +9,7 @@ using Projekt.Annotations;
 
 namespace Projekt
 {
-    class Line:INotifyPropertyChanged
+    class Line:INotifyPropertyChanged, IDataErrorInfo
     {
         private int _number;
 
@@ -48,5 +48,41 @@ namespace Projekt
                 PropertyChanged(this,
                 new PropertyChangedEventArgs(property));
         }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+
+                    case "Number":
+                        if (Number.ToString().Length < 1)
+                        {
+                            return "id can't be empty";
+                        }
+                        if (Number < 1)
+                        {
+                            return "id can't be smaller than 1";
+                        }
+                        break;
+                    case "Length":
+                        if (Length.ToString().Length < 1)
+                        {
+                            return "length can't be empty";
+                        }
+                        if (Length < 0)
+                        {
+                            return "Length can't be negative";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }
+
+        public string Error { get; }
     }
 }

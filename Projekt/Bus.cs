@@ -9,7 +9,7 @@ using Projekt.Annotations;
 
 namespace Projekt
 {
-    class Bus : INotifyPropertyChanged
+    class Bus : INotifyPropertyChanged, IDataErrorInfo
     {
         private int     _busId;
         private string  _busbrand;
@@ -85,5 +85,59 @@ namespace Projekt
                 PropertyChanged(this,
                 new PropertyChangedEventArgs(property));
         }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+
+                    case "Busid":
+                        if (Busid.ToString().Length < 1)
+                        {
+                            return "id can't be empty";
+                        }
+                        if (Busid < 1)
+                        {
+                            return "id can't be smaller than 1";
+                        }
+                        break;
+                    case "Type":
+                        if (string.IsNullOrEmpty(Type))
+                        {
+                            return "type can't be empty";
+                        }
+                        break;
+                    case "Mileage":
+                        if (Mileage.ToString().Length < 1)
+                        {
+                            return "mileage can't be empty";
+                        }
+                        if (Mileage < 0)
+                        {
+                            return "mileage can't be smaller than 1";
+                        }
+                        break;
+                    case "Busbrand":
+                        if (string.IsNullOrEmpty(Type))
+                        {
+                            return "busbrand can't be empty";
+                        }
+                        break;
+                    case "Techcondition":
+                        if (string.IsNullOrEmpty(Type))
+                        {
+                            return "techcondition can't be empty";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }
+
+        public string Error { get; }
     }
 }

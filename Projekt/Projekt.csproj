@@ -111,7 +111,11 @@
     </Compile>
     <Compile Include="BusBackgroundConverter.cs" />
     <Compile Include="BusConverter.cs" />
+    <Compile Include="BusStopAddWindow.xaml.cs">
+      <DependentUpon>BusStopAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusTechConverter.cs" />
+    <Compile Include="CheckStrings.cs" />
     <Compile Include="DriverBackgroundConverter.cs" />
     <Compile Include="DriverConverter.cs" />
     <Compile Include="LineConverter.cs" />
@@ -126,6 +130,9 @@
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StarPage.xaml.cs">
+      <DependentUpon>StarPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="ActualTrackAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BusListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BusStopAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StarPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

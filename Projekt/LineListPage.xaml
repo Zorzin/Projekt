@@ -26,7 +26,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj"/>
+            <Button Command="local:Commands.AddLineButtonCommand" Name="AddButton" Content="Dodaj"/>
+            <Button Grid.Row="5" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click">
+                <Button.Style>
+                    <Style>
+                        <Setter Property="Button.IsEnabled" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=ListBox, Path=SelectedIndex}" Value="-1">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LineDataTemplate}"/>
@@ -51,7 +63,7 @@
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Firststop.Id, Mode=TwoWay}"/>
             <Label Grid.Row="4" Content="Ostatni Przystanek:"/>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Laststop.Id, Mode=TwoWay}"/>
-            <Button Grid.Row="5" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click"/>
+            
         </Grid>
     </Grid>
 </Page>

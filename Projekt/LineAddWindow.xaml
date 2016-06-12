@@ -15,28 +15,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Nr linii:"/>
-        <TextBox Grid.Column="1" />
-        <Label Grid.Row="1" Content="Długość trasy:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" />
-        <Label Grid.Row="2" Content="Kierunki:"/>
-        <ComboBox Grid.Row="2" Grid.Column="1"></ComboBox>
+        <CheckBox Content="Własny numer" Name="CheckBox"/>
+        <Label Grid.Row="1" Content="Nr linii:" IsEnabled="{Binding ElementName=CheckBox, Path=IsChecked}"/>
+        <TextBox Name="NumberTextBox" Grid.Row="1" Grid.Column="1" Text="{Binding Number, Mode=TwoWay, ValidatesOnDataErrors=True}" IsEnabled="{Binding ElementName=CheckBox, Path=IsChecked}"/>
+        <Label Grid.Row="2" Content="Długość trasy:"/>
+        <TextBox Name="LengthTextBox" Grid.Row="2" Grid.Column="1" Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
         <Label Grid.Row="3" Content="Pierwszy przystanek:"/>
-        <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+        <ComboBox Name="FirstStopComboBox" Grid.Row="3" Grid.Column="1"/>
         <Label Grid.Row="4" Content="Ostatni Przystanek:"/>
-        <TextBox Grid.Column="1" Grid.Row="4" />
-        <Label Grid.Row="5" Content="Aktualny kierowca:"/>
-        <ComboBox Grid.Column="1" Grid.Row="5" />
-        <Label Grid.Row="6" Content="Aktualny autobus:"/>
-        <ComboBox Grid.Column="1" Grid.Row="6"/>
-        <Button Click="AddButton" Grid.Row="7" Grid.ColumnSpan="2" Content="Dodaj"/>
-        <Button Command="local:Commands.BackButtonCommand" Grid.Row="8" Grid.ColumnSpan="2" Content="Powrót"/>
+        <ComboBox Name="LastStopComboBox" Grid.Column="1" Grid.Row="4"/>
+        <Button Click="AddButton" Grid.Row="5" Grid.ColumnSpan="2" Content="Dodaj"/>
+        <Button Command="local:Commands.BackButtonCommand" Grid.Row="6" Grid.ColumnSpan="2" Content="Powrót"/>
     </Grid>
 </Window>

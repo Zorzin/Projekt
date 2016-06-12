@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Net.Mail;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms.VisualStyles;
 using Projekt.Annotations;
 
 namespace Projekt
 {
-    internal class BusStop:INotifyPropertyChanged
+    internal class BusStop:INotifyPropertyChanged, IDataErrorInfo
     {
         private int _id;
 
@@ -15,19 +18,23 @@ namespace Projekt
         }
 
         public string Name { get; set; }
-        public int Area { get; set; }
-        public BusStop(int id, string name, int area)
+
+        public override string ToString()
+        {
+            return Id.ToString()+ ": " + Name;
+        }
+
+
+        public BusStop(int id, string name)
         {
             Name = name;
-            Area = area;
             _id = id;
         }
 
         public BusStop()
         {
-            Id = -1;
+            Id = 0;
             Name = null;
-            Area = -1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -39,5 +46,37 @@ namespace Projekt
                 PropertyChanged(this,
                 new PropertyChangedEventArgs(property));
         }
+
+        public string this [string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    
+                    case "Id":
+                        if (Id.ToString().Length<1)
+                        {
+                            return "id can't be empty";
+                        }
+                        if(Id<1)
+                        {
+                            return "id can't be smaller than 1";
+                        }
+                        break;
+                    case "Name":
+                        if (string.IsNullOrEmpty(Name))
+                        {
+                            return "name can't be empty";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                return null;
+            }
+        }
+
+        public string Error { get { return null; } }
     }
 }

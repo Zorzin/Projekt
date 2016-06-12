@@ -35,7 +35,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" />
             <Button Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click">
                 <Button.Style>
                     <Style>

@@ -130,8 +130,6 @@ namespace Projekt
                 {
                     Bus bus = new Bus();
                     bus.Busid = Int32.Parse(dt.Rows[i]["idbus"].ToString());
-                    //bus.Actualdriver = Lists.GetDriver(Int32.Parse(dt.Rows[i]["actualdriver"].ToString()));
-                    //bus.Actualline = Lists.GetLine(Int32.Parse(dt.Rows[i]["actualline"].ToString()));
                     bus.Busbrand = dt.Rows[i]["busbrand"].ToString();
                     bus.Mileage = Double.Parse(dt.Rows[i]["mileage"].ToString());
                     bus.Techcondition = dt.Rows[i]["techcondition"].ToString();
@@ -178,7 +176,6 @@ namespace Projekt
                 BusStop bs = new BusStop();
                 bs.Id = Int32.Parse(dt.Rows[i]["idBusStop"].ToString());
                 bs.Name = dt.Rows[i]["busstopname"].ToString();
-                //bs.Area = Int32.Parse(dt.Rows[i]["area"].ToString());
                 Lists.BusStops.Add(bs);
             }
         }
@@ -200,7 +197,6 @@ namespace Projekt
                     driver.City = dt.Rows [i] ["city"].ToString();
                     driver.Zipcode = Int32.Parse(dt.Rows [i] ["zipcode"].ToString());
                     driver.Address = dt.Rows [i] ["address"].ToString();
-                    //driver.Actualbus = Lists.GetBus(Int32.Parse(dt.Rows [i] ["actualbus"].ToString()));
                     driver.Salary = Double.Parse(dt.Rows [i] ["salary"].ToString());
                     driver.Hoursworked = Double.Parse(dt.Rows [i] ["hoursworked"].ToString());
                     driver.Photopath = dt.Rows [i] ["photopath"].ToString();
@@ -213,6 +209,13 @@ namespace Projekt
                 }
                 
             }
+        }
+
+        private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            var startpage = new StarPage();
+            var mainWindow = (MainWindow) Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(startpage);
         }
     }
 }

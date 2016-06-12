@@ -26,7 +26,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.ButtonCommand" Name="AddButton" Content="Dodaj" />
+            <Button Command="local:Commands.AddBusStopButtonCommand" Name="AddButton" Content="Dodaj" />
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
         <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ListItemDataTemplate}" />

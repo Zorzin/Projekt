@@ -34,7 +34,7 @@ namespace Projekt
             if (driver.Actualbus != null)
             {
                 MessageBoxButton mbb = MessageBoxButton.YesNo;
-                MessageBoxResult dr = MessageBox.Show("Usuwany kierowca ma aktualnie kurs. Usunąć kierowcę i zakończyć kurs?", "Usunąć?", mbb);
+                MessageBoxResult dr = MessageBox.Show("Usuwany kierowca ma aktualnie kurs. Usunąć kierowcę oraz kurs?", "Usunąć?", mbb);
                 if (dr == MessageBoxResult.Yes)
                 {
                     ActualTrack track = Lists.GetActualTrackByDriver(driver.Id);

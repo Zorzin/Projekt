@@ -5,38 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
-        Title="Strona Główna" Height="580" Width="600">
+        Title="Strona Główna" Height="580" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Margin="20,0" Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
-            <Button Name="DriversButton" Grid.Row="1" Content="Kierowcy" Command="local:Commands.ButtonCommand"/>
-            <Button Name="BussesButton" Grid.Row="2" Content="Autobusy" Command="local:Commands.ButtonCommand"/>
-            <Button Name="BusStopsButton"  Grid.Row="3" Content="Przystanki" Command="local:Commands.ButtonCommand"/>
-            <Button Name="LinesButton" Grid.Row="4"  Content="Linie" Command="local:Commands.ButtonCommand"/>
-            <Button Name="ActualTrackButton" Grid.Row="5"  Content="Aktualne Kursy" Command="local:Commands.ButtonCommand"/>
-            <Button Name="SearchButton" Grid.Row="6"  Content="Wyszukiwanie" Click="SearchButton_OnClickButton_Click"/>
-            <Button Name="CloseButton" Grid.Row="7" Content="Zamknij" Click="CloseButton_Click"/>
+        <DockPanel Grid.Row="0">
+            <Menu>
+                <MenuItem Padding="5" Header="Opcje">
+                    
+                </MenuItem>
+                <MenuItem Padding="5" Header="Dodaj">
+                    <MenuItem Header="Kierowca" Command="local:Commands.AddDriverButtonCommand"/>
+                    <MenuItem Header="Autobus" Command="local:Commands.AddBusButtonCommand"/>
+                    <MenuItem Header="Linia" Command="local:Commands.AddLineButtonCommand"/>
+                    <MenuItem Header="Przystanek" Command="local:Commands.AddBusStopButtonCommand"/>
+                </MenuItem>
+                <MenuItem Padding="5" Header="Zamknij"/>
+
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="MainMenuButton" Content="Strona główna" Click="MainMenuButton_Click"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="DriversButton" Grid.Column="1" Content="Kierowcy" Command="local:Commands.ButtonCommand"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="BussesButton" Grid.Column="2" Content="Autobusy" Command="local:Commands.ButtonCommand"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="BusStopsButton"  Grid.Column="3" Content="Przystanki" Command="local:Commands.ButtonCommand"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="LinesButton" Grid.Column="4"  Content="Linie" Command="local:Commands.ButtonCommand"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="ActualTrackButton" Grid.Column="5"  Content="Aktualne Kursy" Command="local:Commands.ButtonCommand"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="SearchButton" Grid.Column="6"  Content="Wyszukiwanie" Click="SearchButton_OnClickButton_Click"/>
         </Grid>
-        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Grid.Row="1" Grid.Column="1">
+        <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Grid.Row="2">
             
         </Frame>
         
