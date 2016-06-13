@@ -8,7 +8,10 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="BusListPage">
     <Page.Resources>
+        <local:TypeConverter x:Key="TypeConverter"/>
+        <local:TechconditionConverter x:Key="TechconditionConverter"/>
         <local:DriverConverter x:Key="DriverConverter"/>
+        <local:DriverComboConverter x:Key="DriverComboConverter"/>
         <local:LineConverter x:Key="LineConverter"/>
         <local:BusBackgroundConverter x:Key="BusBackgroundConverter"
                                       FreeBrush="Green"
@@ -18,7 +21,7 @@
                                         Bad="Red"/>
         <DataTemplate x:Key="BusDataTemplate">
             <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="{Binding Techcondition, Converter={StaticResource BusTechConverter}}">
-                <Grid Background="{Binding Actualline, Converter={StaticResource BusBackgroundConverter}}">
+                <Grid Background="{Binding Actualdriver, Converter={StaticResource BusBackgroundConverter}}">
                     <TextBlock Text="{Binding BusShow}"/>
                 </Grid>
             </Border>
@@ -90,18 +93,26 @@
             <Label Content="Nr boczny:"/>
             <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Busid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="1" Content="Typ autobusu:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Type, Mode=TwoWay}"/>
+            <ComboBox Name="TypeComboBox" Grid.Row="1" Grid.Column="1" SelectedValue="{Binding Type, Mode=TwoWay, Converter={StaticResource TypeConverter}}"/>
             <Label Grid.Row="2" Content="Aktualny kierowca:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Actualdriver, TargetNullValue=0, Mode=TwoWay, Converter={StaticResource DriverConverter}, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="DriverComboBox" Grid.Row="2" Grid.Column="1" SelectedValue="{Binding Actualdriver, TargetNullValue=0, Mode=TwoWay,  ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Aktualna linia:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Actualline, Mode=TwoWay,TargetNullValue=0, Converter={StaticResource LineConverter}, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="LineComboBox" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Actualline, Mode=TwoWay,TargetNullValue=0, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="4" Content="Przebieg:"/>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Mileage, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="5" Content="Model:"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Busbrand, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="BrandComboBox" Grid.Row="5" Grid.Column="1" SelectedValue="{Binding Busbrand, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="6" Content="Stan techniczny:"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Techcondition, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="TechComboBox" Grid.Row="6" Grid.Column="1" SelectedValue="{Binding Techcondition, Mode=TwoWay, ValidatesOnDataErrors=True, Converter={StaticResource TechconditionConverter}}"/>
             
         </Grid>
     </Grid>
 </Page>
+
+<!-- Converter={StaticResource DriverComboConverter}, 
+    
+    <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Id}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>-->

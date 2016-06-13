@@ -14,6 +14,7 @@ namespace Projekt
         private Line        _line;
         private DateTime    _startHour;
         private DateTime    _endHour;
+        private Driver      _driver;
         public  DateTime     StartHour
         {
             get { return _startHour; }
@@ -39,7 +40,27 @@ namespace Projekt
         }
         public  BusStop      StartBusStop    { get; set; }
         public  BusStop      EndBusStop      { get; set; }
-        public  Driver       Driver          { get; set; }
+
+        public Driver Driver
+        {
+            get { return _driver; }
+            set
+            {
+                if (_driver != null)
+                {
+                    var bus = _driver.Actualbus;
+                    _driver.Actualbus = null;
+                    _driver = value;
+                    _driver.Actualbus = bus;
+                }
+                else
+                {
+                    _driver = value;
+                }
+                
+            }
+            
+        }
         public bool         Smallbus        { get; set; }
         public string       ActualTrackShow
         {

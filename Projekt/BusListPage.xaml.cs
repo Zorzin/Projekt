@@ -24,8 +24,13 @@ namespace Projekt
         {
             View.Filter = null;
             InitializeComponent();
-            Commands.List[AddButton] = Commands.BusAddFunction;
+            Commands.List [AddButton] = Commands.BusAddFunction;
+            LineComboBox.ItemsSource = Lists.Lines;
+            DriverComboBox.ItemsSource = Lists.Drivers;
             ListBox.ItemsSource = Lists.Buses;
+            TechComboBox.ItemsSource = Lists.TechConditions;
+            BrandComboBox.ItemsSource = Lists.Brands;
+            TypeComboBox.ItemsSource = Lists.Types;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

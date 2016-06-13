@@ -15,6 +15,7 @@ namespace Projekt
         private string  _busbrand;
         private string  _techcondition;
         private Line    _actualline;
+
         public int Busid
         {
             get { return _busId; }
@@ -46,7 +47,9 @@ namespace Projekt
 
         }
         public string   Type             { get; set; }
-        public Driver   Actualdriver     { get; set; }
+
+        public Driver Actualdriver { get; set; }
+
         public double   Mileage          { get; set; }
         public string   BusShow
         {

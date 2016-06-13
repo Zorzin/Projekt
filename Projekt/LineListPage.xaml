@@ -8,6 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="LineListPage">
     <Page.Resources>
+        <local:BusStopComboConverter x:Key="BusStopComboConverter"/>
         <DataTemplate x:Key="LineDataTemplate">
             <Border Margin="2" Padding="2" BorderThickness="2" BorderBrush="Black">
                 <Grid>
@@ -83,10 +84,9 @@
             <Label Grid.Row="1" Content="Długość trasy:"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Pierwszy przystanek:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Firststop.Id, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="FirstBusStopComboBox" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Firststop, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="4" Content="Ostatni Przystanek:"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Laststop.Id, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-            
+            <ComboBox Name="LastBusStopComboBox" Grid.Column="1" Grid.Row="4" SelectedValue="{Binding Laststop, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
         </Grid>
     </Grid>
 </Page>

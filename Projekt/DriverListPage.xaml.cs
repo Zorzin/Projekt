@@ -26,7 +26,9 @@ namespace Projekt
             View.Filter = null;
             InitializeComponent();
             Commands.List[AddButton] = Commands.DriverAddFunction;
+            StatusComboBox.ItemsSource = Lists.Statuses;
             ListBox.ItemsSource = Lists.Drivers;
+            BusComboBox.ItemsSource = Lists.Buses;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

@@ -8,6 +8,7 @@
       d:DesignHeight="550" d:DesignWidth="300"
       Title="DriverListPage">
     <Page.Resources>
+        <local:StatusConverter x:Key="StatusConverter"/>
         <local:SalaryConverter x:Key="SalaryConverter"/>
         <local:PhotoPathConverter x:Key="PhotoPathConverter"/>
         <local:BusConverter x:Key="BusConverter"/>
@@ -112,7 +113,7 @@
             <Label Grid.Row="2" Content="ID:"/>
             <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding Id, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Status:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Status, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="StatusComboBox" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Status, Mode=TwoWay, ValidatesOnDataErrors=True, Converter={StaticResource StatusConverter}}"/>
             <Label Grid.Row="4" Content="Nr prawo jazdy:"/>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Driverlicenseid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="5" Content="Miasto:"/>
@@ -128,7 +129,7 @@
             <Label Grid.Row="10" Content="Godziny w tym miesiącu: "/>
             <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Hoursworked, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="11" Content="Aktualny autobus:"/>
-            <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Actualbus, Mode=TwoWay, Converter={StaticResource BusConverter}, ValidatesOnDataErrors=True}"/>
+            <ComboBox Name="BusComboBox" Grid.Column="1" Grid.Row="11" SelectedValue="{Binding Actualbus, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="12" Content="Ścieżka do zdjęcia:"/>
             <Grid Grid.Row="12" Grid.Column="1">
                 <Grid.ColumnDefinitions>

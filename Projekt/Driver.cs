@@ -14,7 +14,7 @@ namespace Projekt
         private string  _name;
         private string  _secondname;
         private int     _id;
-        private Bus    _actualline;
+        private Bus    _actualbus;
         private string  _photopath;
         private double  _salary;
         public string   Name
@@ -38,8 +38,20 @@ namespace Projekt
 
         public Bus Actualbus
         {
-            get { return _actualline; }
-            set { _actualline = value; OnPropertyChanged("Actualbus"); }
+            get { return _actualbus; }
+            set
+            {
+                if (_actualbus!=null)
+                {
+                    _actualbus.Actualdriver = null;
+                }
+                _actualbus = value;
+                if (_actualbus!= null)
+                {
+                    _actualbus.Actualdriver = this;
+                }
+                OnPropertyChanged("Actualbus");
+            }
             
         }
 

@@ -28,6 +28,8 @@ namespace Projekt
             InitializeComponent();
             Commands.List[AddButton] = Commands.LineAddFunction;
             ListBox.ItemsSource = Lists.Lines;
+            FirstBusStopComboBox.ItemsSource = Lists.BusStops;
+            LastBusStopComboBox.ItemsSource = Lists.BusStops;
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {

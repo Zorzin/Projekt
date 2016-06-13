@@ -28,6 +28,11 @@ namespace Projekt
             _isexpended = true;
             InitializeComponent();
             ListBox.ItemsSource = Lists.ActualTracks;
+            DriverComboBox.ItemsSource = Lists.Drivers;
+            StartBusStopComboBox.ItemsSource = Lists.BusStops;
+            EndBusStopComboBox.ItemsSource = Lists.BusStops;
+            LineComboBox.ItemsSource = Lists.Lines;
+            BusComboBox.ItemsSource = Lists.Buses;
             /**Storyboard sb; //nie dziala
             if (_isexpended)
             {

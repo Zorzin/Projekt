@@ -5,22 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace Projekt
 {
-    class BusBackgroundConverter:IValueConverter
+    class DriverComboConverter: IValueConverter
     {
-        public Brush FreeBrush { get; set; }
-        public Brush BusyBrush { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Driver driver = value as Driver;
-            if (driver == null)
+            if (value != null)
             {
-                return FreeBrush;
+                Driver d = (Driver) value;
+                return d.Id.ToString();
             }
-            return BusyBrush;
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

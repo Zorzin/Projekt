@@ -15,6 +15,10 @@ namespace Projekt
         public static ObservableCollection<Driver> Drivers = new ObservableCollection<Driver>();
         public static ObservableCollection<Line> Lines = new ObservableCollection<Line>();
         public static ObservableCollection<Bus> Buses = new ObservableCollection<Bus>();
+        public static List<string> TechConditions = new List<string>();
+        public static List<string> Brands = new List<string>();
+        public static List<string> Types = new List<string>();
+        public static List<string> Statuses = new List<string>();
 
         public static BusStop GetBusStop(int id)
         {

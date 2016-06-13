@@ -30,6 +30,10 @@ namespace Projekt
         public MainWindow()
         {
             dbConnect = new DbConnect();
+            AddToBrands();
+            AddToTech();
+            AddToTypes();
+            AddToStatuses();
             InitializeComponent();
             Commands.BindCommandsToWindow(this);
             LoadButtonFunctions();
@@ -38,6 +42,32 @@ namespace Projekt
             CheckSmallBus();
             RefreshData.Execute();
         }
+
+        private void AddToBrands()
+        {
+            Lists.Brands.Add("Mann");
+            Lists.Brands.Add("Solaris");
+        }
+
+        private void AddToStatuses()
+        {
+            Lists.Statuses.Add("aktywny");
+            Lists.Statuses.Add("nieaktywny");
+            Lists.Statuses.Add("urlop");
+        }
+
+        private void AddToTypes()
+        {
+            Lists.Types.Add("mały");
+            Lists.Types.Add("duży");
+        }
+
+        private void AddToTech()
+        {
+            Lists.TechConditions.Add("działający");
+            Lists.TechConditions.Add("zepsuty");
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

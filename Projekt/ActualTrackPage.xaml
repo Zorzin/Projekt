@@ -95,20 +95,20 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Content="Nr linii:" />
-            <TextBox Grid.Column="1" Text="{Binding Line.Number, Mode=TwoWay}" />
-            <Label Grid.Row="1" Content="Nr Autobusu:" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Driver.Actualbus.Busid, Mode=TwoWay}" />
+            <Label Content="Linia:" />
+            <ComboBox Name="LineComboBox" Grid.Column="1" SelectedValue="{Binding Line, Mode=TwoWay}" />
+            <Label Grid.Row="1" Content="Autobus:" />
+            <ComboBox Name="BusComboBox" Grid.Row="1" Grid.Column="1" SelectedValue="{Binding Driver.Actualbus, Mode=TwoWay}" />
             <Label Grid.Row="2" Content="Godzina startu:" />
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding StartHour, Mode=TwoWay}" />
             <Label Grid.Row="3" Content="Godzina zakończenia:" />
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding EndHour, Mode=TwoWay}" />
             <Label Grid.Row="4" Content="Pierwszy Przystanek:" />
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding StartBusStop.Id, Mode=TwoWay}" />
+            <ComboBox Name="StartBusStopComboBox" Grid.Column="1" Grid.Row="4" SelectedValue="{Binding StartBusStop, Mode=TwoWay}" />
             <Label Grid.Row="5" Content="Ostatni Przystanek:" />
-            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding EndBusStop.Id, Mode=TwoWay}" />
-            <Label Grid.Row="6" Content="Nr Kierowcy:" />
-            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Driver.Id, Mode=TwoWay}" />
+            <ComboBox Name="EndBusStopComboBox" Grid.Column="1" Grid.Row="5" SelectedValue="{Binding EndBusStop, Mode=TwoWay}" />
+            <Label Grid.Row="6" Content="Kierowca:" />
+            <ComboBox Name="DriverComboBox" Grid.Column="1" Grid.Row="6" SelectedValue="{Binding Driver, Mode=TwoWay}" />
         </Grid>
     </Grid>
 </Page>

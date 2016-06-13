@@ -15,7 +15,7 @@ namespace Projekt
         public Brush Bad { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value.ToString() == "Bad")
+            if (value.ToString() == "bad")
             {
                 return Bad;
             }

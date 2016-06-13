@@ -59,19 +59,36 @@ namespace Projekt
                         {
                             if (tracks.Smallbus)
                             {
-                                tracks.Driver.Actualbus =
+                                try
+                                {
+                                    tracks.Driver.Actualbus =
                                     Lists.Buses.First(
                                         x =>
                                             x.Actualdriver == null && x.Actualline == null && x.Type == "small" &&
-                                            x.Techcondition == "Good");
+                                            x.Techcondition == "good");
+                                }
+                                catch (Exception)
+                                {
+                                    tracks.Driver.Actualbus = null;
+                                }
+                                
                             }
                             else
                             {
-                                tracks.Driver.Actualbus =
+                                try
+                                {
+                                    tracks.Driver.Actualbus =
                                     Lists.Buses.First(
                                         x =>
                                             x.Actualdriver == null && x.Actualline == null && x.Type == "big" &&
-                                            x.Techcondition == "Good");
+                                            x.Techcondition == "good");
+                                }
+                                catch (Exception)
+                                {
+
+                                    tracks.Driver.Actualbus = null;
+                                }
+                                
                             }
                             tracks.Driver.Actualbus.Actualline = tracks.Line;
                             tracks.Driver.Actualbus.Actualdriver = tracks.Driver;
