@@ -67,6 +67,7 @@ namespace Projekt
                     case "Name":
                         if (string.IsNullOrEmpty(Name))
                         {
+                            Name = "nazwa";
                             return "name can't be empty";
                         }
                         break;

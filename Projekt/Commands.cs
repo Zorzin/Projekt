@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Projekt
 {
@@ -97,7 +99,14 @@ namespace Projekt
 
         public static void ButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            List[e.Source].Invoke();
+            foreach (var butn in List)
+            {
+                Button button = butn.Key as Button;
+                button.Background = Brushes.Green;
+            }
+            Button btn = e.Source as Button;
+            btn.Background = Brushes.Red;
+            List [e.Source].Invoke();
         }
 
         public static void ButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -142,6 +151,22 @@ namespace Projekt
             var lineListPage = new LineListPage();
             var mainWindow = (MainWindow) Application.Current.MainWindow;
             mainWindow.MainFrame.Navigate(lineListPage);
+            return 1;
+        }
+
+        public static int StartPageFunction()
+        {
+            var startpage = new StarPage();
+            var mainWindow = (MainWindow) Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(startpage);
+            return 1;
+        }
+
+        public static int SearchButtonFunction()
+        {
+            SearchPage searchPage = new SearchPage();
+            var mainWindow = (MainWindow) Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(searchPage);
             return 1;
         }
 

@@ -64,7 +64,23 @@ namespace Projekt
         public double  Hoursworked      { get; set; }
         public string DriverShow
         {
-            get { return Name.Substring(0, 1) + "." + Secondname + ": " + Id; }
+            get
+            {
+                if (Name.Length > 0)
+                {
+                    return Name.Substring(0, 1) + "." + Secondname + ", nr: " + Id;
+                }
+                else
+                {
+                    return Name+ " " + Secondname+ ", nr: " + Id;
+                }
+                
+            }
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + Secondname + ", id: " + Id;
         }
 
         public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Bus actualbus, double salary, double hoursworked, string photopath)
@@ -119,18 +135,21 @@ namespace Projekt
                     case "Name":
                         if (string.IsNullOrEmpty(Name))
                         {
+                            Name = "imie";
                             return "name can't be empty";
                         }
                         break;
                     case "Secondname":
                         if (string.IsNullOrEmpty(Secondname))
                         {
+                            Secondname = "nazwisko";
                             return "second name can't be empty";
                         }
                         break;
                     case "Status":
                         if (string.IsNullOrEmpty(Status))
                         {
+                            Status = "nieaktywny";
                             return "status can't be empty";
                         }
                         break;
@@ -147,6 +166,7 @@ namespace Projekt
                     case "City":
                         if (string.IsNullOrEmpty(City))
                         {
+                            City = "miasto";
                             return "city can't be empty";
                         }
                         break;
@@ -167,6 +187,7 @@ namespace Projekt
                     case "Address":
                         if (string.IsNullOrEmpty(Address))
                         {
+                            Address = "adres";
                             return "address can't be empty";
                         }
                         break;
@@ -185,14 +206,15 @@ namespace Projekt
                         {
                             return "hoursworked can't be empty";
                         }
-                        if (Hoursworked < 1)
+                        if (Hoursworked < 0)
                         {
-                            return "hoursworked can't be smaller than 1";
+                            return "hoursworked can't be smaller than 0";
                         }
                         break;
                     case "Photopath":
                         if (string.IsNullOrEmpty(Photopath))
                         {
+                            Photopath = "default.jpg";
                             return "Photopath can't be empty";
                         }
                         break;
@@ -203,6 +225,12 @@ namespace Projekt
             }
         }
 
-        public string Error { get { return null; } }
+        public string Error
+        {
+            get
+            {
+                return null;
+            }
+        }
     }
 }

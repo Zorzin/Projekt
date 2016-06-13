@@ -21,6 +21,11 @@
                 </Grid>
             </Border>
         </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate">
+            <TextBlock Text="{Binding Path=Name}"
+                        FontWeight="Bold" Foreground="White" Background="DodgerBlue"
+                        Margin="0,5,0,0" Padding="3"/>
+        </DataTemplate>
     </Page.Resources>
     <Grid Name="mainGrid">
         <Grid.ColumnDefinitions>
@@ -57,9 +62,28 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <!-- Sortuj, grupuj, filtruj-->
+            <Label>Numer prawo jazdy</Label>
+            <TextBox MinWidth="50" Name="filtertxt"/>
+            <Button Click="Filter">Filtruj</Button>
+            <Button Click="FilterNone">Usuń Filtr</Button>
+            <Separator/>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="SortNone">Bez sortowania</ComboBoxItem>
+                <ComboBoxItem Selected="SortName">Sortuj wg imienia</ComboBoxItem>
+                <ComboBoxItem Selected="SortID">Sortuj wg id</ComboBoxItem>
+                <ComboBoxItem Selected="SortFirstLetterOfSecondName">Sortuj wg pierwszej litery nazwiska</ComboBoxItem>
+            </ComboBox>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="GroupNone">Bez grupowania</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByCity">Grupuj wg miasta</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByStatus">Grupuj wg statusu</ComboBoxItem>
+            </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource DriverDataTemplate}"/>
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource DriverDataTemplate}">
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
+            </ListBox.GroupStyle>
+        </ListBox>
         <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -82,29 +106,29 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Imie:"/>
-            <TextBox Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" />
+            <TextBox Grid.Column="1" Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True}" />
             <Label Grid.Row="1" Content="Nazwisko:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Secondname, Mode=TwoWay}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Secondname, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="2" Content="ID:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding Id, Mode=TwoWay}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding Id, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Status:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Status, Mode=TwoWay}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Status, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="4" Content="Nr prawo jazdy:"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Driverlicenseid, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Driverlicenseid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="5" Content="Miasto:"/>
-            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding City, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding City, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="6" Content="Kod pocztowy:"/>
-            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Zipcode, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Zipcode, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="7" Content="Ulica i nr domu:"/>
-            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Address, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="8" Content="Pensja brutto:"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Salary, Mode=TwoWay, Converter={StaticResource SalaryConverter}}" />
+            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Salary, Mode=TwoWay, Converter={StaticResource SalaryConverter}, ValidatesOnDataErrors=True}" />
             <Label Grid.Row="9" Content="Pensja netto:"/>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Salary, Mode=TwoWay, StringFormat=c, ConverterCulture='pl-Pl'}"/>
+            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Salary, Mode=TwoWay, StringFormat=c, ConverterCulture='pl-Pl', ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="10" Content="Godziny w tym miesiącu: "/>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Hoursworked, Mode=TwoWay}"/>
+            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Hoursworked, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="11" Content="Aktualny autobus:"/>
-            <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Actualbus, Mode=TwoWay, Converter={StaticResource BusConverter}}"/>
+            <TextBox Grid.Column="1" Grid.Row="11" Text="{Binding Actualbus, Mode=TwoWay, Converter={StaticResource BusConverter}, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="12" Content="Ścieżka do zdjęcia:"/>
             <Grid Grid.Row="12" Grid.Column="1">
                 <Grid.ColumnDefinitions>

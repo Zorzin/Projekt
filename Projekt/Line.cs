@@ -39,6 +39,11 @@ namespace Projekt
             Laststop = null;
         }
 
+        public override string ToString()
+        {
+            return "Linia nr: " + Number;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

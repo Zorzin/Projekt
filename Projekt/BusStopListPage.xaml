@@ -15,6 +15,11 @@
                 </Grid>
             </Border>
         </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate">
+            <TextBlock Text="{Binding Path=Name}"
+                        FontWeight="Bold" Foreground="White" Background="DodgerBlue"
+                        Margin="0,5,0,0" Padding="3"/>
+        </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,9 +32,21 @@
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
             <Button Command="local:Commands.AddBusStopButtonCommand" Name="AddButton" Content="Dodaj" />
-            <!-- Sortuj, grupuj, filtruj-->
+            <Label>Numer przystanku</Label>
+            <TextBox MinWidth="50" Name="filtertxt"/>
+            <Button Click="Filter">Filtruj</Button>
+            <Button Click="FilterNone">Usuń Filtr</Button>
+            <Separator/>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="SortNone">Bez sortowania</ComboBoxItem>
+                <ComboBoxItem Selected="SortName">Sortuj wg nr przystanku</ComboBoxItem>
+            </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ListItemDataTemplate}" />
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ListItemDataTemplate}" >
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
+            </ListBox.GroupStyle>
+        </ListBox>
         <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -41,9 +58,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Content="Nr przystanku:" />
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Id, Mode=TwoWay}" />
+            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Id, Mode=TwoWay, ValidatesOnDataErrors=True}" />
             <Label Grid.Row="1" Content="Nazwa:" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True}" />
             <Button Grid.Row="2" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click" />
         </Grid>
     </Grid>

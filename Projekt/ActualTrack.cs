@@ -57,6 +57,12 @@ namespace Projekt
                 
             }
         }
+
+        public override string ToString()
+        {
+            return ActualTrackShow;
+        }
+
         public ActualTrack(DateTime startHour, DateTime endHour, BusStop startBusStop, BusStop endBusStop, Driver driver, bool smallbus, Line line)
         {
             StartBusStop = startBusStop;

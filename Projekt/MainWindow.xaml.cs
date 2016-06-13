@@ -43,12 +43,6 @@ namespace Projekt
             this.Close();
         }
 
-        private void SearchButton_OnClickButton_Click(object sender, RoutedEventArgs e)
-        {
-            SearchPage searchPage = new SearchPage();
-            MainFrame.Navigate(searchPage);
-        }
-
         private void LoadButtonFunctions()
         {
             Commands.List = new Dictionary<object, Func<int>>();
@@ -57,6 +51,8 @@ namespace Projekt
             Commands.List [BussesButton] = Commands.BusFunction;
             Commands.List [LinesButton] = Commands.LineFunction;
             Commands.List [ActualTrackButton] = Commands.ActualTrackFunction;
+            Commands.List[MainMenuButton] = Commands.StartPageFunction;
+            Commands.List [SearchButton] = Commands.SearchButtonFunction;
         }
         private void LoadJson()
         {
@@ -211,11 +207,9 @@ namespace Projekt
             }
         }
 
-        private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var startpage = new StarPage();
-            var mainWindow = (MainWindow) Application.Current.MainWindow;
-            mainWindow.MainFrame.Navigate(startpage);
+            this.Close();
         }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
         Title="Strona Główna" Height="580" Width="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,7 +24,7 @@
                     <MenuItem Header="Linia" Command="local:Commands.AddLineButtonCommand"/>
                     <MenuItem Header="Przystanek" Command="local:Commands.AddBusStopButtonCommand"/>
                 </MenuItem>
-                <MenuItem Padding="5" Header="Zamknij"/>
+                <MenuItem Padding="5" Header="Zamknij" Click="ExitMenuItem_Click"/>
 
             </Menu>
         </DockPanel>
@@ -37,13 +38,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="MainMenuButton" Content="Strona główna" Click="MainMenuButton_Click"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="MainMenuButton" Content="Strona główna" Command="local:Commands.ButtonCommand"/>
             <Button Style="{StaticResource ButtonStyle}" Name="DriversButton" Grid.Column="1" Content="Kierowcy" Command="local:Commands.ButtonCommand"/>
             <Button Style="{StaticResource ButtonStyle}" Name="BussesButton" Grid.Column="2" Content="Autobusy" Command="local:Commands.ButtonCommand"/>
             <Button Style="{StaticResource ButtonStyle}" Name="BusStopsButton"  Grid.Column="3" Content="Przystanki" Command="local:Commands.ButtonCommand"/>
             <Button Style="{StaticResource ButtonStyle}" Name="LinesButton" Grid.Column="4"  Content="Linie" Command="local:Commands.ButtonCommand"/>
             <Button Style="{StaticResource ButtonStyle}" Name="ActualTrackButton" Grid.Column="5"  Content="Aktualne Kursy" Command="local:Commands.ButtonCommand"/>
-            <Button Style="{StaticResource ButtonStyle}" Name="SearchButton" Grid.Column="6"  Content="Wyszukiwanie" Click="SearchButton_OnClickButton_Click"/>
+            <Button Style="{StaticResource ButtonStyle}" Name="SearchButton" Grid.Column="6"  Content="Wyszukiwanie" Command="local:Commands.ButtonCommand"/>
         </Grid>
         <Frame NavigationUIVisibility="Hidden" Name="MainFrame" Grid.Row="2">
             

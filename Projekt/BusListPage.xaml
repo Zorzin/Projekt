@@ -23,6 +23,11 @@
                 </Grid>
             </Border>
         </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate">
+            <TextBlock Text="{Binding Path=Name}"
+                        FontWeight="Bold" Foreground="White" Background="DodgerBlue"
+                        Margin="0,5,0,0" Padding="3"/>
+        </DataTemplate>
     </Page.Resources>
     <Grid DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
         <Grid.ColumnDefinitions>
@@ -47,9 +52,27 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <!-- Sortuj, grupuj, filtruj-->
+            <Label>Numer boczny</Label>
+            <TextBox MinWidth="50" Name="filtertxt"/>
+            <Button Click="Filter">Filtruj</Button>
+            <Button Click="FilterNone">Usuń Filtr</Button>
+            <Separator/>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="SortNone">Bez sortowania</ComboBoxItem>
+                <ComboBoxItem Selected="SortNumber">Sortuj wg numeru bocznego</ComboBoxItem>
+            </ComboBox>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="GroupNone">Bez grupowania</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByBrand">Grupuj wg modelu</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByTechcondition">Grupuj wg stanu technicznego</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByType">Grupuj wg stanu typu</ComboBoxItem>
+            </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource BusDataTemplate}"/>
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource BusDataTemplate}">
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
+            </ListBox.GroupStyle>
+        </ListBox>
         <Grid Grid.Column="1" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -65,19 +88,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr boczny:"/>
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Busid, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Busid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="1" Content="Typ autobusu:"/>
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Type, Mode=TwoWay}"/>
             <Label Grid.Row="2" Content="Aktualny kierowca:"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Actualdriver, TargetNullValue=0, Mode=TwoWay, Converter={StaticResource DriverConverter}}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Actualdriver, TargetNullValue=0, Mode=TwoWay, Converter={StaticResource DriverConverter}, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Aktualna linia:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Actualline, Mode=TwoWay,TargetNullValue=0, Converter={StaticResource LineConverter}}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Actualline, Mode=TwoWay,TargetNullValue=0, Converter={StaticResource LineConverter}, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="4" Content="Przebieg:"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Mileage, Mode=TwoWay}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Mileage, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="5" Content="Model:"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Busbrand, Mode=TwoWay}"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Busbrand, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="6" Content="Stan techniczny:"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Techcondition, Mode=TwoWay}"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Techcondition, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             
         </Grid>
     </Grid>

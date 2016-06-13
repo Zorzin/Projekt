@@ -15,6 +15,11 @@
                 </Grid>
             </Border>
         </DataTemplate>
+        <DataTemplate x:Key="GroupTemplate">
+            <TextBlock Text="{Binding Path=Name}"
+                        FontWeight="Bold" Foreground="White" Background="DodgerBlue"
+                        Margin="0,5,0,0" Padding="3"/>
+        </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,9 +44,27 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Label>Numer linii</Label>
+            <TextBox MinWidth="50" Name="linefiltertxt"/>
+            <Button Click="Filter">Filtruj</Button>
+            <Button Click="FilterNone">Usuń Filtr</Button>
+            <Separator/>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="SortNone">Bez sortowania</ComboBoxItem>
+                <ComboBoxItem Selected="SortLine">Sortuj wg linii</ComboBoxItem>
+            </ComboBox>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem Selected="GroupNone">Bez grupowania</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByFirstBusStop">Grupuj wg pierwszego przystanku</ComboBoxItem>
+                <ComboBoxItem Selected="GroupByLastBusStop">Grupuj wg ostatniego przystanku</ComboBoxItem>
+            </ComboBox>
             <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LineDataTemplate}"/>
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LineDataTemplate}">
+            <ListBox.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
+            </ListBox.GroupStyle>
+        </ListBox>
         <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding ElementName=ListBox, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -56,13 +79,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr linii:"/>
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Number}"/>
+            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Number, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="1" Content="Długość trasy:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Length, Mode=TwoWay}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Pierwszy przystanek:"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Firststop.Id, Mode=TwoWay}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Firststop.Id, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="4" Content="Ostatni Przystanek:"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Laststop.Id, Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Laststop.Id, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             
         </Grid>
     </Grid>

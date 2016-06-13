@@ -13,17 +13,16 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label Content="Wyszukaj po: " HorizontalAlignment="Center"/>
                 <!--<Label Content="STRONA GŁÓWNA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>-->
-                <ComboBox Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wybierz" IsEditable="True" IsReadOnly="True">
-                    <ComboBoxItem Content="Kierowca"/>
-                    <ComboBoxItem Content="Autobus"/>
-                    <ComboBoxItem Content="Przystanek"/>
-                    <ComboBoxItem Content="Linia"/>
+                <ComboBox Name="SelectComboBox" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wybierz" IsEditable="True" IsReadOnly="True">
+                    <ComboBoxItem Selected="DriverItem_OnSelected" Name="DriverItem" Content="Kierowca"/>
+                    <ComboBoxItem Selected="BusItem_OnSelected" Name="BusItem" Content="Autobus"/>
+                    <ComboBoxItem Selected="BusStopItem_OnSelected" Name="BusStopItem" Content="Przystanek"/>
+                    <ComboBoxItem Selected="LineItem_OnSelected" Name="LineItem" Content="Linia"/>
                 </ComboBox>
                 <Label Content="Wybierz pozycje z listy: " HorizontalAlignment="Center"/>
-                <ComboBox IsEnabled="False" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wybierz" IsEditable="True" IsReadOnly="True">
-                    <ComboBoxItem Content="asda"/>
-                </ComboBox>
-                <Button >Wyszukaj</Button>
+                <ComboBox Name="ListComboBox" IsEnabled="False" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Wybierz" IsEditable="True" IsReadOnly="True"/>
+                <Button Name="SearchButton" Click="SearchButton_Click" >Wyszukaj</Button>
+                <Label Name="WarningLabel"/>
             </StackPanel>
         </Grid>
     </Grid>

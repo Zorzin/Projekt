@@ -54,6 +54,11 @@ namespace Projekt
             
         }
 
+        public override string ToString()
+        {
+            return BusShow + ", stan: " + Techcondition;
+        }
+
         public Bus(int busId, string type, Driver actualdriver, Line actualline, double mileage, string busbrand, string techcondition)
         {
             Type = type;
@@ -106,6 +111,7 @@ namespace Projekt
                     case "Type":
                         if (string.IsNullOrEmpty(Type))
                         {
+                            Type = "undefined";
                             return "type can't be empty";
                         }
                         break;
@@ -120,14 +126,16 @@ namespace Projekt
                         }
                         break;
                     case "Busbrand":
-                        if (string.IsNullOrEmpty(Type))
+                        if (string.IsNullOrEmpty(Busbrand))
                         {
+                            Busbrand = "undefined";
                             return "busbrand can't be empty";
                         }
                         break;
                     case "Techcondition":
-                        if (string.IsNullOrEmpty(Type))
+                        if (string.IsNullOrEmpty(Techcondition))
                         {
+                            Techcondition = "undefined";
                             return "techcondition can't be empty";
                         }
                         break;

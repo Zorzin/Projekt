@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Text="APLIKACJA" TextAlignment="Center"/>
-        <Image Grid.Row="1" Source="" />
+        <Image Grid.Row="1" Name="MainImage"/>
         <TextBox Grid.Row="2" Text="STOPKA" TextAlignment="Center"/>
     </Grid>
 </Page>

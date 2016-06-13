@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -22,6 +23,7 @@ namespace Projekt
     {
         public DriverListPage()
         {
+            View.Filter = null;
             InitializeComponent();
             Commands.List[AddButton] = Commands.DriverAddFunction;
             ListBox.ItemsSource = Lists.Drivers;
@@ -85,101 +87,6 @@ namespace Projekt
         private void Print()
         {
                 Driver driver = (Driver) ListBox.SelectedItem;
-                /***
-                Image image = new Image();
-                Uri uri = new Uri(Path.Combine(Path.Combine(Environment.CurrentDirectory, "images"),
-                    Path.GetFileName(driver.Photopath)));
-                BitmapImage imagebitmap = new BitmapImage(uri);
-                image.Source = imagebitmap;
-                image.Height = 300;
-                Grid grid = new Grid();
-                grid.Width = 1654;
-                grid.Height = 2339;
-                RowDefinition mainrow1 = new RowDefinition();
-                mainrow1.Height = new GridLength(20, GridUnitType.Star);
-                RowDefinition mainrow2 = new RowDefinition();
-                mainrow2.Height = new GridLength(80, GridUnitType.Star);
-                ColumnDefinition maincolumn1 = new ColumnDefinition();
-                ColumnDefinition maincolumn2 = new ColumnDefinition();
-                grid.ColumnDefinitions.Add(maincolumn1);
-                grid.ColumnDefinitions.Add(maincolumn2);
-                grid.RowDefinitions.Add(mainrow1);
-                grid.RowDefinitions.Add(mainrow2);
-                grid.Children.Add(image);
-                Grid.SetColumn(image, 0);
-                Grid.SetRow(image, 0);
-                Label nameLabel = new Label();
-                nameLabel.FontSize = 46;
-                nameLabel.Margin = new Thickness(0,300,0,0);
-                nameLabel.Content = driver.Name + " " + driver.Secondname;
-                grid.Children.Add(nameLabel);
-                Grid.SetColumn(nameLabel, 1);
-
-                Grid infoGrid = new Grid();
-                for (int i = 0; i < 7; i++)
-                {
-                    RowDefinition inforow = new RowDefinition();
-                    infoGrid.RowDefinitions.Add(inforow);
-                }
-                infoGrid.Margin = new Thickness(50,0,0,0);
-                grid.Children.Add(infoGrid);
-                Grid.SetRow(infoGrid,1);
-
-                Label idLabel = new Label();
-                idLabel.FontSize = 35;
-                idLabel.Content = "Id: " + driver.Id;
-                infoGrid.Children.Add(idLabel);
-                Grid.SetRow(idLabel, 0);
-                Label salaryLabel = new Label();
-                salaryLabel.FontSize = 35;
-                salaryLabel.Content = "Zarobki: " + driver.Salary;
-                infoGrid.Children.Add(salaryLabel);
-                Grid.SetRow(salaryLabel, 1);
-                Label driverlicenseLabel = new Label();
-                driverlicenseLabel.FontSize = 35;
-                driverlicenseLabel.Content = "Nr prawa jazdy: " + driver.Driverlicenseid;
-                infoGrid.Children.Add(driverlicenseLabel);
-                Grid.SetRow(driverlicenseLabel, 2);
-                Label cityLabel = new Label();
-                cityLabel.FontSize = 35;
-                cityLabel.Content = "Miasto: " + driver.City;
-                infoGrid.Children.Add(cityLabel);
-                Grid.SetRow(cityLabel, 3);
-                Label zipcodeLabel = new Label();
-                zipcodeLabel.FontSize = 35;
-                zipcodeLabel.Content = "Kod pocztowy: " + driver.Zipcode;
-                infoGrid.Children.Add(zipcodeLabel);
-                Grid.SetRow(zipcodeLabel, 4);
-                Label addressLabel = new Label();
-                addressLabel.FontSize = 35;
-                addressLabel.Content = "Adres: " + driver.Address;
-                infoGrid.Children.Add(addressLabel);
-                Grid.SetRow(addressLabel, 5);
-                Label hoursworkedLabel = new Label();
-                hoursworkedLabel.FontSize = 35;
-                hoursworkedLabel.Content = "Godziny przepracowane: " + driver.Hoursworked;
-                infoGrid.Children.Add(hoursworkedLabel);
-                Grid.SetRow(hoursworkedLabel, 6);
-                // Size the Grid.
-                grid.Measure(new Size(Double.PositiveInfinity,
-                                      Double.PositiveInfinity));
-
-                Size sizeGrid = grid.DesiredSize;
-
-                // Determine point for centering Grid on page.
-                var margin = 96*0.25;
-                var point = new Point(
-                        (printDialog.PrintableAreaWidth - grid.Width)/2 - margin,
-                        (printDialog.PrintableAreaHeight - grid.Height)/2 - margin);
-
-                // Layout pass.
-                grid.Arrange(new Rect(point, sizeGrid));
-                PrintWindow printWindow = new PrintWindow();
-                printWindow.Content = grid;
-                // Now print it.
-                printDialog.PrintVisual(grid, Title);
-                printWindow.Close();*/
-
                 PrintWindow pw = new PrintWindow();
                 Uri uri = new Uri(Path.Combine(Path.Combine(Environment.CurrentDirectory, "images"),
                     Path.GetFileName(driver.Photopath)));
@@ -196,6 +103,103 @@ namespace Projekt
                 pw.ShowDialog();
                 pw.Close();
             
+        }
+        private ListCollectionView View
+        {
+            get
+            {
+                return (ListCollectionView)CollectionViewSource.GetDefaultView(Lists.Drivers);
+            }
+        }
+        
+        private void GroupByStatus(object sender, RoutedEventArgs e)
+        {
+            View.GroupDescriptions.Clear();
+            View.GroupDescriptions.Add(new PropertyGroupDescription("Status"));
+        }
+
+        private void GroupByCity(object sender, RoutedEventArgs e)
+        {
+            View.GroupDescriptions.Clear();
+            View.GroupDescriptions.Add(new PropertyGroupDescription("City"));
+        }
+
+        private void GroupNone(object sender, RoutedEventArgs e)
+        {
+            View.GroupDescriptions.Clear();
+        }
+
+        private void SortNone(object sender, RoutedEventArgs e)
+        {
+            View.SortDescriptions.Clear();
+            View.CustomSort = null;
+        }
+
+        private class SortByName: System.Collections.IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                Driver driver1 = (Driver) x;
+                Driver driver2 = (Driver) y;
+
+                return driver1.Name.CompareTo(driver2.Name);
+            }
+        }
+
+        private class SortByID: System.Collections.IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                Driver driver1 = (Driver) x;
+                Driver driver2 = (Driver) y;
+
+                return driver1.Id.CompareTo(driver2.Id);
+            }
+        }
+
+        private class SortByFirstLetterOfSecondName: System.Collections.IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                Driver driver1 = (Driver) x;
+                Driver driver2 = (Driver) y;
+
+                string first = driver1.Secondname.Substring(0, 1);
+                string second = driver2.Secondname.Substring(0, 1);
+                return first.CompareTo(second);
+            }
+        }
+        private void SortName(object sender, RoutedEventArgs e)
+        {
+            View.CustomSort = new SortByName();
+        }
+
+        private void SortID(object sender, RoutedEventArgs e)
+        {
+            View.CustomSort = new SortByID();
+        }
+        private void SortFirstLetterOfSecondName(object sender, RoutedEventArgs e)
+        {
+            View.CustomSort = new SortByFirstLetterOfSecondName();
+        }
+
+        private void Filter(object sender, RoutedEventArgs e)
+        {
+            var number = Int32.Parse(filtertxt.Text);
+            View.Filter = delegate (object item)
+            {
+                var driver = item as Driver;
+                if (driver != null)
+                {
+                    return driver.Driverlicenseid == number;
+                }
+                return false;
+            };
+        }
+
+        private void FilterNone(object sender, RoutedEventArgs e)
+        {
+            View.Filter = null;
         }
     }
 }
