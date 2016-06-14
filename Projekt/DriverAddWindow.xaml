@@ -62,7 +62,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Content="Wybierz"/>
+            <Button Grid.Row="0" Grid.Column="0" Content="Wybierz" Height="27" VerticalAlignment="Top" Click="PathButton_Click"/>
             <TextBox Grid.Row="0" Grid.Column="1" Name="PhotopathTextBox" Text="{Binding Photopath, Mode=TwoWay, ValidatesOnDataErrors=True, Converter={StaticResource PhotoPathConverter}}"/>
         </Grid>
         <Image Grid.Row="12" Grid.ColumnSpan="2" Width="100" Height="100" Source="{Binding Photopath}"/>

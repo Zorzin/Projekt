@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,17 +12,59 @@ namespace Projekt
 {
     class Line:INotifyPropertyChanged, IDataErrorInfo
     {
+        private static DbConnect dbConnect = new DbConnect();
         private int _number;
+        private double _length;
+        private BusStop _firststop;
+        private BusStop _laststop;
 
         public int Number
         {
             get { return _number; }
             set { _number = value; OnPropertyChanged("Number"); }
-            
         }
-        public double   Length          { get; set; }
-        public BusStop  Firststop       { get; set; }
-        public BusStop  Laststop        { get; set; }
+
+        public double Length
+        {
+            get { return _length; }
+            set
+            {
+                if (value > 0)
+                {
+                    NumberFormatInfo dot = new NumberFormatInfo();
+                    dot.NumberDecimalSeparator = ".";
+                    dbConnect.UpdateFromString("update projekt.line set lenght='" + value.ToString(dot) + "' where idline=" + Number + ";");
+                }
+                _length = value;
+                OnPropertyChanged("Length");
+            }
+        }
+
+        public BusStop Firststop
+        {
+            get { return _firststop; }
+            set
+            {
+                if (value !=null)
+                {
+                    dbConnect.UpdateFromString("update projekt.line set firststop='" + value.Id + "' where idline=" + Number + ";");
+                }
+                _firststop = value;
+            }
+        }
+
+        public BusStop Laststop
+        {
+            get { return _laststop; }
+            set
+            {
+                if (value !=null)
+                {
+                    dbConnect.UpdateFromString("update projekt.line set laststop='" + value.Id + "' where idline=" + Number + ";");
+                }
+                _laststop = value;
+            }
+        }
 
         public Line(int number, double lenght, BusStop firststop, BusStop laststop)
         {
@@ -42,6 +85,11 @@ namespace Projekt
         public override string ToString()
         {
             return "Linia nr: " + Number;
+        }
+
+        public string LineShow
+        {
+            get { return ToString(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

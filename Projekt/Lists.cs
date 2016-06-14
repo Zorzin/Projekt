@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Projekt
 {
@@ -19,10 +20,20 @@ namespace Projekt
         public static List<string> Brands = new List<string>();
         public static List<string> Types = new List<string>();
         public static List<string> Statuses = new List<string>();
+        public static JArray JArray = new JArray();
 
         public static BusStop GetBusStop(int id)
         {
-            return BusStops.First(stop => stop.Id==id);
+            try
+            {
+                return BusStops.First(stop => stop.Id == id);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            
         }
         public static Driver GetDriver(int id)
         {
@@ -62,16 +73,47 @@ namespace Projekt
             
         }
 
-        public static ActualTrack GetActualTrackByDriver(int id)
+        public static JObject GetActualTrackJObject(ActualTrack at)
         {
-            try
+
+            foreach (JObject obj in JArray.Children())
             {
-                return ActualTracks.First(driver => driver.Driver.Id == id);
+                var itemProperties = obj.Children<JProperty>();
+                if (at.StartBusStop != null && at.EndBusStop != null && at.Driver != null && at.StartHour != null &&
+                    at.EndHour != null && at.Line != null)
+                {
+                    if (itemProperties.First(x => x.Name == "startBusStop").Value.ToString() ==
+                        at.StartBusStop.Id.ToString())
+                    {
+                        if (itemProperties.First(x => x.Name == "endBusStop").Value.ToString() ==
+                            at.EndBusStop.Id.ToString())
+                        {
+                            if (itemProperties.First(x => x.Name == "driver").Value.ToString() ==
+                                at.Driver.Id.ToString())
+                            {
+                                if (itemProperties.First(x => x.Name == "startHour").Value.ToString() ==
+                                    at.StartHour.ToString()
+                                        .Replace(".", "/")
+                                        .Substring(0, at.StartHour.ToString().Length - 3))
+                                {
+                                    if (itemProperties.First(x => x.Name == "endHour").Value.ToString() ==
+                                        at.EndHour.ToString()
+                                            .Replace(".", "/")
+                                            .Substring(0, at.StartHour.ToString().Length - 3))
+                                    {
+                                        if (itemProperties.First(x => x.Name == "line").Value.ToString() ==
+                                            at.Line.Number.ToString())
+                                        {
+                                            return obj;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

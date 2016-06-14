@@ -26,9 +26,11 @@ namespace Projekt
 
     public partial class MainWindow : Window
     {
-        private DbConnect dbConnect;
+        public string       ActualTemplate;
+        private DbConnect   dbConnect;
         public MainWindow()
         {
+            ActualTemplate = "main";
             dbConnect = new DbConnect();
             AddToBrands();
             AddToTech();
@@ -41,6 +43,9 @@ namespace Projekt
             LoadJson();
             CheckSmallBus();
             RefreshData.Execute();
+            var startpage = new StarPage();
+            var mainWindow = (MainWindow) Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(startpage);
         }
 
         private void AddToBrands()
@@ -86,9 +91,11 @@ namespace Projekt
         }
         private void LoadJson()
         {
-            JArray array = JArray.Parse(File.ReadAllText("schedule.json"));
-            foreach (var obj in array.Children())
+            Lists.JArray = JArray.Parse(File.ReadAllText("schedule.json"));
+            int i = Lists.JArray.Count;
+            for (int j=i-1;j>=0;j--)
             {
+                var obj = Lists.JArray[j];
                 ActualTrack at = new ActualTrack();
                 var itemProperties = obj.Children<JProperty>();
                 at.StartBusStop = Lists.GetBusStop((int)itemProperties.First(x => x.Name == "startBusStop").Value);
@@ -99,9 +106,34 @@ namespace Projekt
                 var enddate = (string) itemProperties.First(x => x.Name == "endHour").Value;
                 at.EndHour = DateTime.Parse(enddate);
                 at.Line = Lists.GetLine((int) itemProperties.First(x => x.Name == "line").Value);
-                Lists.ActualTracks.Add(at);
 
+
+                var dt = DateTime.Now;
+                dt = dt.AddMilliseconds(-dt.Millisecond);
+                dt = dt.AddSeconds(-dt.Second);
+                dt = dt.AddTicks(-dt.Ticks % 10000000);
+                if (at.EndHour < dt)
+                {
+                    if (at.Driver != null)
+                    {
+                        TimeSpan ts = at.EndHour - at.StartHour;
+                        int hours = ts.Hours;
+                       at.Driver.Hoursworked += hours;
+                        if (at.Driver.Actualbus != null)
+                        {
+                            at.Driver.Actualbus.Actualdriver = null;
+                            at.Driver.Actualbus.Actualline = null;
+                        }
+                        at.Driver.Actualbus = null;
+                    }
+                    obj.Remove();
+                }
+                else
+                {
+                    Lists.ActualTracks.Add(at);
+                }
             }
+            File.WriteAllText("schedule.json", Lists.JArray.ToString());
         }
 
         private void CheckSmallBus()
@@ -157,7 +189,6 @@ namespace Projekt
                     Bus bus = new Bus();
                     bus.Busid = Int32.Parse(dt.Rows[i]["idbus"].ToString());
                     bus.Busbrand = dt.Rows[i]["busbrand"].ToString();
-                    bus.Mileage = Double.Parse(dt.Rows[i]["mileage"].ToString());
                     bus.Techcondition = dt.Rows[i]["techcondition"].ToString();
                     bus.Type = dt.Rows[i]["type"].ToString();
                     Lists.Buses.Add(bus);
@@ -224,7 +255,7 @@ namespace Projekt
                     driver.Zipcode = Int32.Parse(dt.Rows [i] ["zipcode"].ToString());
                     driver.Address = dt.Rows [i] ["address"].ToString();
                     driver.Salary = Double.Parse(dt.Rows [i] ["salary"].ToString());
-                    driver.Hoursworked = Double.Parse(dt.Rows [i] ["hoursworked"].ToString());
+                    driver.Hoursworked = Int32.Parse(dt.Rows [i] ["hoursworked"].ToString());
                     driver.Photopath = dt.Rows [i] ["photopath"].ToString();
                     Lists.Drivers.Add(driver);
                 }
@@ -240,6 +271,22 @@ namespace Projekt
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void MainTemplateMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ActualTemplate = "main";
+            var startpage = new StarPage();
+            var mainWindow = (MainWindow) Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(startpage);
+        }
+
+        private void LessTamplateMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ActualTemplate = "less";
+            var startpage = new StarPage();
+            var mainWindow = (MainWindow) Application.Current.MainWindow;
+            mainWindow.MainFrame.Navigate(startpage);
         }
     }
 }

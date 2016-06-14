@@ -102,12 +102,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ActualTrackAddWindow.xaml.cs">
-      <DependentUpon>ActualTrackAddWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ActualTrackConverter.cs" />
     <Compile Include="ActualTrackPage.xaml.cs">
       <DependentUpon>ActualTrackPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddActualTrackWindow.xaml.cs">
+      <DependentUpon>AddActualTrackWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusBackgroundConverter.cs" />
     <Compile Include="BusConverter.cs" />
@@ -118,9 +118,11 @@
     <Compile Include="BusTechConverter.cs" />
     <Compile Include="CheckStrings.cs" />
     <Compile Include="DriverBackgroundConverter.cs" />
+    <Compile Include="DriverBorderConverter.cs" />
     <Compile Include="DriverComboConverter.cs" />
     <Compile Include="DriverConverter.cs" />
     <Compile Include="GridLengthAnimation.cs" />
+    <Compile Include="LengthPrintConverter.cs" />
     <Compile Include="LineConverter.cs" />
     <Compile Include="Lists.cs" />
     <Compile Include="PhotoPathConverter.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RefreshData.cs" />
     <Compile Include="SalaryConverter.cs" />
+    <Compile Include="SalaryPrintConverter.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
@@ -139,11 +142,11 @@
     <Compile Include="StatusConverter.cs" />
     <Compile Include="TechconditionConverter.cs" />
     <Compile Include="TypeConverter.cs" />
-    <Page Include="ActualTrackAddWindow.xaml">
+    <Page Include="ActualTrackPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ActualTrackPage.xaml">
+    <Page Include="AddActualTrackWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,7 +15,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -29,19 +28,17 @@
             <ComboBoxItem Content="Mały"/>
             <ComboBoxItem Content="Duży"/>
         </ComboBox>
-        <Label Grid.Row="3" Content="Przebieg:"/>
-        <TextBox Name="MileageTextBox" Grid.Column="1" Grid.Row="3" Text="{Binding Mileage, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-        <Label Grid.Row="4" Content="Model:"/>
-        <ComboBox Name="BrandComboBox" Grid.Row="4" Grid.Column="1">
+        <Label Grid.Row="3" Content="Model:"/>
+        <ComboBox Name="BrandComboBox" Grid.Row="3" Grid.Column="1">
             <ComboBoxItem Content="Solaris"/>
             <ComboBoxItem Content="Mann"/>
         </ComboBox>
-        <Label Grid.Row="5" Content="Stan techniczny:"/>
-        <ComboBox Name="TechConditionComboBox" Grid.Row="5" Grid.Column="1">
+        <Label Grid.Row="4" Content="Stan techniczny:"/>
+        <ComboBox Name="TechConditionComboBox" Grid.Row="4" Grid.Column="1">
             <ComboBoxItem Content="Zły"/>
             <ComboBoxItem Content="Dobry"/>
         </ComboBox>
-        <Button Click="AddButton" Grid.Row="6" Grid.ColumnSpan="2" Content="Dodaj"/>
-        <Button Command="local:Commands.BackButtonCommand" Grid.Row="7" Grid.ColumnSpan="2" Content="Powrót"/>
+        <Button Click="AddButton" Grid.Row="5" Grid.ColumnSpan="2" Content="Dodaj"/>
+        <Button Command="local:Commands.BackButtonCommand" Grid.Row="6" Grid.ColumnSpan="2" Content="Powrót"/>
     </Grid>
 </Window>

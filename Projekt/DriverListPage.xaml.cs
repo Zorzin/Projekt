@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Application = System.Windows.Application;
 using Button = System.Windows.Controls.Button;
 using FlowDirection = System.Windows.FlowDirection;
 using Label = System.Windows.Controls.Label;
@@ -25,10 +26,21 @@ namespace Projekt
         {
             View.Filter = null;
             InitializeComponent();
-            Commands.List[AddButton] = Commands.DriverAddFunction;
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            DataTemplate dt;
+            switch (mainWindow.ActualTemplate)
+            {
+                case "main":
+                    dt = (DataTemplate)this.FindResource("MainDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+                case "less":
+                    dt = (DataTemplate)this.FindResource("LessDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+            }
             StatusComboBox.ItemsSource = Lists.Statuses;
             ListBox.ItemsSource = Lists.Drivers;
-            BusComboBox.ItemsSource = Lists.Buses;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -37,22 +49,9 @@ namespace Projekt
             var driver = (Driver) ListBox.SelectedItem;
             if (driver.Actualbus != null)
             {
-                MessageBoxButton mbb = MessageBoxButton.YesNo;
-                MessageBoxResult dr = MessageBox.Show("Usuwany kierowca ma aktualnie kurs. Usunąć kierowcę oraz kurs?", "Usunąć?", mbb);
-                if (dr == MessageBoxResult.Yes)
-                {
-                    ActualTrack track = Lists.GetActualTrackByDriver(driver.Id);
-                    track.Driver.Actualbus.Actualdriver = null;
-                    track.Driver.Actualbus.Actualline = null;
-                    track.Driver.Actualbus = null;
-                    track.Driver = null;
-                    track.Line = null;
-                    Lists.ActualTracks.Remove(track);
-                }
-                else
-                {
-                    return;
-                }
+                MessageBoxButton mbb = MessageBoxButton.OK;
+                MessageBoxResult dr = MessageBox.Show("Usuwany kierowca ma aktualnie kurs. Nie można usunąć", "Błąd", mbb);
+                return;
             }
             db.Delete("driver", driver.Id.ToString());
             Lists.Drivers.RemoveAt(ListBox.SelectedIndex);

@@ -10,15 +10,32 @@
     <Page.Resources>
         <local:StatusConverter x:Key="StatusConverter"/>
         <local:SalaryConverter x:Key="SalaryConverter"/>
+        <local:SalaryPrintConverter x:Key="SalaryPrintConverter"/>
         <local:PhotoPathConverter x:Key="PhotoPathConverter"/>
         <local:BusConverter x:Key="BusConverter"/>
         <local:DriverBackgroundConverter x:Key="DriverBackgroundConverter"
                                       FreeBrush="Green"
                                       BusyBrush="Red"/>
-        <DataTemplate x:Key="DriverDataTemplate">
-            <Border Margin="2" Padding="2" BorderThickness="2" BorderBrush="Black">
+        <local:DriverBorderConverter x:Key="DriverBorderConverter"
+                                      ActiveBrush="Green"
+                                      InactiveBrush="Red"
+                                      LeaveBrush="Yellow"/>
+        <DataTemplate x:Key="MainDataTemplate">
+            <Border Width="200" Margin="2" Padding="2" BorderThickness="2" BorderBrush="{Binding Status, Converter={StaticResource DriverBorderConverter}}">
                 <Grid Background="{Binding Actualbus, Converter={StaticResource DriverBackgroundConverter}}">
-                    <TextBlock Text="{Binding DriverShow}"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image HorizontalAlignment="Left" Source="{Binding Photopath, Converter={StaticResource PhotoPathConverter}}" Width="50" Height="50"/>
+                    <TextBlock Margin="5,0" Grid.Column="1" Text="{Binding DriverShow}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="LessDataTemplate">
+            <Border Margin="2" Padding="2" BorderThickness="2" BorderBrush="{Binding Status, Converter={StaticResource DriverBorderConverter}}">
+                <Grid Background="{Binding Actualbus, Converter={StaticResource DriverBackgroundConverter}}">
+                    <TextBlock Text="{Binding Id}"/>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -80,7 +97,7 @@
                 <ComboBoxItem Selected="GroupByStatus">Grupuj wg statusu</ComboBoxItem>
             </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource DriverDataTemplate}">
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LessDataTemplate}">
             <ListBox.GroupStyle>
                 <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
             </ListBox.GroupStyle>
@@ -123,13 +140,19 @@
             <Label Grid.Row="7" Content="Ulica i nr domu:"/>
             <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Address, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="8" Content="Pensja brutto:"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Salary, Mode=TwoWay, Converter={StaticResource SalaryConverter}, ValidatesOnDataErrors=True}" />
+            <Label Grid.Row="8" Grid.Column="1" Content="{Binding Salary, Converter={StaticResource SalaryConverter}}" />
             <Label Grid.Row="9" Content="Pensja netto:"/>
-            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Salary, Mode=TwoWay, StringFormat=c, ConverterCulture='pl-Pl', ValidatesOnDataErrors=True}"/>
+            <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal">
+                <Slider Width="200" IsSnapToTickEnabled="True" TickFrequency="0.10" Minimum="0" Maximum="20000" Value="{Binding Salary, Mode=TwoWay, StringFormat=c, ConverterCulture='pl-Pl', ValidatesOnDataErrors=True}"/>
+                <Label Content="{Binding Salary, Converter={StaticResource SalaryPrintConverter}}"/>
+            </StackPanel>
             <Label Grid.Row="10" Content="Godziny w tym miesiącu: "/>
-            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Hoursworked, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <StackPanel Grid.Row="10" Grid.Column="1" Orientation="Horizontal">
+                <Slider Width="200" Minimum="0" Maximum="200" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Hoursworked, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                <Label Content="{Binding Hoursworked}"/>
+            </StackPanel>
             <Label Grid.Row="11" Content="Aktualny autobus:"/>
-            <ComboBox Name="BusComboBox" Grid.Column="1" Grid.Row="11" SelectedValue="{Binding Actualbus, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <Label Name="BusComboBox" Grid.Column="1" Grid.Row="11" Content="{Binding Actualbus.Busid}"/>
             <Label Grid.Row="12" Content="Ścieżka do zdjęcia:"/>
             <Grid Grid.Row="12" Grid.Column="1">
                 <Grid.ColumnDefinitions>

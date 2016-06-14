@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,10 +8,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
+using Path = System.Windows.Shapes.Path;
 
 namespace Projekt
 {
@@ -69,7 +72,7 @@ namespace Projekt
             var city = CheckStrings.CheckString(CityTextBox.Text);
             var zipcode = CheckStrings.CheckInt(ZipcodeTextBox.Text);
             var address = CheckStrings.CheckString(AddressTextBox.Text);
-            var salary = CheckStrings.CheckInt(SalaryTextBox.Text);
+            var salary = CheckStrings.CheckDouble(SalaryTextBox.Text);
             var hoursworked = CheckStrings.CheckInt(HoursworkedTextBox.Text);
             var photopath = CheckStrings.CheckString(PhotopathTextBox.Text);
             photopath = photopath.Substring(photopath.LastIndexOf("\\") + 1);
@@ -96,7 +99,7 @@ namespace Projekt
             driver.City = city;
             driver.Zipcode = Int32.Parse(zipcode);
             driver.Address = address;
-            driver.Salary = Double.Parse(salary);
+            driver.Salary = Double.Parse(salary.Replace('.', ','));
             driver.Hoursworked = Int32.Parse(hoursworked);
             driver.Photopath = photopath;
             
@@ -112,6 +115,28 @@ namespace Projekt
             else
             {
                 return;
+            }
+        }
+
+        private void PathButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            var result = dialog.ShowDialog();
+            switch (result)
+            {
+                case System.Windows.Forms.DialogResult.OK:
+                    PhotopathTextBox.Text = dialog.FileName.Substring(dialog.FileName.LastIndexOf("\\") + 1);
+                    if (!File.Exists(System.IO.Path.Combine(System.IO.Path.Combine(Environment.CurrentDirectory, "images"),
+                        System.IO.Path.GetFileName(dialog.FileName))))
+                    {
+                        File.Copy(dialog.FileName,
+                            System.IO.Path.Combine(System.IO.Path.Combine(Environment.CurrentDirectory, "images"),
+                                System.IO.Path.GetFileName(dialog.FileName)));
+                    }
+                    PhotopathTextBox.Focus();
+                    break;
+                default:
+                    break;
             }
         }
     }

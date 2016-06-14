@@ -82,22 +82,14 @@ namespace Projekt
                 }
             }
             
-            var mileage = CheckStrings.CheckInt(MileageTextBox.Text);
-
-            if (mileage==null || type ==null || busbrand == null || techcondition ==null)
-            {
-                MessageBoxButton mbb = MessageBoxButton.OK;
-                MessageBoxResult dr = MessageBox.Show("Błąd podczas walidacji danych!", "Błąd", mbb);
-            }
             
-            bus.Mileage = Int32.Parse(mileage);
             bus.Type = type;
             bus.Busbrand = busbrand;
             bus.Techcondition = techcondition;
 
 
             DbConnect db = new DbConnect();
-            if (db.AddBus(id,type,mileage,busbrand,techcondition,bus))
+            if (db.AddBus(id,type,busbrand,techcondition,bus))
             {
                 Lists.Buses.Add(bus);
                 MessageBoxButton mbb = MessageBoxButton.OK;

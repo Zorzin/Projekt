@@ -8,24 +8,18 @@ using System.Windows.Data;
 
 namespace Projekt
 {
-    class SalaryConverter:IValueConverter
+    class SalaryPrintConverter:IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double salary = (double)value*100/123;
+            double salary = (double)value;
+            salary = Math.Round(salary, 2);
             return salary.ToString("C");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string salary = value.ToString();
-            double result;
-            if (Double.TryParse(salary, NumberStyles.Any, culture, out result))
-            {
-                var res = result + 0.23 * result;
-                return Math.Round(res, 2);
-            }
-            return value;
+            throw new NotImplementedException();
         }
     }
 }

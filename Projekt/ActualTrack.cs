@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Projekt.Annotations;
 
 namespace Projekt
@@ -15,51 +16,129 @@ namespace Projekt
         private DateTime    _startHour;
         private DateTime    _endHour;
         private Driver      _driver;
+        private BusStop _startBusStop;
+        private BusStop _endBusStop;
+
         public  DateTime     StartHour
         {
             get { return _startHour; }
-            set { _startHour = value;
+            set
+            {
+                if (value != null)
+                {
+                    JObject obj = Lists.GetActualTrackJObject(this);
+                    if (obj != null)
+                    {
+                        obj["startHour"] = value.ToString().Replace(".", "/").Substring(0, value.ToString().Length - 3);
+                    }
+                }
+                _startHour = value;
                 OnPropertyChanged("ActualTrackShow");
-                OnPropertyChanged("StartHour");}
+                OnPropertyChanged("StartHour");
+            }
             
         }
         public  DateTime     EndHour
         {
             get { return _endHour; }
-            set { _endHour = value;
+            set
+            {
+                if (value != null)
+                {
+                    JObject obj = Lists.GetActualTrackJObject(this);
+                    if (obj != null)
+                    {
+                        obj["endHour"] = value.ToString().Replace(".", "/").Substring(0, value.ToString().Length - 3);
+                    }
+                }
+                _endHour = value;
                 OnPropertyChanged("ActualTrackShow");
-                OnPropertyChanged("EndHour");}
+                OnPropertyChanged("EndHour");
+            }
             
         }
         public  Line         Line
         {
             get { return _line; }
-            set { _line = value;
-                OnPropertyChanged("ActualTrackShow"); }
+            set
+            {
+                if (value != null)
+                {
+                    JObject obj = Lists.GetActualTrackJObject(this);
+                    if (obj != null)
+                    {
+                        obj["line"] = value.Number.ToString();
+                    }
+                }
+                _line = value;
+                OnPropertyChanged("ActualTrackShow");
+            }
 
         }
-        public  BusStop      StartBusStop    { get; set; }
-        public  BusStop      EndBusStop      { get; set; }
+
+        public BusStop StartBusStop
+        {
+            get { return _startBusStop; }
+            set
+            {
+                if (value != null)
+                {
+                    JObject obj = Lists.GetActualTrackJObject(this);
+                    if (obj != null)
+                    {
+                        obj["startBusStop"] = value.Id.ToString();
+                    }
+                }
+                _startBusStop = value;
+            }
+        }
+
+        public BusStop EndBusStop
+        {
+            get { return _endBusStop; }
+            set
+            {
+                if (value != null)
+                {
+                    JObject obj = Lists.GetActualTrackJObject(this);
+                    if (obj != null)
+                    {
+                        obj["endBusStop"] = value.Id.ToString();
+                    }
+                }
+                _endBusStop = value;
+            }
+        }
 
         public Driver Driver
         {
             get { return _driver; }
             set
             {
+                if (value != null)
+                {
+                    JObject obj = Lists.GetActualTrackJObject(this);
+                    if (obj != null)
+                    {
+                        obj["driver"] = value.Id.ToString();
+                    }
+                }
                 if (_driver != null)
                 {
                     var bus = _driver.Actualbus;
                     _driver.Actualbus = null;
                     _driver = value;
-                    _driver.Actualbus = bus;
+                    if (_driver != null)
+                    {
+                        _driver.Actualbus = bus;
+                        _driver.Actualbus.Actualdriver = _driver;
+                    }
                 }
                 else
                 {
                     _driver = value;
                 }
-                
             }
-            
         }
         public bool         Smallbus        { get; set; }
         public string       ActualTrackShow
@@ -72,10 +151,8 @@ namespace Projekt
                 }
                 catch (Exception)
                 {
-
                     return null;
                 }
-                
             }
         }
 

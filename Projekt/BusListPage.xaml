@@ -19,10 +19,17 @@
         <local:BusTechConverter x:Key="BusTechConverter"
                                         Ok="Green"
                                         Bad="Red"/>
-        <DataTemplate x:Key="BusDataTemplate">
+        <DataTemplate x:Key="MainDataTemplate">
             <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="{Binding Techcondition, Converter={StaticResource BusTechConverter}}">
                 <Grid Background="{Binding Actualdriver, Converter={StaticResource BusBackgroundConverter}}">
                     <TextBlock Text="{Binding BusShow}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="LessDataTemplate">
+            <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="{Binding Techcondition, Converter={StaticResource BusTechConverter}}">
+                <Grid Background="{Binding Actualdriver, Converter={StaticResource BusBackgroundConverter}}">
+                    <TextBlock Text="{Binding Busid}"/>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -42,7 +49,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
-            <Button Command="local:Commands.AddBusButtonCommand" Name="AddButton" Content="Dodaj" VerticalAlignment="Top"/>
+            <Button Command="local:Commands.AddBusButtonCommand" Name="AddButton" Content="Dodaj"/>
             <Button Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click">
                 <Button.Style>
                     <Style>
@@ -71,7 +78,7 @@
                 <ComboBoxItem Selected="GroupByType">Grupuj wg stanu typu</ComboBoxItem>
             </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource BusDataTemplate}">
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LessDataTemplate}">
             <ListBox.GroupStyle>
                 <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
             </ListBox.GroupStyle>
@@ -84,35 +91,24 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr boczny:"/>
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Busid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Column="1" Content="{Binding Busid, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="1" Content="Typ autobusu:"/>
             <ComboBox Name="TypeComboBox" Grid.Row="1" Grid.Column="1" SelectedValue="{Binding Type, Mode=TwoWay, Converter={StaticResource TypeConverter}}"/>
             <Label Grid.Row="2" Content="Aktualny kierowca:"/>
-            <ComboBox Name="DriverComboBox" Grid.Row="2" Grid.Column="1" SelectedValue="{Binding Actualdriver, TargetNullValue=0, Mode=TwoWay,  ValidatesOnDataErrors=True}"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Actualdriver.Id, TargetNullValue=0, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="3" Content="Aktualna linia:"/>
-            <ComboBox Name="LineComboBox" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Actualline, Mode=TwoWay,TargetNullValue=0, ValidatesOnDataErrors=True}"/>
-            <Label Grid.Row="4" Content="Przebieg:"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Mileage, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-            <Label Grid.Row="5" Content="Model:"/>
-            <ComboBox Name="BrandComboBox" Grid.Row="5" Grid.Column="1" SelectedValue="{Binding Busbrand, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-            <Label Grid.Row="6" Content="Stan techniczny:"/>
-            <ComboBox Name="TechComboBox" Grid.Row="6" Grid.Column="1" SelectedValue="{Binding Techcondition, Mode=TwoWay, ValidatesOnDataErrors=True, Converter={StaticResource TechconditionConverter}}"/>
-            
+            <Label Grid.Row="3" Grid.Column="1" Content="{Binding Actualline.Number,TargetNullValue=0, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Row="4" Content="Model:"/>
+            <ComboBox Name="BrandComboBox" Grid.Row="4" Grid.Column="1" SelectedValue="{Binding Busbrand, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Row="5" Content="Stan techniczny:"/>
+            <ComboBox Name="TechComboBox" Grid.Row="5" Grid.Column="1" SelectedValue="{Binding Techcondition, Mode=TwoWay, ValidatesOnDataErrors=True, Converter={StaticResource TechconditionConverter}}"/>
+
         </Grid>
     </Grid>
 </Page>
-
-<!-- Converter={StaticResource DriverComboConverter}, 
-    
-    <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Id}"></TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>-->

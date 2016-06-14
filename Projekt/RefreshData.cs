@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using Newtonsoft.Json.Linq;
 
 namespace Projekt
 {
@@ -18,7 +20,7 @@ namespace Projekt
             DispatcherTimer timer = new DispatcherTimer();
             RefreshList();
             timer.Tick += new EventHandler(Refresh);
-            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Start();
         }
 
@@ -41,12 +43,21 @@ namespace Projekt
                 {
                     if (tracks.Driver!=null)
                     {
+                        TimeSpan ts = tracks.EndHour - tracks.StartHour;
+                        int hours = ts.Hours;
+                        tracks.Driver.Hoursworked += hours;
                         if (tracks.Driver.Actualbus!=null)
                         {
                             tracks.Driver.Actualbus.Actualdriver = null;
                             tracks.Driver.Actualbus.Actualline = null;
                         }
                         tracks.Driver.Actualbus = null;
+                    }
+
+                    JObject obj = Lists.GetActualTrackJObject(tracks);
+                    if (obj!=null)
+                    {
+                        Lists.JArray.Remove(obj);
                     }
                     Lists.ActualTracks.Remove(tracks);
                 }
@@ -83,15 +94,18 @@ namespace Projekt
                                             x.Actualdriver == null && x.Actualline == null && x.Type == "big" &&
                                             x.Techcondition == "good");
                                 }
-                                catch (Exception)
+                                catch (Exception e)
                                 {
 
                                     tracks.Driver.Actualbus = null;
                                 }
                                 
                             }
-                            tracks.Driver.Actualbus.Actualline = tracks.Line;
-                            tracks.Driver.Actualbus.Actualdriver = tracks.Driver;
+                            if (tracks.Driver.Actualbus!=null)
+                            {
+                                tracks.Driver.Actualbus.Actualline = tracks.Line;
+                                tracks.Driver.Actualbus.Actualdriver = tracks.Driver;
+                            }
                         }
                     }
                     else
@@ -100,6 +114,9 @@ namespace Projekt
                     }
                 }
             }
+            //there
+            File.WriteAllText("schedule.json", Lists.JArray.ToString());
+
         }
     }
 }

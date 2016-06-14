@@ -14,7 +14,19 @@ namespace Projekt
         {
             View.Filter = null;
             InitializeComponent();
-            Commands.List[AddButton] = Commands.BusStopAddFunction;
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            DataTemplate dt;
+            switch (mainWindow.ActualTemplate)
+            {
+                case "main":
+                    dt = (DataTemplate)this.FindResource("MainDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+                case "less":
+                    dt = (DataTemplate)this.FindResource("LessDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+            }
             ListBox.ItemsSource = Lists.BusStops;
         }
 

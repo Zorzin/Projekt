@@ -9,7 +9,9 @@ namespace Projekt
 {
     internal class BusStop:INotifyPropertyChanged, IDataErrorInfo
     {
+        private static DbConnect dbConnect = new DbConnect();
         private int _id;
+        private string _name;
 
         public int Id
         {
@@ -17,13 +19,28 @@ namespace Projekt
             set { _id = value; OnPropertyChanged("Id"); }
         }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value !=null)
+                {
+                    dbConnect.UpdateFromString("update projekt.busstop set busstopname='" + value + "' where idbusstop=" + Id + ";");
+                }
+                _name = value;
+            }
+        }
 
         public override string ToString()
         {
             return Id.ToString()+ ": " + Name;
         }
 
+        public string BusStopShow
+        {
+            get { return ToString(); }
+        }
 
         public BusStop(int id, string name)
         {

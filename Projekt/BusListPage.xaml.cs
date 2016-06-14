@@ -24,9 +24,19 @@ namespace Projekt
         {
             View.Filter = null;
             InitializeComponent();
-            Commands.List [AddButton] = Commands.BusAddFunction;
-            LineComboBox.ItemsSource = Lists.Lines;
-            DriverComboBox.ItemsSource = Lists.Drivers;
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            DataTemplate dt;
+            switch (mainWindow.ActualTemplate)
+            {
+                case "main":
+                    dt = (DataTemplate)this.FindResource("MainDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+                case "less":
+                    dt = (DataTemplate)this.FindResource("LessDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+            }
             ListBox.ItemsSource = Lists.Buses;
             TechComboBox.ItemsSource = Lists.TechConditions;
             BrandComboBox.ItemsSource = Lists.Brands;
@@ -39,22 +49,10 @@ namespace Projekt
             Bus bus = (Bus)ListBox.SelectedItem;
             if (bus.Actualline!=null)
             {
-                MessageBoxButton mbb = MessageBoxButton.YesNo;
-                MessageBoxResult dr = MessageBox.Show("Usuwany autobus jest aktualnie na trasie, usunąć wraz z kursem?", "Usunąć?", mbb);
-                if (dr == MessageBoxResult.Yes)
-                {
-                    ActualTrack actualTrack = Lists.GetActualTrackByDriver(bus.Actualdriver.Id);
-                    bus.Actualdriver.Actualbus = null;
-                    bus.Actualdriver = null;
-                    bus.Actualline = null;
-                    actualTrack.Driver = null;
-                    actualTrack.Line = null;
-                    Lists.ActualTracks.Remove(actualTrack);
-                }
-                else
-                {
-                    return;
-                }
+                MessageBoxButton mbb = MessageBoxButton.OK;
+                MessageBoxResult dr = MessageBox.Show("Usuwany autobus jest aktualnie na trasie, nie można usunąć","Błąd", mbb);
+                return;
+                
             }
             db.Delete("Bus",bus.Busid.ToString());
             Lists.Buses.RemoveAt(ListBox.SelectedIndex);

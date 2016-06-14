@@ -9,7 +9,15 @@
       Title="LineListPage">
     <Page.Resources>
         <local:BusStopComboConverter x:Key="BusStopComboConverter"/>
-        <DataTemplate x:Key="LineDataTemplate">
+        <local:LengthPrintConverter x:Key="LengthPrintConverter"/>
+        <DataTemplate x:Key="MainDataTemplate">
+            <Border Margin="2" Padding="2" BorderThickness="2" BorderBrush="Black" Width="200">
+                <Grid>
+                    <TextBlock Text="{Binding LineShow}"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="LessDataTemplate">
             <Border Margin="2" Padding="2" BorderThickness="2" BorderBrush="Black">
                 <Grid>
                     <TextBlock Text="{Binding Number}"/>
@@ -59,9 +67,8 @@
                 <ComboBoxItem Selected="GroupByFirstBusStop">Grupuj wg pierwszego przystanku</ComboBoxItem>
                 <ComboBoxItem Selected="GroupByLastBusStop">Grupuj wg ostatniego przystanku</ComboBoxItem>
             </ComboBox>
-            <!-- Sortuj, grupuj, filtruj-->
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LineDataTemplate}">
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource MainDataTemplate}">
             <ListBox.GroupStyle>
                 <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
             </ListBox.GroupStyle>
@@ -80,9 +87,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Nr linii:"/>
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Number, ValidatesOnDataErrors=True}"/>
+            <Label Grid.Column="1" Content="{Binding Number}"/>
             <Label Grid.Row="1" Content="Długość trasy:"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                <Slider Width="200" Minimum="0" Maximum="20" TickFrequency="0.1" IsSnapToTickEnabled="True" Grid.Row="1" Grid.Column="1" Value="{Binding Length, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                <Label Content="{Binding Length, Converter={StaticResource LengthPrintConverter}}"/>
+            </StackPanel>
             <Label Grid.Row="3" Content="Pierwszy przystanek:"/>
             <ComboBox Name="FirstBusStopComboBox" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Firststop, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
             <Label Grid.Row="4" Content="Ostatni Przystanek:"/>

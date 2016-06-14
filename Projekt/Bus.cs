@@ -5,16 +5,20 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Projekt.Annotations;
 
 namespace Projekt
 {
     class Bus : INotifyPropertyChanged, IDataErrorInfo
     {
+        private static DbConnect dbConnect = new DbConnect();
         private int     _busId;
         private string  _busbrand;
         private string  _techcondition;
         private Line    _actualline;
+        private string  _type;
+        private Driver  _actualDriver;
 
         public int Busid
         {
@@ -30,6 +34,10 @@ namespace Projekt
             get { return _busbrand; }
             set
             {
+                if (value!=null)
+                {
+                    dbConnect.UpdateFromString("update projekt.bus set busbrand='" + value + "' where idbus=" + _busId + ";");
+                }
                 _busbrand = value;
                 OnPropertyChanged("BusShow");
             }
@@ -37,20 +45,55 @@ namespace Projekt
         public Line Actualline
         {
             get { return _actualline; }
-            set { _actualline = value; OnPropertyChanged("Actualline"); }
+            set
+            {
+                _actualline = value;
+                OnPropertyChanged("Actualline");
+                OnPropertyChanged("Actualdriver");
+                OnPropertyChanged("BusShow");
+            }
 
         }
         public string Techcondition
         {
             get { return _techcondition; }
-            set { _techcondition = value; OnPropertyChanged("Techcondition"); }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.bus set techcondition='" + value + "' where idbus=" + _busId + ";");
+                }
+                _techcondition = value;
+                OnPropertyChanged("Techcondition");
+            }
 
         }
-        public string   Type             { get; set; }
 
-        public Driver Actualdriver { get; set; }
+        public string Type
+        {
+            get { return _type; }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.bus set type='" + value + "' where idbus=" + _busId + ";");
+                }
+                _type = value;
+            }
+        }
 
-        public double   Mileage          { get; set; }
+        public Driver Actualdriver
+        {
+            get { return _actualDriver; }
+            set
+            {
+                _actualDriver = value;
+                OnPropertyChanged("Actualdriver");
+            }
+        }
+
+
+
         public string   BusShow
         {
             get { return Busbrand + ", numer boczny: " + Busid; }
@@ -67,7 +110,6 @@ namespace Projekt
             Type = type;
             Actualdriver = actualdriver;
             Actualline = actualline;
-            Mileage = mileage;
             Techcondition = techcondition;
             _busbrand = busbrand;
             _busId = busId;
@@ -79,7 +121,6 @@ namespace Projekt
             Type = null;
             Actualdriver = null;
             Actualline = null;
-            Mileage = 0;
             Busbrand = null;
             Techcondition = null;
         }
@@ -116,16 +157,6 @@ namespace Projekt
                         {
                             Type = "undefined";
                             return "type can't be empty";
-                        }
-                        break;
-                    case "Mileage":
-                        if (Mileage.ToString().Length < 1)
-                        {
-                            return "mileage can't be empty";
-                        }
-                        if (Mileage < 0)
-                        {
-                            return "mileage can't be smaller than 1";
                         }
                         break;
                     case "Busbrand":

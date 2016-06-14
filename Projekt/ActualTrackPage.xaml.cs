@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json.Linq;
 
 namespace Projekt
 {
@@ -27,11 +28,23 @@ namespace Projekt
             View.Filter = null;
             _isexpended = true;
             InitializeComponent();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            DataTemplate dt;
+            switch (mainWindow.ActualTemplate)
+            {
+                case "main":
+                    dt = (DataTemplate) this.FindResource("MainDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+                case "less":
+                    dt = (DataTemplate)this.FindResource("LessDataTemplate");
+                    ListBox.ItemTemplate = dt;
+                    break;
+            }
             ListBox.ItemsSource = Lists.ActualTracks;
             DriverComboBox.ItemsSource = Lists.Drivers;
             StartBusStopComboBox.ItemsSource = Lists.BusStops;
             EndBusStopComboBox.ItemsSource = Lists.BusStops;
-            LineComboBox.ItemsSource = Lists.Lines;
             BusComboBox.ItemsSource = Lists.Buses;
             /**Storyboard sb; //nie dziala
             if (_isexpended)
@@ -64,6 +77,11 @@ namespace Projekt
                 {
                     return;
                 }
+            }
+            JObject obj = Lists.GetActualTrackJObject(actualTrack);
+            if (obj != null)
+            {
+                Lists.JArray.Remove(obj);
             }
             actualTrack.Driver = null;
             actualTrack.Line = null;

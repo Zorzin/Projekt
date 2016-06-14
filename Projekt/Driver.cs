@@ -1,38 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Projekt.Annotations;
 
 namespace Projekt
 {
     class Driver:INotifyPropertyChanged, IDataErrorInfo
     {
+        private static DbConnect dbConnect = new DbConnect();
         private string  _name;
         private string  _secondname;
         private int     _id;
-        private Bus    _actualbus;
+        private Bus     _actualbus;
         private string  _photopath;
         private double  _salary;
+        private string  _status;
+        private int     _driverlicenseid;
+        private string  _city;
+        private int     _hoursworked;
+        private string  _address;
+        private int     _zipcode;
+
         public string   Name
         {
             get { return _name; }
-            set { _name = value; OnPropertyChanged("DriverShow"); }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set name='"+value+"' where iddriver="+Id+";");
+                }
+                _name = value;
+                OnPropertyChanged("DriverShow");
+            }
         }
 
         public string   Secondname
         {
             get { return _secondname; }
-            set { _secondname = value; OnPropertyChanged("DriverShow"); }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set secondname='" + value + "' where iddriver=" + Id + ";");
+                }
+                _secondname = value;
+                OnPropertyChanged("DriverShow");
+            }
         }
 
         public int      Id
         {
             get { return _id; }
-            set { _id = value; OnPropertyChanged("DriverShow"); }
+            set
+            {
+                if (value > 0 && _id > 0)
+                {
+                    var oldid= _id;
+                    try
+                    {
+                        _id = value;
+                        dbConnect.UpdateFromString("update projekt.driver set iddriver=" + _id + " where iddriver=" + oldid + ";");
+                    }
+                    catch (Exception e)
+                    {
+                        var mbb = MessageBoxButton.OK;
+                        var dr = MessageBox.Show("Błąd podczas edytowania rekordu", "Błąd", mbb);
+                        _id = oldid;
+                    }
+                }
+                else
+                {
+                    _id = value;
+                }
+                OnPropertyChanged("DriverShow");
+            }
             
         }
 
@@ -41,15 +89,20 @@ namespace Projekt
             get { return _actualbus; }
             set
             {
-                if (_actualbus!=null)
+                if (value != null)
                 {
-                    _actualbus.Actualdriver = null;
+                    if (_actualbus != null)
+                    {
+                        var line = _actualbus.Actualline;
+                        _actualbus.Actualdriver = null;
+                        _actualbus.Actualline = null;
+                        _actualbus = value;
+                        _actualbus.Actualline = line;
+                        _actualbus.Actualdriver = this;
+                    }
+                    
                 }
                 _actualbus = value;
-                if (_actualbus!= null)
-                {
-                    _actualbus.Actualdriver = this;
-                }
                 OnPropertyChanged("Actualbus");
             }
             
@@ -58,22 +111,116 @@ namespace Projekt
         public string Photopath
         {
             get { return _photopath; }
-            set { _photopath = value; OnPropertyChanged("Photopath"); }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set photopath='" + value + "' where iddriver=" + Id + ";");
+                }
+                _photopath = value;
+                OnPropertyChanged("Photopath");
+            }
             
         }
 
         public double Salary
         {
             get { return _salary; }
-            set { _salary = value; OnPropertyChanged("Salary"); }
+            set
+            {
+                if (value >0)
+                {
+                    NumberFormatInfo dot = new NumberFormatInfo();
+                    dot.NumberDecimalSeparator = ".";
+                    dbConnect.UpdateFromString("update projekt.driver set salary='" + value.ToString(dot) + "' where iddriver=" + Id + ";");
+                }
+                _salary = value;
+                OnPropertyChanged("Salary");
+            }
             
         }
-        public string  Status           { get; set; }
-        public int     Driverlicenseid  { get; set; }
-        public string  City             { get; set; }
-        public int     Zipcode          { get; set; }
-        public string  Address          { get; set; }
-        public double  Hoursworked      { get; set; }
+
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set status='" + value + "' where iddriver=" + Id + ";");
+                }
+                _status = value;
+                OnPropertyChanged("Status");
+            }
+        }
+
+        public int Driverlicenseid
+        {
+            get { return _driverlicenseid; }
+            set
+            {
+                if (value>0)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set driverlicenceid='" + value + "' where iddriver=" + Id + ";");
+                }
+                _driverlicenseid=value;
+            }
+        }
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set city='" + value + "' where iddriver=" + Id + ";");
+                }
+                _city = value;
+            }
+        }
+
+        public int Zipcode
+        {
+            get { return _zipcode; }
+            set
+            {
+                if (value>0)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set zipcode='" + value + "' where iddriver=" + Id + ";");
+                }
+                _zipcode = value;
+            }
+        }
+
+        public string Address
+        {
+            get { return _address; }
+            set
+            {
+                if (value != null)
+                {
+                    dbConnect.UpdateFromString("update projekt.driver set address='" + value + "' where iddriver=" + Id + ";");
+                }
+                _address = value;
+            }
+        }
+
+        public int Hoursworked
+        {
+            get { return _hoursworked; }
+            set
+            {
+                if (value>0)
+                {
+                    NumberFormatInfo dot = new NumberFormatInfo();
+                    dot.NumberDecimalSeparator = ".";
+                    dbConnect.UpdateFromString("update projekt.driver set hoursworked='" + value.ToString(dot) + "' where iddriver=" + Id + ";");
+                }
+                _hoursworked = value;
+                OnPropertyChanged("Hoursworked");
+            }
+        }
         public string DriverShow
         {
             get
@@ -95,7 +242,7 @@ namespace Projekt
             return Name + " " + Secondname + ", id: " + Id;
         }
 
-        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Bus actualbus, double salary, double hoursworked, string photopath)
+        public Driver(string name, string secondname, int id, string status, int driverlicenseid, string city, int zipcode, string address, Bus actualbus, double salary, int hoursworked, string photopath)
         {
             _name = name;
             _secondname = secondname;
@@ -168,10 +315,13 @@ namespace Projekt
                     case "Driverlicenseid":
                         if (Driverlicenseid.ToString().Length < 1)
                         {
+                            Driverlicenseid = 0;
                             return "id can't be empty";
                         }
                         if (Driverlicenseid< 1)
                         {
+
+                            Driverlicenseid = 0;
                             return "id can't be smaller than 1";
                         }
                         break;
@@ -183,16 +333,20 @@ namespace Projekt
                         }
                         break;
                     case "Zipcode":
+                        int oldzipcode = _zipcode;
                         if (Zipcode.ToString().Length < 5)
                         {
+                            Zipcode = 0;
                             return "zipcode too short";
                         }
                         if (Zipcode.ToString().Length > 5)
                         {
+                            Zipcode = 0;
                             return "zipcose too long";
                         }
                         if (Zipcode < 0)
                         {
+                            Zipcode = 0;
                             return "zipcode can't be smaller than 1";
                         }
                         break;
@@ -214,10 +368,6 @@ namespace Projekt
                         }
                         break;
                     case "Hoursworked":
-                        if (Hoursworked.ToString().Length < 1)
-                        {
-                            return "hoursworked can't be empty";
-                        }
                         if (Hoursworked < 0)
                         {
                             return "hoursworked can't be smaller than 0";
@@ -239,10 +389,7 @@ namespace Projekt
 
         public string Error
         {
-            get
-            {
-                return null;
-            }
+            get;
         }
     }
 }

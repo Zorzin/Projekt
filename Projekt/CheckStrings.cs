@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,33 @@ namespace Projekt
                 return null;
             }
             else if (Int32.TryParse(value, out _out))
+            {
+                if (_out < 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    output = value;
+                }
+            }
+            else
+            {
+                return null;
+            }
+            return output;
+        }
+
+        public static string CheckDouble(string value)
+        {
+            string output;
+            double _out;
+            if (string.IsNullOrEmpty(value))
+            {
+
+                return null;
+            }
+            else if (Double.TryParse(value.Replace('.', ','), out _out))
             {
                 if (_out < 0)
                 {

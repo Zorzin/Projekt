@@ -22,6 +22,7 @@ namespace Projekt
             AddBusButtonCommand = new RoutedUICommand("Show new window to add bus", "add", typeof(Commands));
             AddBusStopButtonCommand = new RoutedUICommand("Show new window to add bus stop", "add", typeof(Commands));
             AddLineButtonCommand = new RoutedUICommand("Show new window to add line", "add", typeof(Commands));
+            AddActualTrackButtonCommand = new RoutedUICommand("Show new window to add track", "add", typeof(Commands));
         }
         public static RoutedUICommand ButtonCommand { get; set; }
         public static RoutedUICommand BackButtonCommand { get; set; }
@@ -29,6 +30,7 @@ namespace Projekt
         public static RoutedUICommand AddBusButtonCommand { get; set; }
         public static RoutedUICommand AddBusStopButtonCommand { get; set; }
         public static RoutedUICommand AddLineButtonCommand { get; set; }
+        public static RoutedUICommand AddActualTrackButtonCommand { get; set; }
 
         public static void BindCommandsToWindow(Window window)
         {
@@ -44,22 +46,35 @@ namespace Projekt
                 AddBusStopButtonCommandCanExecute));
             window.CommandBindings.Add(new CommandBinding(AddDriverButtonCommand, AddDriverButtonCommandExecuted,
                 AddDriverButtonCommandCanExecute));
+            window.CommandBindings.Add(new CommandBinding(AddActualTrackButtonCommand, AddActualTrackButtonCommandExecuted,
+                AddActualTrackButtonCommandCanExecute));
         }
 
         public static void AddDriverButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var adddriver = new DriverAddWindow();
-            adddriver.Show();
+            adddriver.ShowDialog();
         }
 
         public static void AddDriverButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
+
+        public static void AddActualTrackButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var addtrack = new AddActualTrackWindow();
+            addtrack.ShowDialog();
+        }
+
+        public static void AddActualTrackButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
         public static void AddBusButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var addbus = new BusAddWindow();
-            addbus.Show();
+            addbus.ShowDialog();
         }
 
         public static void AddBusButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -69,7 +84,7 @@ namespace Projekt
         public static void AddBusStopButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var busstop = new BusStopAddWindow();
-            busstop.Show();
+            busstop.ShowDialog();
         }
 
         public static void AddBusStopButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -79,7 +94,7 @@ namespace Projekt
         public static void AddLineButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             var addline = new LineAddWindow();
-            addline.Show();
+            addline.ShowDialog();
         }
 
         public static void AddLineButtonCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -99,13 +114,17 @@ namespace Projekt
 
         public static void ButtonCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            /**
             foreach (var butn in List)
             {
                 Button button = butn.Key as Button;
-                button.Background = Brushes.Green;
+                var bc = new BrushConverter();
+                button.Background = (Brush)bc.ConvertFrom("#EEEEEEEE");
             }
             Button btn = e.Source as Button;
+            
             btn.Background = Brushes.Red;
+            */        
             List [e.Source].Invoke();
         }
 
@@ -167,40 +186,6 @@ namespace Projekt
             SearchPage searchPage = new SearchPage();
             var mainWindow = (MainWindow) Application.Current.MainWindow;
             mainWindow.MainFrame.Navigate(searchPage);
-            return 1;
-        }
-
-        public static int DriverAddFunction()
-        {
-            var driverAddWindow = new DriverAddWindow();
-            driverAddWindow.Show();
-            return 1;
-        }
-        public static int BusStopAddFunction()
-        {
-            var busStopAddWindow = new BusStopAddWindow();
-            busStopAddWindow.Show();
-            return 1;
-        }
-
-        public static int BusAddFunction()
-        {
-            var busAddWindow = new BusAddWindow();
-            busAddWindow.Show();
-            return 1;
-        }
-
-        public static int ActualTrackAddFunction()
-        {
-            var actualTrackAddWindow = new ActualTrackAddWindow();
-            actualTrackAddWindow.Show();
-            return 1;
-        }
-
-        public static int LineAddFunction()
-        {
-            var lineAddWindow = new LineAddWindow();
-            lineAddWindow.Show();
             return 1;
         }
     }

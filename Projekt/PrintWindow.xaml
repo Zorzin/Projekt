@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt"
         mc:Ignorable="d"
-        Title="PrintWindow"  FontSize="16" Height="842" Width="595">
+        Title="PrintWindow" FontSize="16" MaxHeight="690" MaxWidth="480"  MinHeight="690" MinWidth="480" Height="690" Width="480">
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -34,10 +34,10 @@
                 <Label Margin="5" Name="addressLabel" Content="Adres: "/>
                 <Label Margin="5" Name="hoursworkedLabel" Content="Godziny przepracowane: "/>
             </StackPanel>
-            
+
         </Grid>
         <Grid Grid.Row="1">
-            <Button Content="Drukuj" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" />
+            <Button Content="Drukuj" HorizontalAlignment="Center" Click="Button_Click" />
         </Grid>
-        </Grid>
+    </Grid>
 </Window>

@@ -11,17 +11,30 @@
         <local:ActualTrackConverter x:Key="ActualTrackConverter"
                                             Actual="Green"
                                             NotActual="Red"/>
-        <DataTemplate x:Key="ActualTrackDataTemplate">
+        <DataTemplate x:Key="MainDataTemplate">
+            <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="Black" Width="200">
+                <Grid Name="ListGrid">
+                        <Grid.Background>
+                            <MultiBinding Converter="{StaticResource ActualTrackConverter}">
+                                <Binding Path="StartHour"/>
+                                <Binding Path="EndHour"/>
+                            </MultiBinding>
+                        </Grid.Background>
+                        <TextBlock Text="{Binding Path=ActualTrackShow}"/>
+                    </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="LessDataTemplate">
             <Border BorderThickness="2" Margin="2" Padding="2" BorderBrush="Black">
-                <Grid>
-                    <Grid.Background>
-                        <MultiBinding Converter="{StaticResource ActualTrackConverter}">
-                            <Binding Path="StartHour"/>
-                            <Binding Path="EndHour"/>
-                        </MultiBinding>
-                    </Grid.Background>
-                    <TextBlock Text="{Binding Path=ActualTrackShow}"/>
-                </Grid>
+                <Grid Name="ListGrid">
+                        <Grid.Background>
+                            <MultiBinding Converter="{StaticResource ActualTrackConverter}">
+                                <Binding Path="StartHour"/>
+                                <Binding Path="EndHour"/>
+                            </MultiBinding>
+                        </Grid.Background>
+                        <TextBlock Text="{Binding Path=Line}"/>
+                    </Grid>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="GroupTemplate">
@@ -47,6 +60,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
+            <Button Name="AddButton" Content="Dodaj" Command="local:Commands.AddActualTrackButtonCommand"/>
             <Button Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click">
                 <Button.Style>
                     <Style>
@@ -75,7 +89,7 @@
                 <ComboBoxItem Selected="GroupByDriver">Grupuj wg kierowcy</ComboBoxItem>
             </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ActualTrackDataTemplate}">
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource LessDataTemplate}">
             <ListBox.GroupStyle>
                 <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
             </ListBox.GroupStyle>
@@ -96,7 +110,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Content="Linia:" />
-            <ComboBox Name="LineComboBox" Grid.Column="1" SelectedValue="{Binding Line, Mode=TwoWay}" />
+            <Label Grid.Column="1" Content="{Binding Line.Number}" />
             <Label Grid.Row="1" Content="Autobus:" />
             <ComboBox Name="BusComboBox" Grid.Row="1" Grid.Column="1" SelectedValue="{Binding Driver.Actualbus, Mode=TwoWay}" />
             <Label Grid.Row="2" Content="Godzina startu:" />

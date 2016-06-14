@@ -8,8 +8,15 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="BusStopListPage">
     <Page.Resources>
-        <DataTemplate x:Key="ListItemDataTemplate">
-            <Border BorderThickness="2" BorderBrush="Black" Margin="2" Padding="2" Width="100"> <!-- poprawic szerokosc do aktualnej szerokosci kolumny -->
+        <DataTemplate x:Key="MainDataTemplate">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="2" Padding="2" Width="250">
+                <Grid>
+                    <TextBlock Text="{Binding Path=BusStopShow}" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="LessDataTemplate">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="2" Padding="2">
                 <Grid>
                     <TextBlock Text="{Binding Path=Id}" />
                 </Grid>
@@ -42,7 +49,7 @@
                 <ComboBoxItem Selected="SortName">Sortuj wg nr przystanku</ComboBoxItem>
             </ComboBox>
         </ToolBar>
-        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource ListItemDataTemplate}" >
+        <ListBox Name="ListBox" Grid.Column="0" Grid.Row="1" ItemTemplate="{StaticResource MainDataTemplate}" >
             <ListBox.GroupStyle>
                 <GroupStyle HeaderTemplate="{StaticResource GroupTemplate}"/>
             </ListBox.GroupStyle>
@@ -58,7 +65,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Content="Nr przystanku:" />
-            <TextBox Grid.Column="1" IsReadOnly="True" Text="{Binding Id, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+            <Label Grid.Column="1" Content="{Binding Id, Mode=TwoWay, ValidatesOnDataErrors=True}" />
             <Label Grid.Row="1" Content="Nazwa:" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True}" />
             <Button Grid.Row="2" Grid.ColumnSpan="2" Name="DeleteButton" Content="Usuń" Click="DeleteButton_Click" />

@@ -42,7 +42,7 @@ namespace Projekt
                 id = "null";
             }
 
-            length = CheckStrings.CheckInt(LengthTextBox.Text);
+            length = CheckStrings.CheckDouble(LengthTextBox.Text);
 
             BusStop first = (BusStop)FirstStopComboBox.SelectedItem;
             if (first != null)
@@ -63,7 +63,7 @@ namespace Projekt
                 return;
             }
 
-            line.Length = Double.Parse(length);
+            line.Length = Double.Parse(length.Replace('.', ','));
             line.Firststop = first;
             line.Laststop = last;
 

@@ -1,66 +1,210 @@
 [
-{
-"startHour": "07/06/2016 07:50",
-"endHour": "07/06/2016 23:33",
-"startBusStop":"34",
-"endBusStop":"67",
-"driver":"6",
-"line":"5"
-},
-{
-"startHour": "08/06/2016 07:50",
-"endHour": "10/06/2016 13:56",
-"startBusStop":"67",
-"endBusStop":"98",
-"driver":"2",
-"line":"9"
-},
-{
-"startHour": "09/06/2016 05:43",
-"endHour": "26/06/2016 05:43",
-"startBusStop":"23",
-"endBusStop":"34",
-"driver":"7",
-"line":"5"
-},
-{
-"startHour": "26/05/2016 05:43",
-"endHour": "26/05/2016 05:43",
-"startBusStop":"23",
-"endBusStop":"34",
-"driver":"1",
-"line":"5"
-},
-{
-"startHour": "26/05/2016 05:43",
-"endHour": "26/05/2016 05:43",
-"startBusStop":"23",
-"endBusStop":"34",
-"driver":"1",
-"line":"5"
-},
-{
-"startHour": "26/05/2016 05:43",
-"endHour": "26/05/2016 05:43",
-"startBusStop":"23",
-"endBusStop":"34",
-"driver":"1",
-"line":"5"
-},
-{
-"startHour": "26/05/2016 05:43",
-"endHour": "26/05/2016 05:43",
-"startBusStop":"23",
-"endBusStop":"34",
-"driver":"1",
-"line":"5"
-},
-{
-"startHour": "26/05/2016 05:43",
-"endHour": "26/05/2016 05:43",
-"startBusStop":"23",
-"endBusStop":"34",
-"driver":"1",
-"line":"5"
-}
+  {
+    "startHour": "15/06/2016 05:00",
+    "endHour": "15/06/2016 10:00",
+    "startBusStop": "2",
+    "endBusStop": "27",
+    "driver": "1",
+    "line": "16"
+  },
+  {
+    "startHour": "15/06/2016 06:00",
+    "endHour": "15/06/2016 09:00",
+    "startBusStop": "12",
+    "endBusStop": "27",
+    "driver": "2",
+    "line": "3"
+  },
+  {
+    "startHour": "15/06/2016 10:00",
+    "endHour": "15/06/2016 13:00",
+    "startBusStop": "27",
+    "endBusStop": "53",
+    "driver": "1",
+    "line": "16"
+  },
+  {
+    "startHour": "15/06/2016 09:00",
+    "endHour": "15/06/2016 14:00",
+    "startBusStop": "27",
+    "endBusStop": "38",
+    "driver": "2",
+    "line": "3"
+  },
+  {
+    "startHour": "15/06/2016 08:00",
+    "endHour": "15/06/2016 14:00",
+    "startBusStop": "15",
+    "endBusStop": "87",
+    "driver": "3",
+    "line": "5"
+  },
+  {
+    "startHour": "15/06/2016 14:00",
+    "endHour": "15/06/2016 17:30",
+    "startBusStop": "87",
+    "endBusStop": "93",
+    "driver": "4",
+    "line": "5"
+  },
+  {
+    "startHour": "15/06/2016 17:30",
+    "endHour": "15/06/2016 22:30",
+    "startBusStop": "93",
+    "endBusStop": "14",
+    "driver": "3",
+    "line": "5"
+  },
+  {
+    "startHour": "15/06/2016 17:30",
+    "endHour": "15/06/2016 22:30",
+    "startBusStop": "87",
+    "endBusStop": "17",
+    "driver": "4",
+    "line": "6"
+  },
+  {
+    "startHour": "15/06/2016 05:00",
+    "endHour": "15/06/2016 13:00",
+    "startBusStop": "12",
+    "endBusStop": "47",
+    "driver": "5",
+    "line": "13"
+  },
+  {
+    "startHour": "15/06/2016 13:00",
+    "endHour": "15/06/2016 21:00",
+    "startBusStop": "47",
+    "endBusStop": "77",
+    "driver": "6",
+    "line": "13"
+  },
+  {
+    "startHour": "15/06/2016 13:00",
+    "endHour": "15/06/2016 15:00",
+    "startBusStop": "2",
+    "endBusStop": "57",
+    "driver": "7",
+    "line": "15"
+  },
+  {
+    "startHour": "15/06/2016 16:00",
+    "endHour": "15/06/2016 22:00",
+    "startBusStop": "15",
+    "endBusStop": "66",
+    "driver": "7",
+    "line": "17"
+  },
+  {
+    "startHour": "15/06/2016 15:00",
+    "endHour": "15/06/2016 23:00",
+    "startBusStop": "57",
+    "endBusStop": "13",
+    "driver": "8",
+    "line": "15"
+  },
+  {
+    "startHour": "15/06/2016 7:00",
+    "endHour": "15/06/2016 10:00",
+    "startBusStop": "1",
+    "endBusStop": "83",
+    "driver": "9",
+    "line": "7"
+  },
+  {
+    "startHour": "15/06/2016 10:00",
+    "endHour": "15/06/2016 12:00",
+    "startBusStop": "17",
+    "endBusStop": "45",
+    "driver": "9",
+    "line": "4"
+  },
+  {
+    "startHour": "15/06/2016 12:00",
+    "endHour": "15/06/2016 15:00",
+    "startBusStop": "56",
+    "endBusStop": "23",
+    "driver": "9",
+    "line": "7"
+  },
+  {
+    "startHour": "15/06/2016 5:00",
+    "endHour": "15/06/2016 13:00",
+    "startBusStop": "27",
+    "endBusStop": "64",
+    "driver": "10",
+    "line": "2"
+  },
+  {
+    "startHour": "15/06/2016 13:00",
+    "endHour": "15/06/2016 21:00",
+    "startBusStop": "64",
+    "endBusStop": "43",
+    "driver": "11",
+    "line": "2"
+  },
+  {
+    "startHour": "15/06/2016 13:00",
+    "endHour": "15/06/2016 21:00",
+    "startBusStop": "53",
+    "endBusStop": "31",
+    "driver": "12",
+    "line": "16"
+  },
+  {
+    "startHour": "15/06/2016 7:00",
+    "endHour": "15/06/2016 8:00",
+    "startBusStop": "15",
+    "endBusStop": "76",
+    "driver": "13",
+    "line": "5"
+  },
+  {
+    "startHour": "15/06/2016 14:00",
+    "endHour": "15/06/2016 21:00",
+    "startBusStop": "38",
+    "endBusStop": "23",
+    "driver": "13",
+    "line": "3"
+  },
+  {
+    "startHour": "15/06/2016 9:30",
+    "endHour": "15/06/2016 17:30",
+    "startBusStop": "17",
+    "endBusStop": "63",
+    "driver": "14",
+    "line": "6"
+  },
+  {
+    "startHour": "15/06/2016 5:00",
+    "endHour": "15/06/2016 13:00",
+    "startBusStop": "68",
+    "endBusStop": "2",
+    "driver": "15",
+    "line": "15"
+  },
+  {
+    "startHour": "15/06/2016 8:00",
+    "endHour": "15/06/2016 16:00",
+    "startBusStop": "57",
+    "endBusStop": "15",
+    "driver": "16",
+    "line": "17"
+  },
+  {
+    "startHour": "15/06/2016 10:00",
+    "endHour": "15/06/2016 12:00",
+    "startBusStop": "83",
+    "endBusStop": "26",
+    "driver": "17",
+    "line": "7"
+  },
+  {
+    "startHour": "15/06/2016 00:00",
+    "endHour": "15/06/2016 21:00",
+    "startBusStop": "23",
+    "endBusStop": "75",
+    "driver": "14",
+    "line": "7"
+  }
 ]
